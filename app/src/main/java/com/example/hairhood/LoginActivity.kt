@@ -1,10 +1,11 @@
 package com.example.hairhood
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 
-class InicioSesion : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.inicio_sesion)
-}}
+        setContentView(R.layout.activity_login)
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HairHood</string>
+    <string name="favorites">Gogokoenak</string>
+    <string name="places">Lekuak</string>
+    <string name="profile">Profila</string>
+    <string name="chat">Chat</string>
+    <string name="log_in">Saioa hasi</string>
+    <string name="userName">Erabiltzailea</string>
+    <string name="userPassword">Pasahitza</string>
+    <string name="register">Erregistratu</string>
+
+    <string name="forgetPass">Pasahitza ahaztu dugu?</string>
+</resources>
