@@ -14,10 +14,8 @@
         android:layout_width="409dp"
         android:layout_height="51dp"
         android:layout_marginStart="2dp"
-        android:layout_marginBottom="28dp"
         android:background="#FFFFFF"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/NombreCliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,6 +37,15 @@
             android:text="Peluquero" />
     </LinearLayout>
 
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </ScrollView>
+
     <EditText
         android:id="@+id/NombreCliente"
         android:layout_width="wrap_content"
@@ -51,52 +58,8 @@
         android:text="Nombre"
         app:layout_constraintBottom_toTopOf="@+id/NumTlfCliente"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="37dp"
-        android:text="Nombre"
-        app:layout_constraintBottom_toTopOf="@+id/Usuario"
-        app:layout_constraintStart_toStartOf="@+id/Usuario" />
-
-    <EditText
-        android:id="@+id/NumTlfCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="14dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/DNICliente"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/NumTlf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="19dp"
-        android:text="Num. Tlf"
-        app:layout_constraintEnd_toEndOf="@+id/Pass"
-        app:layout_constraintStart_toStartOf="@+id/Correo"
-        app:layout_constraintTop_toBottomOf="@+id/Usuario" />
-
-    <EditText
-        android:id="@+id/UsuarioCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="User"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NombreCliente" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/Usuario"
@@ -111,6 +74,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/UsuarioCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="User"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NombreCliente"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/Nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="37dp"
+        android:text="Nombre"
+        app:layout_constraintBottom_toTopOf="@+id/Usuario"
+        app:layout_constraintStart_toStartOf="@+id/Usuario" />
+
+    <EditText
         android:id="@+id/DNICliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +106,8 @@
         android:inputType="textPersonName"
         android:text="DNI"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NumTlf" />
+        app:layout_constraintTop_toBottomOf="@+id/NumTlf"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/DNI"
@@ -133,36 +120,27 @@
         app:layout_constraintTop_toBottomOf="@+id/NumTlf" />
 
     <EditText
-        android:id="@+id/EmailCliente"
+        android:id="@+id/ConfirmPassCiente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DNICliente" />
-
-    <TextView
-        android:id="@+id/Correo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginBottom="10dp"
-        android:text="Correo Electronico"
-        app:layout_constraintBottom_toBottomOf="@+id/EmailCliente"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/PassCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginEnd="12dp"
         android:ems="10"
         android:inputType="textPassword"
+        app:layout_constraintBaseline_toBaselineOf="@+id/confirmPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailCliente" />
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/NumTlf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="19dp"
+        android:text="Num. Tlf"
+        app:layout_constraintEnd_toEndOf="@+id/Pass"
+        app:layout_constraintStart_toStartOf="@+id/Correo"
+        app:layout_constraintTop_toBottomOf="@+id/Usuario" />
 
     <TextView
         android:id="@+id/Pass"
@@ -176,23 +154,60 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout" />
 
     <EditText
-        android:id="@+id/ConfirmPassCiente"
+        android:id="@+id/EmailCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DNICliente"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/PassCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="14dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBaseline_toBaselineOf="@+id/confirmPass"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EmailCliente"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/Correo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginBottom="10dp"
+        android:text="Correo Electronico"
+        app:layout_constraintBottom_toBottomOf="@+id/EmailCliente"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/NumTlfCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="14dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/DNICliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/confirmPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="168dp"
         android:text="Confirmar Contraseña"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ConfirmPassCiente" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
