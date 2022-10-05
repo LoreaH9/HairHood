@@ -10,52 +10,37 @@
         android:id="@+id/usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="serif-monospace"
         android:text="Erabiltzailea"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNombre"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.317"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.157" />
 
     <EditText
         android:id="@+id/editTextNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="161dp"
-        android:layout_marginBottom="51dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Usuario"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPass"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/usuario"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/usuario"
+        app:layout_constraintTop_toBottomOf="@+id/usuario" />
 
     <EditText
         android:id="@+id/editTextPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="51dp"
         android:layout_marginEnd="96dp"
-        android:layout_marginBottom="40dp"
         android:ems="10"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btn_InicioSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
-
-    <Button
-        android:id="@+id/btn_InicioSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Saioa Hasi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/pass"
+        app:layout_constraintTop_toBottomOf="@+id/pass" />
 
     <TextView
         android:id="@+id/registrarse"
@@ -74,23 +59,49 @@
         android:id="@+id/btn_ayuda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="264dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="59dp"
-        android:layout_marginBottom="133dp"
-        android:text="Ayuda"
+        android:fontFamily="serif-monospace"
+        android:text="Laguntza"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btn_InicioSesion"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_InicioSesion"
+        app:layout_constraintTop_toBottomOf="@+id/btn_InicioSesion"
+        app:layout_constraintVertical_bias="0.128" />
+
+    <Button
+        android:id="@+id/btn_InicioSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="serif-monospace"
+        android:text="Saioa Hasi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_InicioSesion" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPass"
+        app:layout_constraintVertical_bias="0.282" />
 
     <TextView
         android:id="@+id/pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="serif-monospace"
         android:text="Pasahitza"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPass"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextNombre"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextNombre"
         app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:fontFamily="serif-monospace"
+        android:text="Log In"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
