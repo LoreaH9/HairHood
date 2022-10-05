@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HairHood</string>
+    <string name="favorites">favoritos</string>
+    <string name="music">musica</string>
+    <string name="places">sitios</string>
+    <string name="profile">perfil</string>
+    <string name="chat">chat</string>
 </resources>
