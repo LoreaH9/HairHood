@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "710928445917",
+    "project_id": "hairhood-f9a24",
+    "storage_bucket": "hairhood-f9a24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710928445917:android:37a3be84c9981efe4cc634",
+        "android_client_info": {
+          "package_name": "com.example.hairhood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710928445917-4b08scm2p7pmnkp7g9348vrr6867m1g0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQcqN1nReUTULi9koMc3Pe8rLPPlgAF4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710928445917-4b08scm2p7pmnkp7g9348vrr6867m1g0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
