@@ -1,9 +1,12 @@
 package com.example.hairhood
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.hairhood.databinding.ActivityMainBinding
+import java.util.Timer
+import java.util.TimerTask
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
