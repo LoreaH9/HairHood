@@ -14,13 +14,13 @@
         android:theme="@style/Theme.HairHood"
         tools:targetApi="31">
         <activity
-            android:name=".FavoriteActivity"
+            android:name=".Favorite"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".Chat"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".Profile"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

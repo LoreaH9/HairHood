@@ -1,36 +1,48 @@
 package com.example.hairhood
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.hairhood.databinding.ActivityMainBinding
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.prueba.text = "Cargando datos..."
-        val db = Firebase.firestore
 
-        db.collection("peluqueros")
-            .get()
-            .addOnSuccessListener { list ->
-                if (list != null) {
-                    list.forEach {
-                        binding.prueba.text = "${it.data}\n"
-                    }
-                }else{
-                    binding.prueba.text = "error al cargar los datos"
+        setContentView(binding.root)
+        replaceFragment(Profile())
+        binding.bottomNavigationView.setOnItemSelectedListener {
+
+            when(it.itemId){
+
+                R.id.chat -> replaceFragment(Chat())
+                R.id.profile -> replaceFragment(Profile())
+                R.id.favorite -> replaceFragment(Favorite())
+                //R.id.places -> replaceFragment(Places())
+
+                else ->{
+
                 }
+
             }
-            .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
+
+            true
+
+        }
+
+
+
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout,fragment)
+        fragmentTransaction.commit()
+
 
     }
 }
