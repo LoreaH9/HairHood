@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
             if (TextUtils.isEmpty(binding.user.text.toString()) || TextUtils.isEmpty(binding.password.text.toString())) {
                 Toast.makeText(this, "Por favor introduzca el usuario y la contraseña", Toast.LENGTH_SHORT).show();
             } else {
+
                 val editor: SharedPreferences.Editor = sharedPreferences.edit()
                 editor.putString(EMAIL_KEY, binding.user.text.toString())
                 editor.putString(PWD_KEY, binding.password.text.toString())
@@ -50,10 +51,16 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        //Meterse a la app si ya tenia una sesión iniciada
         if (email != "" || pwd != "") {
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putString(EMAIL_KEY, "")
+            editor.putString(PWD_KEY, "")
+            editor.apply()
             val i = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(i)
             finish()
         }
     }
+
 }
