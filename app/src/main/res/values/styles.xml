@@ -2,15 +2,16 @@
 <resources>
 
     <style name="Usuario" parent="Theme.AppCompat.Light.DarkActionBar">
-<!--        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:orientation">horizontal</item>-->
+        <item name="android:orientation">horizontal</item>
 
     </style>
 
     <style name="button_style"></style>
+    <!--El style Usuario deberia de volver a cargar y visualizarse correctamente una vez el splash termine de visualizarse-->
     <style name="SplashTheme" parent="Usuario" >
         <!--Tema para designar nuestro splash hereda del tema por defecto utilizado para la app para utilizarlo-->
-        <item name="android:windowBackground">@drawable/splash_screem</item>
-    </style>
+    <item name="android:windowBackground">@drawable/splash_screem</item>
+</style>
 </resources>
