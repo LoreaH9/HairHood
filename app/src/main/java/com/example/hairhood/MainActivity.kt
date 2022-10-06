@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-        replaceFragment(Profile())
+        replaceFragment(Favorite())
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.chat -> replaceFragment(Chat())
