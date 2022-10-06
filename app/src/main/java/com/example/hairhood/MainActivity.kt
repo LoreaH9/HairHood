@@ -14,35 +14,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(Profile())
         binding.bottomNavigationView.setOnItemSelectedListener {
-
             when(it.itemId){
-
                 R.id.chat -> replaceFragment(Chat())
                 R.id.profile -> replaceFragment(Profile())
                 R.id.favorite -> replaceFragment(Favorite())
                 //R.id.places -> replaceFragment(Places())
-
                 else ->{
-
                 }
-
             }
-
             true
-
         }
-
-
-
     }
 
     private fun replaceFragment(fragment: Fragment){
-
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout,fragment)
         fragmentTransaction.commit()
-
-
     }
 }
