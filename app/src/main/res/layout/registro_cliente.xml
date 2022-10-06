@@ -38,176 +38,231 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="410dp"
+        android:layout_height="597dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </ScrollView>
-
-    <EditText
-        android:id="@+id/NombreCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="79dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="78dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Nombre"
-        app:layout_constraintBottom_toTopOf="@+id/NumTlfCliente"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <TextView
-        android:id="@+id/Usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="52dp"
-        android:text="Usuario"
-        app:layout_constraintEnd_toEndOf="@+id/Correo"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0">
 
-    <EditText
-        android:id="@+id/UsuarioCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="User"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NombreCliente"
-        tools:ignore="TouchTargetSizeCheck" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/Nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="37dp"
-        android:text="Nombre"
-        app:layout_constraintBottom_toTopOf="@+id/Usuario"
-        app:layout_constraintStart_toStartOf="@+id/Usuario" />
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp">
 
-    <EditText
-        android:id="@+id/DNICliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="DNI"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NumTlf"
-        tools:ignore="TouchTargetSizeCheck" />
+                <TextView
+                    android:id="@+id/Usuario"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:text="Usuario" />
 
-    <TextView
-        android:id="@+id/DNI"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="43dp"
-        android:text="DNI"
-        app:layout_constraintStart_toStartOf="@+id/NumTlf"
-        app:layout_constraintTop_toBottomOf="@+id/NumTlf" />
+                <EditText
+                    android:id="@+id/UsuarioCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="User"
+                    tools:ignore="TouchTargetSizeCheck" />
 
-    <EditText
-        android:id="@+id/ConfirmPassCiente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintBaseline_toBaselineOf="@+id/confirmPass"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/NumTlf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="19dp"
-        android:text="Num. Tlf"
-        app:layout_constraintEnd_toEndOf="@+id/Pass"
-        app:layout_constraintStart_toStartOf="@+id/Correo"
-        app:layout_constraintTop_toBottomOf="@+id/Usuario" />
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/Pass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="56dp"
-        android:text="Contraseña"
-        app:layout_constraintBaseline_toBaselineOf="@+id/PassCliente"
-        app:layout_constraintEnd_toStartOf="@+id/EmailCliente"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout" />
+                <TextView
+                    android:id="@+id/Nombre"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
 
-    <EditText
-        android:id="@+id/EmailCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DNICliente"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                    android:text="Nombre" />
 
-    <EditText
-        android:id="@+id/PassCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="14dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EmailCliente"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                <EditText
+                    android:id="@+id/NombreCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Nombre"
+                    tools:ignore="TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/Correo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginBottom="10dp"
-        android:text="Correo Electronico"
-        app:layout_constraintBottom_toBottomOf="@+id/EmailCliente"
-        app:layout_constraintStart_toStartOf="parent" />
+            </LinearLayout>
 
-    <EditText
-        android:id="@+id/NumTlfCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="14dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/DNICliente"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/confirmPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="168dp"
-        android:text="Confirmar Contraseña"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ConfirmPassCiente" />
+                <TextView
+                    android:id="@+id/DNI"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="DNI" />
+
+                <EditText
+                    android:id="@+id/DNICliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="DNI"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/NumTlf"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+
+                    android:text="Num. Tlf" />
+
+                <EditText
+                    android:id="@+id/NumTlfCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="9dp"
+                    android:layout_marginBottom="16dp"
+                    android:ems="10"
+                    android:inputType="number"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Correo"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:text="Correo Electronico" />
+
+                <EditText
+                    android:id="@+id/EmailCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Pass"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:text="Contraseña" />
+
+                <EditText
+                    android:id="@+id/PassCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/confirmPass"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:text="Confirmar Contraseña" />
+
+                <EditText
+                    android:id="@+id/ConfirmPassCiente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/fecha"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha de Nacimiento"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <EditText
+                    android:id="@+id/DateCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:inputType="date" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Usuario"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/foto"
+                    android:layout_width="149dp"
+                    android:layout_height="wrap_content"
+                    android:text="Foto" />
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="172dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@android:drawable/ic_menu_camera" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegistro"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Registrarse" />
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
