@@ -155,6 +155,7 @@
                     android:src="@drawable/ic_favorite" />
 
                 <ImageView
+                    android:id="@+id/registro"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_margin="10dp"

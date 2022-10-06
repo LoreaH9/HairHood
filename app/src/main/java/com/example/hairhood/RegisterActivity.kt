@@ -17,7 +17,7 @@ class RegisterActivity : AppCompatActivity() {
             binding.singUpUser.setTextColor(resources.getColor(R.color.textColor,null))
             binding.singUpWorker.background = null
             binding.singUpUserLayout.visibility = View.VISIBLE
-            binding.singUpWorkerLayout.visibility = View.GONE
+            binding.singUpWorkerLayout.visibility = View.INVISIBLE
             binding.singUpWorker.setTextColor(resources.getColor(R.color.pinkColor,null))
         }
 
@@ -25,7 +25,7 @@ class RegisterActivity : AppCompatActivity() {
             binding.singUpUser.background = null
             binding.singUpUser.setTextColor(resources.getColor(R.color.pinkColor,null))
             binding.singUpWorker.background = resources.getDrawable(R.drawable.switch_trcks,null)
-            binding.singUpUserLayout.visibility = View.GONE
+            binding.singUpUserLayout.visibility = View.INVISIBLE
             binding.singUpWorkerLayout.visibility = View.VISIBLE
             binding.singUpWorker.setTextColor(resources.getColor(R.color.textColor,null))
         }
