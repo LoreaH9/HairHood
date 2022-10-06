@@ -104,66 +104,225 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/singUpUserLayout"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="25dp">
+                android:layout_height="match_parent">
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                <LinearLayout
+                    android:id="@+id/singUpUserLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:hint="Email or User Name"
-                    app:boxStrokeColor="#4E4A4A"
-                    app:boxStrokeWidth="1dp"
-                    app:hintTextColor="#4E4A4A"
-                    app:shapeAppearanceOverlay="@style/Button4">
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="25dp">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/eMail"
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/UsuarioCliente"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPersonName|textEmailAddress"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:hint="User Name"
+                        app:boxStrokeColor="#4E4A4A"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="#4E4A4A"
+                        app:shapeAppearanceOverlay="@style/Button4">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:hint="Password"
-                    app:boxStrokeColor="#4E4A4A"
-                    app:boxStrokeWidth="1dp"
-                    app:endIconMode="password_toggle"
-                    app:hintTextColor="#4E4A4A"
-                    app:shapeAppearanceOverlay="@style/Button4">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/usuarioCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/passwords"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/NombreCliente"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:inputType="textPassword"
-                        android:textColor="@color/black"
-                        android:textSize="13sp"
-                        android:textStyle="normal" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:hint="Nombre"
+                        app:boxStrokeColor="#4E4A4A"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="#4E4A4A"
+                        app:shapeAppearanceOverlay="@style/Button4">
 
-            </LinearLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/nombreCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/DNICliente"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:hint="DNI"
+                        app:boxStrokeColor="#4E4A4A"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="#4E4A4A"
+                        app:shapeAppearanceOverlay="@style/Button4">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/dniCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/NumTlfCliente"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:hint="Num. tlf"
+                        app:boxStrokeColor="#4E4A4A"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="#4E4A4A"
+                        app:shapeAppearanceOverlay="@style/Button4">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/numTlfCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/EmailCliente"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:hint="Correo electronico"
+                        android:inputType="textEmailAddress"
+                        app:boxStrokeColor="#4E4A4A"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="#4E4A4A"
+                        app:shapeAppearanceOverlay="@style/Button4">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/emailCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textEmailAddress"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/PassCliente"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:hint="Contraseña"
+                        app:boxStrokeColor="#4E4A4A"
+                        app:boxStrokeWidth="1dp"
+                        app:endIconMode="password_toggle"
+                        app:hintTextColor="#4E4A4A"
+                        app:shapeAppearanceOverlay="@style/Button4">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/passCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPassword"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/PassConfirmCliente"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:hint="Confirmar Contraseña"
+                        app:boxStrokeColor="#4E4A4A"
+                        app:boxStrokeWidth="1dp"
+                        app:endIconMode="password_toggle"
+                        app:hintTextColor="#4E4A4A"
+                        app:shapeAppearanceOverlay="@style/Button4">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/passConfirmCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPassword"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/FechaCliente"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:hint="Fecha de Ncimiento"
+                        app:boxStrokeColor="#4E4A4A"
+                        app:boxStrokeWidth="1dp"
+                        app:hintTextColor="#4E4A4A"
+                        app:shapeAppearanceOverlay="@style/Button4">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/fechaCliente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="date"
+                            android:textColor="@color/black"
+                            android:textSize="13sp"
+                            android:textStyle="normal" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </ScrollView>
 
             <LinearLayout
                 android:id="@+id/singUpWorkerLayout"
