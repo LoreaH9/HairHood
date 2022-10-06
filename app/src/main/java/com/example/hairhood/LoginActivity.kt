@@ -9,14 +9,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hairhood.databinding.ActivityLoginBinding
 
-
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     lateinit var sharedPreferences: SharedPreferences
     var PREFS_KEY = "prefs"
-    var EMAIL_KEY = "email"
+    var USER_KEY = "email"
     var PWD_KEY = "pwd"
 
     // on below line we are creating a
@@ -30,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-        email = sharedPreferences.getString(EMAIL_KEY, "").toString()
+        email = sharedPreferences.getString(USER_KEY, "").toString()
         pwd = sharedPreferences.getString(PWD_KEY, "").toString()
 
         binding.btnLogin.setOnClickListener {
@@ -39,13 +37,18 @@ class LoginActivity : AppCompatActivity() {
             } else {
 
                 val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                editor.putString(EMAIL_KEY, binding.user.text.toString())
+                editor.putString(USER_KEY, binding.user.text.toString())
                 editor.putString(PWD_KEY, binding.password.text.toString())
                 editor.apply()
                 val i = Intent(this@LoginActivity, MainActivity::class.java)
                 startActivity(i)
                 finish()
             }
+        }
+        binding.titleLogin.setOnClickListener {
+            intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -54,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
         //Meterse a la app si ya tenia una sesión iniciada
         if (email != "" || pwd != "") {
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putString(EMAIL_KEY, "")
+            editor.putString(USER_KEY, "")
             editor.putString(PWD_KEY, "")
             editor.apply()
             val i = Intent(this@LoginActivity, MainActivity::class.java)

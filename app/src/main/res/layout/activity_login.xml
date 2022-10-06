@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_login"
     android:orientation="vertical"
+
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/titleLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -176,5 +177,5 @@
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

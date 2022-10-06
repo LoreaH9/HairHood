@@ -10,5 +10,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="textColor">#ECE5EC</color>
     <color name="pinkColor">#168ecb</color>
-    <color name="tansparentColor">#00FFFFFF</color>
+    <color name="transparentColor">#00FFFFFF</color>
 </resources>
