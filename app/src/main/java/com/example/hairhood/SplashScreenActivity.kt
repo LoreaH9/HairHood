@@ -6,7 +6,11 @@ import android.os.Bundle
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
-
+        //Siguiente pantalla que tiene que abrir
+        val intent = Intent(this, a_login::class.java)
+        //Abre la siguiente actividad
+        startActivity(intent)
+        //Cuando abra la siguiente actividad cerrara esta
+        finish()
     }
 }
