@@ -21,7 +21,9 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+            <!--Para que nuestra pantalla principal utilice el tema del splashScreen-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -35,10 +37,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:theme="@style/SplashTheme">
-            <!--Para que nuestra pantalla principal utilice el tema del splashScreen-->>
-
+            android:exported="false">
         </activity>
     </application>
 

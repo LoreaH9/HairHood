@@ -25,6 +25,9 @@ class LoginActivity : AppCompatActivity() {
     var pwd = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Thread.sleep(2000)
+        //Esto es para que una vez empiece a ejecutar el main activity vuelve a cargar el tema por defecto
+        setTheme(R.style.Theme_HairHood)
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

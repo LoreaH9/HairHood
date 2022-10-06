@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Usuario">
-        <item name="android:layout_width">match_parent</item>
+    <style name="Usuario" parent="Theme.AppCompat.Light.DarkActionBar">
+<!--        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:orientation">horizontal</item>
+        <item name="android:orientation">horizontal</item>-->
+
     </style>
+
     <style name="button_style"></style>
-    <style name="SplashTheme" parent="Theme.HairHood" >
-        <!--Tema para designar nuestro splash heredado del tema por defecto utilizado para la app para utilizarlo-->
+    <style name="SplashTheme" parent="Usuario" >
+        <!--Tema para designar nuestro splash hereda del tema por defecto utilizado para la app para utilizarlo-->
         <item name="android:windowBackground">@drawable/splash_screem</item>
     </style>
 </resources>

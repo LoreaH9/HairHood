@@ -13,13 +13,11 @@ var email = ""
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        //Esto es para que una vez empiece a ejecutar el main activity vuelve a cargar el tema por defecto
-        setTheme(R.style.Theme_HairHood)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        var sharedPreferences = getSharedPreferences(PREFS_KEY, MODE_PRIVATE)
-
         setContentView(binding.root)
+
+        var sharedPreferences = getSharedPreferences(PREFS_KEY, MODE_PRIVATE)
         replaceFragment(Favorite())
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
