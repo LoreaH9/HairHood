@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Designando color de fondo, la imagen y su posicion-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/pinkColor"/>
+    <item>
+        <bitmap android:src="@drawable/ic_favorite"
+            android:gravity="center"/>
+    </item>
+</layer-list>

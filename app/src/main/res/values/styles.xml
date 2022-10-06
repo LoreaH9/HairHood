@@ -6,6 +6,9 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:orientation">horizontal</item>
     </style>
-
     <style name="button_style"></style>
+    <style name="SplashTheme" parent="Theme.HairHood" >
+        <!--Tema para designar nuestro splash heredado del tema por defecto utilizado para la app para utilizarlo-->
+        <item name="android:windowBackground">@drawable/splash_screem</item>
+    </style>
 </resources>
