@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             if (TextUtils.isEmpty(binding.user.text.toString()) || TextUtils.isEmpty(binding.password.text.toString())) {
-                Toast.makeText(this, "Por favor introduzca un usuario y una contraseña", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Por favor introduzca el usuario y la contraseña", Toast.LENGTH_SHORT).show();
             } else {
                 val editor: SharedPreferences.Editor = sharedPreferences.edit()
                 editor.putString(EMAIL_KEY, binding.user.text.toString())
