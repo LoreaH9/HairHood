@@ -35,7 +35,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
+            android:exported="false"
+            android:theme="@style/SplashTheme">
+            <!--Para que nuestra pantalla principal utilice el tema del splashScreen-->>
 
         </activity>
     </application>
