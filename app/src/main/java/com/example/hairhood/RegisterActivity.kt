@@ -44,14 +44,16 @@ class RegisterActivity : AppCompatActivity() {
                 TextUtils.isEmpty(binding.numTlfCliente.text.toString()) ||
                 TextUtils.isEmpty(binding.direccionCliente.text.toString())) {
                     Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT).show();
-                }
+                }else if (!binding.passCliente.equals(binding.passConfirmCliente)) {
+                    Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
+            }
 
-            val intentMapa =Intent(this, Map::class.java)
-            startActivity(intentMapa)
+           // val intentMapa =Intent(this, Map::class.java)
+            //startActivity(intentMapa)
         }
-        binding.singInPelu.setOnClickListener{
-            val intentMapa =Intent(this, Map::class.java)
-            startActivity(intentMapa)
-        }
+        //binding.singInPelu.setOnClickListener{
+          //  val intentMapa =Intent(this, Map::class.java)
+            //startActivity(intentMapa)
+        //}
     }
 }
