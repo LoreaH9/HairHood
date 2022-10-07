@@ -15,6 +15,9 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//link para intentar : https://es.acervolima.com/como-crear-y-agregar-datos-a-firebase-firestore-en-android/
+
         binding.singUpUser.setOnClickListener {
             binding.singUpUser.background = resources.getDrawable(R.drawable.switch_trcks,null)
             binding.singUpUser.setTextColor(resources.getColor(R.color.textColor,null))
@@ -23,7 +26,6 @@ class RegisterActivity : AppCompatActivity() {
             binding.ScrollPeluquero.visibility = View.GONE
             binding.singUpWorker.setTextColor(resources.getColor(R.color.pinkColor,null))
         }
-
         binding.singUpWorker.setOnClickListener {
             binding.singUpUser.background = null
             binding.singUpUser.setTextColor(resources.getColor(R.color.pinkColor,null))
