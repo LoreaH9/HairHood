@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">HairHood</string>
 
     <!-- MENU OPTIONS -->
@@ -10,17 +11,22 @@
 
     <!-- LOGIN ACTIVITY -->
     <string name="log_in">Saioa hasi</string>
-    <string name="closeFrm">Itxi formularioa</string>
-
+    <string name="closeFrm">Cerrar formulario</string>
     <string name="userName">Erabiltzailea</string>
     <string name="userPassword">Pasahitza</string>
     <string name="noLoginAcc">Ez duzu konturik oraindik?</string>
-    <string name="forgetPass">Pasahitza ahaztu dugu?</string>
+    <string name="forgetPass">Pasahitza ahaztu duzu?</string>
 
     <!-- REGISTER ACTIVITY -->
     <string name="register">Erregistratu</string>
 
     <!-- ADMIN ACTIVITY -->
-    <string name="adminConfig">Administratzailearen configurazioa</string>
+    <string name="adminConfig">Configuración del administrador</string>
 
+    <!-- PROFILE ACTIVITY -->
+    <string name="moreInformation">Informazio gehiago</string>
+    <string name="logOut">Saioa itxi</string>
+    <string name="changePassword">Pasahitza aldatu</string>
+    <string name="saveAndBack">Gorde eta atzera joan</string>
+    <string name="back">Atzera</string>
 </resources>
