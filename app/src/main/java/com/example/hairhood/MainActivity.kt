@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var sharedPreferences = getSharedPreferences(PREFS_KEY, MODE_PRIVATE)
+        //var sharedPreferences = getSharedPreferences(PREFS_KEY, MODE_PRIVATE)
         replaceFragment(Favorite())
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){

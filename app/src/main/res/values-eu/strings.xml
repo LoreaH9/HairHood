@@ -9,6 +9,8 @@
     <string name="userName">Erabiltzailea</string>
     <string name="userPassword">Pasahitza</string>
     <string name="register">Erregistratu</string>
+    <string name="noLoginAcc">Ez duzu konturik oraindik?</string>
+
 
     <string name="forgetPass">Pasahitza ahaztu dugu?</string>
 </resources>

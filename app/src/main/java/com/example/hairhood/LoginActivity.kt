@@ -37,12 +37,10 @@ class LoginActivity : AppCompatActivity() {
         pwd = sharedPreferences.getString(PWD_KEY, "").toString()
 
 
-
-        binding.registro.setOnClickListener{
+        binding.registerRedirect.setOnClickListener {
             val intentRegitro = Intent(this,RegisterActivity::class.java)
             startActivity(intentRegitro)
         }
-
         binding.btnLogin.setOnClickListener {
             if (TextUtils.isEmpty(binding.user.text.toString()) || TextUtils.isEmpty(binding.password.text.toString())) {
                 Toast.makeText(this, "Por favor introduzca el usuario y la contraseña", Toast.LENGTH_SHORT).show();

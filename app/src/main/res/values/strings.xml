@@ -8,6 +8,7 @@
     <string name="userName">Usuario</string>
     <string name="userPassword">Contraseña</string>
     <string name="register">Registrarse</string>
-    <string name="forgetPass">Has olvidado la contraseña?</string>
+    <string name="noLoginAcc">¿No tienes una cuenta todavía?</string>
+    <string name="forgetPass">¿Has olvidado la contraseña?</string>
 </resources>
 
