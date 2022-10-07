@@ -13,19 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HairHood"
         tools:targetApi="31">
-
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
         <activity
             android:name=".RegisterActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
-            <!--Para que nuestra pantalla principal utilice el tema del splashScreen-->
+
+            <!-- Para que nuestra pantalla principal utilice el tema del splashScreen -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,8 +39,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>

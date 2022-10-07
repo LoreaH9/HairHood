@@ -54,9 +54,15 @@ class LoginActivity : AppCompatActivity() {
                                 editor.putString(USER_KEY, binding.user.text.toString())
                                 editor.putString(PWD_KEY, binding.password.text.toString())
                                 editor.apply()
-                                val i = Intent(this@LoginActivity, MainActivity::class.java)
-                                startActivity(i)
-                                finish()
+                                if (it.data["usuario"]!="admin"){
+                                    val i = Intent(this@LoginActivity, MainActivity::class.java)
+                                    startActivity(i)
+                                    finish()
+                                }else{
+                                    val a = Intent(this@LoginActivity, AdminActivity::class.java)
+                                    startActivity(a)
+                                    finish()
+                                }
                             }else{
                                 db.collection("peluqueros")
                                     .get()
@@ -71,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
                                                 val i = Intent(this@LoginActivity, MainActivity::class.java)
                                                 startActivity(i)
                                                 finish()
-                                            }else{
+                                            }else if(USER_KEY==""){
                                                 Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show();
                                             }
                                         }
@@ -100,9 +106,17 @@ class LoginActivity : AppCompatActivity() {
             editor.putString(USER_KEY, "")
             editor.putString(PWD_KEY, "")
             editor.apply()
-            val i = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(i)
-            finish()
+            if(user=="admin"){
+                val a = Intent(this@LoginActivity, AdminActivity::class.java)
+                startActivity(a)
+                finish()
+            }else{
+                val i = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(i)
+                finish()
+            }
+
+
         }
     }
 
