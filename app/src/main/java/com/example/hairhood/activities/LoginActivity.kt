@@ -5,12 +5,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.hairhood.MainActivity
 import com.example.hairhood.R
-import com.example.hairhood.RegisterActivity
 import com.example.hairhood.databinding.ActivityLoginBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -20,7 +17,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     lateinit var sharedPreferences: SharedPreferences
-    var PREFS_KEY = "com.example.hairhood.user"
+    var PREFS_KEY = "com.example.hairhood.activities.getUser"
     var USER_KEY = "user"
     var PWD_KEY = "pwd"
 
@@ -50,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 val hashedPassword = hashPassword(binding.password.text.toString().replace(" ", ""))
                 val userName = binding.user.text.toString().replace(" ", "")
-                Log.i("hashedPassword",hashedPassword)
                 //Mira si es un usuario
                 db.collection("clientes")
                     .get()
