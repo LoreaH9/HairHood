@@ -2,7 +2,7 @@ package com.example.hairhood.model
 
 import java.util.*
 
-class ClientesClass {
+class ClientesModel {
     val contraseña : String?=null
     val direccion : String?=null
     val dni : String?=null

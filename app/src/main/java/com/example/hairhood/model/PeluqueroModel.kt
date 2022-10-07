@@ -2,7 +2,7 @@ package com.example.hairhood.model
 
 import java.util.*
 
-class PeluqueroClass {
+class PeluqueroModel {
     val contraseña : String?=null
     val dni : String?=null
     val email : String?=null
@@ -12,4 +12,8 @@ class PeluqueroClass {
     val numTelefono : Int?=null
     val titulo : String?=null
     val usuario : String?=null
+
+    public fun PeluqueroModel() {
+
+    }
 }

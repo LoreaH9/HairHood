@@ -1,11 +1,12 @@
-package com.example.hairhood
+package com.example.hairhood.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.hairhood.databinding.ActivityLoginBinding
+import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityRegisterBinding
+import com.example.hairhood.fragments.Map
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding

@@ -1,4 +1,4 @@
-package com.example.hairhood
+package com.example.hairhood.activities
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityLoginBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -36,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.registerRedirect.setOnClickListener {
-            val intentRegitro = Intent(this,RegisterActivity::class.java)
+            val intentRegitro = Intent(this, RegisterActivity::class.java)
             startActivity(intentRegitro)
         }
         binding.btnLogin.setOnClickListener {
@@ -87,11 +88,10 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
-
             }
         }
         //Si le dal an titulo te lleva de vuelta a la app
-        binding.titleLogin.setOnClickListener {
+        binding.closeLoginFrm.setOnClickListener {
             intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
