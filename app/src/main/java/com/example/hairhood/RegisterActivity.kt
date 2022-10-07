@@ -3,9 +3,13 @@ package com.example.hairhood
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
 import com.example.hairhood.databinding.ActivityLoginBinding
 import com.example.hairhood.databinding.ActivityRegisterBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -30,9 +34,24 @@ class RegisterActivity : AppCompatActivity() {
             binding.ScrollPeluquero.visibility = View.VISIBLE
             binding.singUpWorker.setTextColor(resources.getColor(R.color.textColor,null))
         }
-binding.singIn.setOnClickListener{
-    val intentMapa =Intent(this, Map::class.java)
-    startActivity(intentMapa)
-}
+        binding.singInCliente.setOnClickListener{
+
+            if (TextUtils.isEmpty(binding.usuarioCliente.text.toString()) ||
+                TextUtils.isEmpty(binding.passCliente.text.toString()) ||
+                TextUtils.isEmpty(binding.emailCliente.text.toString()) ||
+                TextUtils.isEmpty(binding.nombreCliente.text.toString()) ||
+                TextUtils.isEmpty(binding.dniCliente.text.toString()) ||
+                TextUtils.isEmpty(binding.numTlfCliente.text.toString()) ||
+                TextUtils.isEmpty(binding.direccionCliente.text.toString())) {
+                    Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT).show();
+                }
+
+            val intentMapa =Intent(this, Map::class.java)
+            startActivity(intentMapa)
+        }
+        binding.singInPelu.setOnClickListener{
+            val intentMapa =Intent(this, Map::class.java)
+            startActivity(intentMapa)
+        }
     }
 }
