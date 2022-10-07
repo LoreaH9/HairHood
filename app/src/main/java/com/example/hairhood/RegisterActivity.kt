@@ -1,15 +1,12 @@
 package com.example.hairhood
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
-import com.example.hairhood.databinding.ActivityLoginBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.example.hairhood.databinding.ActivityRegisterBinding
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -34,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
             binding.ScrollPeluquero.visibility = View.VISIBLE
             binding.singUpWorker.setTextColor(resources.getColor(R.color.textColor,null))
         }
-        binding.singInCliente.setOnClickListener{
+        binding.singInCliente.setOnClickListener {
 
             if (TextUtils.isEmpty(binding.usuarioCliente.text.toString()) ||
                 TextUtils.isEmpty(binding.passCliente.text.toString()) ||
@@ -42,18 +39,46 @@ class RegisterActivity : AppCompatActivity() {
                 TextUtils.isEmpty(binding.nombreCliente.text.toString()) ||
                 TextUtils.isEmpty(binding.dniCliente.text.toString()) ||
                 TextUtils.isEmpty(binding.numTlfCliente.text.toString()) ||
-                TextUtils.isEmpty(binding.direccionCliente.text.toString())) {
-                    Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT).show();
-                }else if (!binding.passCliente.equals(binding.passConfirmCliente)) {
-                    Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
+                TextUtils.isEmpty(binding.direccionCliente.text.toString())||
+                TextUtils.isEmpty(binding.fechaCliente.text.toString())
+            ) {
+                Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT)
+                    .show();
             }
-
-           // val intentMapa =Intent(this, Map::class.java)
-            //startActivity(intentMapa)
+            val PassCliente: String = binding.passCliente.getText().toString()
+            val ConfirmPassCliente: String = binding.passConfirmCliente.getText().toString()
+            if (PassCliente != ConfirmPassCliente) {
+                Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
+            }else{
+                val intentLogin =Intent(this, LoginActivity::class.java )
+                startActivity(intentLogin)
+            }
         }
-        //binding.singInPelu.setOnClickListener{
-          //  val intentMapa =Intent(this, Map::class.java)
-            //startActivity(intentMapa)
-        //}
+        binding.singInPelu.setOnClickListener {
+
+            if (TextUtils.isEmpty(binding.usuarioPeluquero.text.toString()) ||
+                TextUtils.isEmpty(binding.passPeluquero.text.toString()) ||
+                TextUtils.isEmpty(binding.emailPeluquero.text.toString()) ||
+                TextUtils.isEmpty(binding.nombrePeluquero.text.toString()) ||
+                TextUtils.isEmpty(binding.dniPeluquero.text.toString()) ||
+                TextUtils.isEmpty(binding.numTlfPeluquero.text.toString()) ||
+                TextUtils.isEmpty(binding.fechaPeluquero.text.toString())
+
+            ) {
+                Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT)
+                    .show();
+            }
+            val PassPeluquero: String = binding.passPeluquero.getText().toString()
+            val ConfirmPassPeluquero: String = binding.passConfirmPeluquero.getText().toString()
+            if (PassPeluquero != ConfirmPassPeluquero) {
+                Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
+            }else{
+                val intentLogin =Intent(this, LoginActivity::class.java )
+                startActivity(intentLogin)
+            }
+        }
+
+
+        }
+
     }
-}
