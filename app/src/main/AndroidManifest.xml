@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".activities.SplashScreenActivity"
             android:exported="false" />
         <activity
             android:name=".RegistroCliente"
