@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import com.example.hairhood.databinding.ActivityMainBinding
 
 var PREFS_KEY = "prefs"
-var EMAIL_KEY = "email"
+var USER_KEY = "user"
 var email = ""
 
 class MainActivity : AppCompatActivity() {

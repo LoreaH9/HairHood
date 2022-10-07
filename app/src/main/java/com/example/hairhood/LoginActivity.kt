@@ -16,12 +16,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     lateinit var sharedPreferences: SharedPreferences
     var PREFS_KEY = "prefs"
-    var USER_KEY = "email"
+    var USER_KEY = "user"
     var PWD_KEY = "pwd"
 
-    // on below line we are creating a
-    // variable for email and password.
-    var email = ""
+    var user = ""
     var pwd = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         val db = Firebase.firestore
         sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
-        email = sharedPreferences.getString(USER_KEY, "").toString()
+        user = sharedPreferences.getString(USER_KEY, "").toString()
         pwd = sharedPreferences.getString(PWD_KEY, "").toString()
 
 
@@ -97,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         //Meterse a la app si ya tenia una sesión iniciada
-        if (email != "" || pwd != "") {
+        if (user != "" || pwd != "") {
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.putString(USER_KEY, "")
             editor.putString(PWD_KEY, "")
