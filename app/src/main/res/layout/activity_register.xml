@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_login"
-    tools:context=".activities.MainActivity">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/titleRegister"
@@ -130,7 +130,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:hint="User Name"
+                        android:hint="Usuario"
                         app:boxStrokeColor="#4E4A4A"
                         app:boxStrokeWidth="1dp"
                         app:hintTextColor="#4E4A4A"
@@ -352,7 +352,7 @@
 
 
                     <Button
-                        android:id="@+id/singIn"
+                        android:id="@+id/singInCliente"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -589,7 +589,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
-                        android:id="@+id/singIn2"
+                        android:id="@+id/singInPelu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

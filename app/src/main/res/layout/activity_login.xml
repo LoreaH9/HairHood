@@ -7,7 +7,7 @@
     android:background="@drawable/bg_login"
     android:orientation="vertical"
 
-    tools:context=".activities.MainActivity">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/titleLogin"
@@ -51,26 +51,6 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="25dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/closeLoginFrm"
-                        android:layout_width="22dp"
-                        android:layout_height="25dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:srcCompat="@drawable/ic_cross" />
-
-                    <TextView
-                        android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/closeFrm"
-                        app:layout_constraintEnd_toStartOf="@+id/closeLoginFrm"
-                        tools:layout_editor_absoluteY="3dp" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -196,5 +176,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleLogin" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

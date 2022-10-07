@@ -1,14 +1,10 @@
-package com.example.hairhood.activities
+package com.example.hairhood
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityMainBinding
-import com.example.hairhood.fragments.Chat
-import com.example.hairhood.fragments.Favorite
-import com.example.hairhood.fragments.Map
-import com.example.hairhood.fragments.Profile
 
 var PREFS_KEY :String = "prefs"
 var USER_KEY :String = "user"
