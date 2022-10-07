@@ -28,6 +28,7 @@ class Profile : Fragment() {
         binding.btnMasInfor.setOnClickListener {
             val intent = Intent(this@Profile.requireContext(), ProfileMoreInformation::class.java)
             startActivity(intent)
+
         }
         /*binding.btnMasInfor.setOnClickListener {
             val intent = Intent(this@Favorite.requireContext(), LoginActivity::class.java)
