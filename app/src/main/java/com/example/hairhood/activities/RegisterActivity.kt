@@ -66,22 +66,19 @@ class RegisterActivity : AppCompatActivity() {
                 TextUtils.isEmpty(binding.dniPeluquero.text.toString()) ||
                 TextUtils.isEmpty(binding.numTlfPeluquero.text.toString()) ||
                 TextUtils.isEmpty(binding.fechaPeluquero.text.toString())
-
             ) {
                 Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT)
                     .show();
             }
-            val PassPeluquero: String = binding.passPeluquero.getText().toString()
-            val ConfirmPassPeluquero: String = binding.passConfirmPeluquero.getText().toString()
-            if (PassPeluquero != ConfirmPassPeluquero) {
+            val passPeluquero: String = binding.passPeluquero.getText().toString()
+            val confirmPassPeluquero: String = binding.passConfirmPeluquero.getText().toString()
+            if (passPeluquero != confirmPassPeluquero) {
                 Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
             }else{
                 val intentLogin =Intent(this, LoginActivity::class.java )
                 startActivity(intentLogin)
             }
         }
-
-
-        }
-
     }
+
+}

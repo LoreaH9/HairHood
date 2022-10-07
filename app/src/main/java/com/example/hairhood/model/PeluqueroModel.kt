@@ -1,17 +1,40 @@
 package com.example.hairhood.model
 
 class PeluqueroModel{
-    val contraseña : String?=null
-    val dni : String?=null
-    val email : String?=null
-    val especialidad : String?=null
-    val foto : String?=null
-    val nombre : String?=null
-    val numTelefono : Int?=null
-    val titulo : String?=null
-    val usuario : String?=null
+    private var contraseña : String?=null
+    private var dni : String?=null
+    private var email : String?=null
+    private var especialidad : String?=null
+    private var foto : String?=null
+    private var nombre : String?=null
+    private var numTelefono : Int?=null
+    private var titulo : String?=null
+    private var usuario : String?=null
 
-    public fun PeluqueroModel() {
-
+    constructor(
+        contraseña: String?,
+        dni: String?,
+        email: String?,
+        especialidad: String?,
+        foto: String?,
+        nombre: String?,
+        numTelefono: Int?,
+        titulo: String?,
+        usuario: String?
+    ) {
+        this.contraseña = contraseña
+        this.dni = dni
+        this.email = email
+        this.especialidad = especialidad
+        this.foto = foto
+        this.nombre = nombre
+        this.numTelefono = numTelefono
+        this.titulo = titulo
+        this.usuario = usuario
     }
+
+
+
+
+
 }
