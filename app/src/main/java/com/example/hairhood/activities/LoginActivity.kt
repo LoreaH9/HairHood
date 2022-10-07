@@ -5,18 +5,20 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityLoginBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import java.security.MessageDigest
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     lateinit var sharedPreferences: SharedPreferences
-    var PREFS_KEY = "prefs"
+    var PREFS_KEY = "com.example.hairhood.user"
     var USER_KEY = "user"
     var PWD_KEY = "pwd"
 
@@ -24,8 +26,6 @@ class LoginActivity : AppCompatActivity() {
     var pwd = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Thread.sleep(2000)
-        //Esto es para que una vez empiece a ejecutar el main activity vuelve a cargar el tema por defecto
         setTheme(R.style.Theme_HairHood)
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -35,50 +35,38 @@ class LoginActivity : AppCompatActivity() {
         user = sharedPreferences.getString(USER_KEY, "").toString()
         pwd = sharedPreferences.getString(PWD_KEY, "").toString()
 
-
         binding.registerRedirect.setOnClickListener {
             val intentRegitro = Intent(this, RegisterActivity::class.java)
             startActivity(intentRegitro)
         }
+
+        //Pulsa boton login
         binding.btnLogin.setOnClickListener {
-            if (TextUtils.isEmpty(binding.user.text.toString()) || TextUtils.isEmpty(binding.password.text.toString())) {
+            //Si no mete alguno de los datos
+            if (TextUtils.isEmpty(binding.user.text.toString()) && TextUtils.isEmpty(binding.password.text.toString())) {
                 Toast.makeText(this, "Por favor introduzca el usuario y la contraseña", Toast.LENGTH_SHORT).show();
             } else {
+                val hashedPassword = hashPassword(binding.password.text.toString().replace(" ", ""))
+                val userName = binding.user.text.toString().replace(" ", "")
+                Log.i("hashedPassword",hashedPassword)
                 //Mira si es un usuario
                 db.collection("clientes")
                     .get()
                     .addOnSuccessListener { list ->
-                        list.forEach {
-                            //binding.textView.text = binding.textView.text.toString() + "${it.id}, ${it.data["nombre"]}, ${it.data["ciudad"]}\n"
-                            if (binding.user.text.toString() == it.data["usuario"] && binding.password.text.toString() == it.data["contraseña"]) {
-                                val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                                editor.putString(USER_KEY, binding.user.text.toString())
-                                editor.putString(PWD_KEY, binding.password.text.toString())
-                                editor.apply()
-                                if (it.data["usuario"]!="admin"){
-                                    val i = Intent(this@LoginActivity, MainActivity::class.java)
-                                    startActivity(i)
-                                    finish()
-                                }else{
-                                    val a = Intent(this@LoginActivity, AdminActivity::class.java)
-                                    startActivity(a)
-                                    finish()
-                                }
+                        list.forEach { usuario ->
+
+                            if (userName == usuario.data["usuario"] && hashedPassword == usuario.data["contraseña"]) {
+                                saveChanges(usuario.data["usuario"].toString(), usuario.data["contraseña"].toString())
                             }else{
+                                //En caso de no ser usuario mira si es peluquero
                                 db.collection("peluqueros")
                                     .get()
                                     .addOnSuccessListener { list ->
-                                        list.forEach {
-                                            //binding.textView.text = binding.textView.text.toString() + "${it.id}, ${it.data["nombre"]}, ${it.data["ciudad"]}\n"
-                                            if (binding.user.text.toString() == it.data["usuario"] && binding.password.text.toString() == it.data["contraseña"]) {
-                                                val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                                                editor.putString(USER_KEY, binding.user.text.toString())
-                                                editor.putString(PWD_KEY, binding.password.text.toString())
-                                                editor.apply()
-                                                val i = Intent(this@LoginActivity, MainActivity::class.java)
-                                                startActivity(i)
-                                                finish()
+                                        list.forEach { peluquero ->
+                                            if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
+                                                saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
                                             }else if(USER_KEY==""){
+                                                //Los datos no son correctos
                                                 Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show();
                                             }
                                         }
@@ -90,12 +78,34 @@ class LoginActivity : AppCompatActivity() {
                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
         }
-        //Si le dal an titulo te lleva de vuelta a la app
+
+        //Volver a la página principal
         binding.closeLoginFrm.setOnClickListener {
             intent = Intent(this@LoginActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    //Hash password and rm blank spaces
+    private fun hashPassword(psswd: String): String {
+        val digest = MessageDigest.getInstance("SHA-1")
+        val result = digest.digest(psswd.toByteArray(Charsets.UTF_8))
+        val sb = StringBuilder()
+        for (b in result) {sb.append(String.format("%02X", b))}
+        return sb.toString()
+    }
+
+    //Guarda el inicio de sesion en SharedPreferences
+    private fun saveChanges(user: String, psswd: String) {
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString(USER_KEY, user)
+        editor.putString(PWD_KEY, psswd)
+        editor.apply()
+        var i = Intent(this@LoginActivity, MainActivity::class.java)
+        if(user=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
+        startActivity(i)
+        finish()
     }
 
     override fun onStart() {
@@ -106,17 +116,10 @@ class LoginActivity : AppCompatActivity() {
             editor.putString(USER_KEY, "")
             editor.putString(PWD_KEY, "")
             editor.apply()
-            if(user=="admin"){
-                val a = Intent(this@LoginActivity, AdminActivity::class.java)
-                startActivity(a)
-                finish()
-            }else{
-                val i = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(i)
-                finish()
-            }
-
-
+            var i = Intent(this@LoginActivity, MainActivity::class.java)
+            if(user=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
+            startActivity(i)
+            finish()
         }
     }
 

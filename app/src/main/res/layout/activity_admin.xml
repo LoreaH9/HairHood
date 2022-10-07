@@ -66,18 +66,6 @@
                 android:padding="10dp"
                 android:text="Apellido"
                 android:textStyle="bold" />
-            <TextView
-                android:layout_column="1"
-                android:textSize="16dp"
-                android:padding="10dp"
-                android:text="Email"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_column="1"
-                android:textSize="16dp"
-                android:padding="10dp"
-                android:text="Número Telefono"
-                android:textStyle="bold" />
         </TableRow>
     </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

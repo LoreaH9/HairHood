@@ -10,9 +10,10 @@ import com.example.hairhood.fragments.Favorite
 import com.example.hairhood.fragments.Map
 import com.example.hairhood.fragments.Profile
 
-var PREFS_KEY = "prefs"
-var USER_KEY = "user"
-var email = ""
+var PREFS_KEY :String = "prefs"
+var USER_KEY :String = "user"
+var user :String = ""
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,8 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //var sharedPreferences = getSharedPreferences(PREFS_KEY, MODE_PRIVATE)
         replaceFragment(Favorite())
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
