@@ -1,0 +1,17 @@
+package com.example.hairhood.model
+
+class PeluqueroModel{
+    val contraseña : String?=null
+    val dni : String?=null
+    val email : String?=null
+    val especialidad : String?=null
+    val foto : String?=null
+    val nombre : String?=null
+    val numTelefono : Int?=null
+    val titulo : String?=null
+    val usuario : String?=null
+
+    public fun PeluqueroModel() {
+
+    }
+}
