@@ -19,8 +19,11 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        userList.add(User("12345678A", "prueba", "peluquero"))
-        userList.add(User("12345678A", "prueba", "cliente"))
+        userList.add(User("12345678A", "prueba", "P"))
+        userList.add(User("12345678A", "prueba", "C"))
+        userList.add(User("12345678A", "prueba", "C"))
+        userList.add(User("12345678A", "prueba", "C"))
+
         tableRecyclerView = findViewById(R.id.table_recycler_view)
         UserAdapter = UserAdapter(userList)
         tableRecyclerView.layoutManager = LinearLayoutManager(this)

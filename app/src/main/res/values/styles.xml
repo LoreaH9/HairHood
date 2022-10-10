@@ -9,7 +9,7 @@
     </style>
     <style name="table_row_item" parent="@android:style/TextAppearance.Small">
         <item name="android:gravity">center_vertical</item>
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/transparentColor</item>
     </style>
     <style name="button_style"></style>
     <!--El style Usuario deberia de volver a cargar y visualizarse correctamente una vez el splash termine de visualizarse-->
