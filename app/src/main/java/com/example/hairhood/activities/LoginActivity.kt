@@ -59,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
                         list.forEach { usuario ->
                             if (userName == usuario.data["usuario"] && hashedPassword == usuario.data["contraseña"]) {
                                 saveChanges(usuario.data["usuario"].toString(), usuario.data["contraseña"].toString())
+                                val intentCorrecto =Intent(this, MainActivity::class.java)
+                                startActivity(intentCorrecto)
                             }else{
                                 //En caso de no ser usuario mira si es peluquero
                                 db.collection("peluqueros")
@@ -67,6 +69,8 @@ class LoginActivity : AppCompatActivity() {
                                         list.forEach { peluquero ->
                                             if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
                                                 saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
+                                                val intentCorrecto =Intent(this, MainActivity::class.java)
+                                                startActivity(intentCorrecto)
                                             }else if(USER_KEY==""){
                                                 //Los datos no son correctos
                                                 Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show()}}}
