@@ -1,28 +1,39 @@
 package com.example.hairhood
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-
-class ClientesAdapter: RecyclerView.Adapter<ClientesAdapter.ViewHolder>{
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientesAdapter.ViewHolder {
-        TODO("Not yet implemented")
-    }
-
-    override fun onBindViewHolder(holder: ClientesAdapter.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
+import com.example.hairhood.model.ClienteModel
+import com.example.hairhood.model.User
 
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+class UserAdapter(private var userArrayList: ArrayList<User>) :
+    RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
-    class ViewHolder (view: View):RecyclerView.ViewHolder(view){
-        val binding = SingleItemBinding.bind(view)
-        fun bind(asig:Asignaturas){
-            binding.asignatura.text=asig.nombre
-            binding.nombreProf.text=asig.profesor
+        override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
+            val v: View = LayoutInflater.from(viewGroup.context)
+                .inflate(R.layout.table_row_layout, viewGroup, false)
+            return ViewHolder(v)
+        }
+
+        override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
+            viewHolder.tvUserName.text = userArrayList[i].usuario
+            viewHolder.tvAge.text = userArrayList[i].nombre
+            viewHolder.tvDesignation.text = userArrayList[i].tipo
+        }
+
+        override fun getItemCount(): Int {
+            return userArrayList.size
+        }
+
+        class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val tvUserName: TextView = itemView.findViewById(R.id.tv_user_name)
+            val tvAge: TextView = itemView.findViewById(R.id.tv_user_age)
+
+            val tvDesignation: TextView = itemView.findViewById(R.id.tv_user_designation)
         }
     }
-}
+
+

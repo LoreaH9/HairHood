@@ -108,10 +108,6 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         //Meterse a la app si ya tenia una sesión iniciada
         if (user != "" || pwd != "") {
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putString(USER_KEY, "")
-            editor.putString(PWD_KEY, "")
-            editor.apply()
             var i = Intent(this@LoginActivity, MainActivity::class.java)
             if(user=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
             startActivity(i)

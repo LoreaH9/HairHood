@@ -22,7 +22,16 @@
         </activity>
         <activity
             android:name=".activities.RegisterActivity"
+<<<<<<< HEAD
             android:exported="true" />
+=======
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".activities.AdminActivity"
+            android:exported="false">
+        </activity>
+>>>>>>> 0e7041c3b3cda32921bfc5aaee7ada8875a50d4c
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true"
