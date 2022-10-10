@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TableLayout
+        android:id="@+id/table_heading_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:stretchColumns="1,2,3"
+        android:layout_margin="8dp"
+        >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/table_row_item"
+                android:layout_column="1"
+                android:background="@color/white"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tv_user_age"
+                style="@style/table_row_item"
+                android:layout_column="1"
+                android:background="@color/white"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tv_user_designation"
+                style="@style/table_row_item"
+                android:layout_column="1"
+                android:background="@color/white"
+
+                android:textAlignment="center" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

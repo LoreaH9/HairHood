@@ -16,8 +16,11 @@
 
         <activity
             android:name=".activities.RegisterActivity"
-            android:exported="true">
-
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".activities.AdminActivity"
+            android:exported="false">
         </activity>
         <activity
             android:name=".activities.LoginActivity"
