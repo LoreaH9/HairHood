@@ -30,10 +30,12 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val db = Firebase.firestore
+
         sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         user = sharedPreferences.getString(USER_KEY, "").toString()
         pwd = sharedPreferences.getString(PWD_KEY, "").toString()
 
+        //Redireccion al formulario del registro
         binding.registerRedirect.setOnClickListener {
             val intentRegitro = Intent(this, RegisterActivity::class.java)
             startActivity(intentRegitro)
@@ -41,18 +43,20 @@ class LoginActivity : AppCompatActivity() {
 
         //Pulsa boton login
         binding.btnLogin.setOnClickListener {
+
             //Si no mete alguno de los datos
             if (TextUtils.isEmpty(binding.user.text.toString()) && TextUtils.isEmpty(binding.password.text.toString())) {
                 Toast.makeText(this, "Por favor introduzca el usuario y la contraseña", Toast.LENGTH_SHORT).show();
             } else {
+
                 val hashedPassword = hashPassword(binding.password.text.toString().replace(" ", ""))
                 val userName = binding.user.text.toString().replace(" ", "")
+
                 //Mira si es un usuario
                 db.collection("clientes")
                     .get()
                     .addOnSuccessListener { list ->
                         list.forEach { usuario ->
-
                             if (userName == usuario.data["usuario"] && hashedPassword == usuario.data["contraseña"]) {
                                 saveChanges(usuario.data["usuario"].toString(), usuario.data["contraseña"].toString())
                             }else{
@@ -65,14 +69,8 @@ class LoginActivity : AppCompatActivity() {
                                                 saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
                                             }else if(USER_KEY==""){
                                                 //Los datos no son correctos
-                                                Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    }
-                                    .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
-                            }
-                        }
-                    }
+                                                Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show()}}}
+                                    .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}}}}
                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
         }

@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.hairhood.databinding.ActivityAdminBinding
 
-
-
 class AdminActivity : AppCompatActivity() {
     lateinit var binding: ActivityAdminBinding
 

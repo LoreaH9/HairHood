@@ -23,6 +23,7 @@ class Favorite : Fragment() {
     ): View? {
         val binding: FragmentFavoriteBinding = FragmentFavoriteBinding.inflate(inflater, container, false)
         //set variables in Binding
+
         binding.btnPrueba.setOnClickListener {
             val intent = Intent(this@Favorite.requireContext(), LoginActivity::class.java)
             startActivity(intent)
