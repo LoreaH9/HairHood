@@ -123,7 +123,7 @@ fun guardarDatosCliente(db: FirebaseFirestore) {
             "dni" to binding.dniPeluquero.text.toString(),
             "numTelefono" to binding.numTlfPeluquero.text.toString().toInt(),
             "email" to binding.emailPeluquero.text.toString(),
-            "contraseña" to binding.passPeluquero.text.toString().hashCode())
+            "contraseña" to binding.passPeluquero.text.toString())
         db.collection("peluqueros").document(binding.usuarioPeluquero.text.toString())
             .set(datoP)
             .addOnSuccessListener { resultado ->
