@@ -44,7 +44,6 @@ class Profile : Fragment() {
             val fragmentManager = childFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.cLayoutProfile, Map())
-            //desaparece()
             //fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

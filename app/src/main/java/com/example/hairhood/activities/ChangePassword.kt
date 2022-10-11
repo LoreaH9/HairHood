@@ -3,15 +3,18 @@ package com.example.hairhood.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent.KEYCODE_BACK
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityChangePasswordBinding
+import com.example.hairhood.databinding.ActivityMainBinding
 import com.example.hairhood.fragments.Profile
 
 class ChangePassword : AppCompatActivity() {
 
     lateinit var binding: ActivityChangePasswordBinding
+    lateinit var llamada: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,7 @@ class ChangePassword : AppCompatActivity() {
         binding.editTextTextPassword3.visibility = View.GONE
         binding.button5.visibility = View.GONE
         binding.button6.visibility = View.GONE
+        //llamada.bottomNavigationView.visibility = View.VISIBLE
     }
 
 }
