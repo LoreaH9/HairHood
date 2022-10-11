@@ -10,6 +10,14 @@
     android:padding="32dp"
     tools:context=".activities.Selector_peluquero">
 
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="52dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
+        android:scrollbarThumbVertical="@drawable/ic_favorite"
+        app:srcCompat="@drawable/ic_favorite" />
+
     <ImageView
         android:id="@+id/fav"
         android:layout_width="52dp"
