@@ -8,16 +8,15 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/app_name"
-        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold|normal|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.082" />
@@ -31,56 +30,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <TableLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="LOG OUT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:stretchColumns="1,2,3,4"
-        android:layout_margin="8dp"
-        >
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TableLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:stretchColumns="1,2,3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logout">
 
         <TableRow>
+
             <TextView
+                android:id="@+id/tv_user_dni"
+                style="@style/table_row_item"
                 android:layout_column="1"
-                android:textSize="16dp"
-                android:padding="10dp"
-                android:text="ID"
                 android:gravity="center"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:layout_column="1"
-                android:textSize="16dp"
                 android:padding="10dp"
                 android:text="DNI"
-                android:gravity="center"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_column="1"
-                android:gravity="center"
-
-                android:textSize="16dp"
-                android:padding="10dp"
-                android:text="Nombre"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
+                style="@style/table_row_item"
                 android:layout_column="1"
-                android:textSize="16dp"
-                android:padding="10dp"
                 android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/userName"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-                android:text="Apellido"
+            <TextView
+                android:id="@+id/tv_user_surname"
+                style="@style/table_row_item"
+                android:layout_column="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/type"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </TableRow>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvClientes"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/table_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,6 +23,6 @@ class Map : Fragment() {
 
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
-
-
+//Videos de tutoriales
+    //https://youtube.com/playlist?list=PLI4dAv2GvnrTAs7V-yZeNQAbYe-8FNFAi
 }

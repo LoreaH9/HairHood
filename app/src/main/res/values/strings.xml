@@ -20,6 +20,7 @@
 
     <!-- ADMIN ACTIVITY -->
     <string name="adminConfig">Configuración del administrador</string>
+    <string name="type">Tipo</string>
 
     <!-- PROFILE ACTIVITY -->
     <string name="moreInformation">Más información</string>

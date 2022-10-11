@@ -59,6 +59,9 @@ class LoginActivity : AppCompatActivity() {
                         list.forEach { usuario ->
                             if (userName == usuario.data["usuario"] && hashedPassword == usuario.data["contraseña"]) {
                                 saveChanges(usuario.data["usuario"].toString(), usuario.data["contraseña"].toString())
+                                var i = Intent(this@LoginActivity, MainActivity::class.java)
+                                if(userName=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
+                                startActivity(i)
                             }else{
                                 //En caso de no ser usuario mira si es peluquero
                                 db.collection("peluqueros")
@@ -67,6 +70,8 @@ class LoginActivity : AppCompatActivity() {
                                         list.forEach { peluquero ->
                                             if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
                                                 saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
+                                                val intentCorrecto =Intent(this, MainActivity::class.java)
+                                                startActivity(intentCorrecto)
                                             }else if(USER_KEY==""){
                                                 //Los datos no son correctos
                                                 Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show()}}}
@@ -107,11 +112,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         //Meterse a la app si ya tenia una sesión iniciada
-        if (user != "" || pwd != "") {
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putString(USER_KEY, "")
-            editor.putString(PWD_KEY, "")
-            editor.apply()
+        if (user != "" && pwd != "") {
             var i = Intent(this@LoginActivity, MainActivity::class.java)
             if(user=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
             startActivity(i)

@@ -469,7 +469,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:hint="Usuario"
+                        android:hint="Numero de telefono"
                         app:boxStrokeColor="#4E4A4A"
                         app:boxStrokeWidth="1dp"
                         app:hintTextColor="#4E4A4A"
@@ -603,11 +603,8 @@
                         android:textSize="17sp"
                         app:backgroundTint="@color/pinkColor"
                         app:shapeAppearanceOverlay="@style/Button5" />
-
-
                 </LinearLayout>
             </ScrollView>
-
 
         </LinearLayout>
 
