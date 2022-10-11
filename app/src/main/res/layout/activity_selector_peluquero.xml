@@ -11,6 +11,7 @@
     tools:context=".activities.Selector_peluquero">
 
     <ImageView
+        android:id="@+id/fav"
         android:layout_width="52dp"
         android:layout_height="60dp"
         android:layout_gravity="right"
@@ -28,23 +29,25 @@
 
         <!-- add a Image image.png in your Drawable folder -->
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/foto_peluquero"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:src="@drawable/prueba" />
 
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:id="@+id/nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:textSize="24dp"
-        android:text="Izena"/>
+        android:text="Izena"
+        android:textSize="24dp" />
 
     <RatingBar
+        android:id="@+id/rango"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -53,12 +56,14 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
+        android:id="@+id/infor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
-        android:textSize="24dp"
         android:text="+ informazioa"
-        android:textColor="@color/pinkColor"/>
+        android:textStyle="bold"
+        android:textColor="@color/pinkColor"
+        android:textSize="24dp" />
 
 </LinearLayout>
