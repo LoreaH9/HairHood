@@ -3,7 +3,6 @@ package com.example.hairhood.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +44,12 @@ class AdminActivity : AppCompatActivity() {
                         }
                         //Recycle View tabla todos los usuarios
                         tableRecyclerView = findViewById(R.id.table_recycler_view)
-                        UserAdapter = UserAdapter(userList)
+                        UserAdapter = UserAdapter(userList){ user->
+                            val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
+                            intent.putExtra(AdminUserActivity.USER_INFO, user)
+                            startActivity(intent)
+
+                        }
                         tableRecyclerView.layoutManager = LinearLayoutManager(this)
                         tableRecyclerView.adapter = UserAdapter
                     }

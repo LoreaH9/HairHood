@@ -5,11 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hairhood.model.ClienteModel
 import com.example.hairhood.model.User
 
 
-class UserAdapter(private var userArrayList: ArrayList<User>) :
+class UserAdapter(private var userArrayList: ArrayList<User>, private val listener:(User)->Unit) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
@@ -19,9 +18,12 @@ class UserAdapter(private var userArrayList: ArrayList<User>) :
         }
 
         override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
-            viewHolder.tvUserName.text = userArrayList[i].usuario
-            viewHolder.tvAge.text = userArrayList[i].nombre
-            viewHolder.tvDesignation.text = userArrayList[i].tipo
+            viewHolder.dni.text = userArrayList[i].dni
+            viewHolder.username.text = userArrayList[i].usuario
+            viewHolder.type.text = userArrayList[i].tipo
+            viewHolder.username.setOnClickListener {
+                listener(userArrayList[i])
+            }
         }
 
         override fun getItemCount(): Int {
@@ -29,10 +31,9 @@ class UserAdapter(private var userArrayList: ArrayList<User>) :
         }
 
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val tvUserName: TextView = itemView.findViewById(R.id.tv_user_name)
-            val tvAge: TextView = itemView.findViewById(R.id.tv_user_age)
-
-            val tvDesignation: TextView = itemView.findViewById(R.id.tv_user_designation)
+            val dni: TextView = itemView.findViewById(R.id.tv_user_dni)
+            val username: TextView = itemView.findViewById(R.id.tv_user_username)
+            val type: TextView = itemView.findViewById(R.id.tv_user_type)
         }
     }
 
