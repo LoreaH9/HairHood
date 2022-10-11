@@ -111,7 +111,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         //Meterse a la app si ya tenia una sesión iniciada
-        if (user != "" || pwd != "") {
+        if (user != "" && pwd != "") {
             var i = Intent(this@LoginActivity, MainActivity::class.java)
             if(user=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
             startActivity(i)

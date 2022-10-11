@@ -1,17 +1,20 @@
 package com.example.hairhood.activities
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.hairhood.UserAdapter
 import com.example.hairhood.R
+import com.example.hairhood.UserAdapter
 import com.example.hairhood.databinding.ActivityAdminBinding
 import com.example.hairhood.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
 
 class AdminActivity : AppCompatActivity() {
     lateinit var binding: ActivityAdminBinding
@@ -21,10 +24,19 @@ class AdminActivity : AppCompatActivity() {
     private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        getAllUsers()
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        getAllUsers()
+        binding.logout.setOnClickListener {
+            val sharedPreferences = getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putString(USER_KEY, "")
+            editor.apply()
+            var i = Intent(this@AdminActivity, LoginActivity::class.java)
+            startActivity(i)
+            finish()
+        }
     }
 
     private fun getAllUsers() {
