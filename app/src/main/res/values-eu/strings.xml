@@ -22,5 +22,6 @@
 
     <!-- ADMIN ACTIVITY -->
     <string name="adminConfig">Administratzailearen configurazioa</string>
+    <string name="type">Mota</string>
 
 </resources>
