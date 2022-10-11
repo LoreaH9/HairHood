@@ -51,14 +51,13 @@ class RegisterActivity : AppCompatActivity() {
             ) {
                 Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT)
                     .show();
-            }else{
-                guardarDatosCliente(db)
             }
             val PassCliente: String = binding.passCliente.getText().toString()
             val ConfirmPassCliente: String = binding.passConfirmCliente.getText().toString()
             if (PassCliente != ConfirmPassCliente) {
                 Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
             }else{
+                guardarDatosCliente(db)
                 val intentLogin =Intent(this, LoginActivity::class.java )
                 startActivity(intentLogin)
             }
