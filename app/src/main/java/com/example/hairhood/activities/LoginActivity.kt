@@ -59,8 +59,9 @@ class LoginActivity : AppCompatActivity() {
                         list.forEach { usuario ->
                             if (userName == usuario.data["usuario"] && hashedPassword == usuario.data["contraseña"]) {
                                 saveChanges(usuario.data["usuario"].toString(), usuario.data["contraseña"].toString())
-                                val intentCorrecto =Intent(this, MainActivity::class.java)
-                                startActivity(intentCorrecto)
+                                var i = Intent(this@LoginActivity, MainActivity::class.java)
+                                if(userName=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
+                                startActivity(i)
                             }else{
                                 //En caso de no ser usuario mira si es peluquero
                                 db.collection("peluqueros")

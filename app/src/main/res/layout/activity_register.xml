@@ -603,11 +603,8 @@
                         android:textSize="17sp"
                         app:backgroundTint="@color/pinkColor"
                         app:shapeAppearanceOverlay="@style/Button5" />
-
-
                 </LinearLayout>
             </ScrollView>
-
 
         </LinearLayout>
 
