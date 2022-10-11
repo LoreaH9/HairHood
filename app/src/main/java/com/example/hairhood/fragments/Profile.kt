@@ -5,10 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.hairhood.R
+import com.example.hairhood.activities.ChangePassword
+import com.example.hairhood.activities.LoginActivity
+import com.example.hairhood.activities.RegisterActivity
+import com.example.hairhood.databinding.ActivityChangePasswordBinding
 import com.example.hairhood.databinding.FragmentProfileBinding
-import com.example.hairhood.fragments.ProfileMoreInformation
-
+import androidx.fragment.app.FragmentActivity
 
 class Profile : Fragment() {
 
@@ -23,17 +28,33 @@ class Profile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val vista: FragmentProfileBinding = FragmentProfileBinding.inflate(inflater, container, false)
-        //set variables in Binding
-        binding.btnMasInfor.setOnClickListener {
-            val intent = Intent(this@Profile.requireContext(), ProfileMoreInformation::class.java)
+        val binding: FragmentProfileBinding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        binding.button.setOnClickListener {
+            val editProfileIntent = Intent(getActivity(), ChangePassword()::class.java)
+            getActivity()?.startActivity(editProfileIntent)
+        }
+
+        binding.button2.setOnClickListener {
+            val intent = Intent(this@Profile.requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+
+        binding.button3.setOnClickListener {
+            val fragmentManager = childFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.cLayoutProfile, Map())
+            //desaparece()
+            //fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+
+        //set variables in Binding
         /*binding.btnMasInfor.setOnClickListener {
             val intent = Intent(this@Favorite.requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }*/
-        return vista.root
+        return binding.root
     }
 
 }

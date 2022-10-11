@@ -1,4 +1,4 @@
-package com.example.hairhood
+/*package com.example.hairhood
 
 import android.view.View
 import android.view.ViewGroup
@@ -25,4 +25,4 @@ class ClientesAdapter: RecyclerView.Adapter<ClientesAdapter.ViewHolder>{
             binding.nombreProf.text=asig.profesor
         }
     }
-}
+}*/

@@ -27,8 +27,12 @@
     <string name="changePassword">Cambiar contraseña</string>
     <string name="saveAndBack">Guardar y volver</string>
     <string name="back">Volver</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="nameSurname">Nombre y Apellidos</string>
+    <string name="email">Correo electrónico</string>
+    <string name="phoneNumber">Número de teléfono</string>
+    <string name="address">Dirección</string>
+    <string name="oldPassword">Contraseña actual</string>
+    <string name="newPassword">Nueva contraseña</string>
+    <string name="newPasswordRepeat">Repite la nueva contraseña</string>
 </resources>
 
