@@ -46,7 +46,6 @@ class Profile : Fragment() {
             fragmentTransaction.replace(R.id.cLayoutProfile, Map())
             //fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-
         }
 
         //set variables in Binding

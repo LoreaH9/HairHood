@@ -35,6 +35,5 @@
     <string name="oldPassword">Contraseña actual</string>
     <string name="newPassword">Nueva contraseña</string>
     <string name="newPasswordRepeat">Repite la nueva contraseña</string>
-
 </resources>
 
