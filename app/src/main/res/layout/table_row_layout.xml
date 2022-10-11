@@ -14,7 +14,7 @@
 
         <TableRow>
             <TextView
-                android:id="@+id/tv_user_name"
+                android:id="@+id/tv_user_dni"
                 style="@style/table_row_item"
                 android:layout_column="1"
                 android:gravity="center"
@@ -22,7 +22,7 @@
                 />
 
             <TextView
-                android:id="@+id/tv_user_age"
+                android:id="@+id/tv_user_username"
                 style="@style/table_row_item"
                 android:layout_column="1"
                 android:layout_width="0dp"
@@ -30,7 +30,7 @@
                 />
 
             <TextView
-                android:id="@+id/tv_user_designation"
+                android:id="@+id/tv_user_type"
                 style="@style/table_row_item"
                 android:layout_column="1"
                 android:gravity="center"
