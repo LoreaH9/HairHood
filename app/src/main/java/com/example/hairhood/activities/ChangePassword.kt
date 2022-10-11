@@ -42,6 +42,7 @@ class ChangePassword : AppCompatActivity() {
         binding.editTextTextPassword3.visibility = View.GONE
         binding.button5.visibility = View.GONE
         binding.button6.visibility = View.GONE
+
         //llamada.bottomNavigationView.visibility = View.VISIBLE
     }
 
