@@ -166,6 +166,16 @@
         app:layout_constraintVertical_bias="0.607"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="64dp"
+        android:layout_height="70dp"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextNombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"

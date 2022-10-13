@@ -3,20 +3,24 @@
         android:id="@+id/favorite"
         android:enabled="true"
         android:icon="@drawable/ic_favorite"
-        android:title="@string/favorites"/>
+        android:title="@string/favorites"
+        android:iconTint="@color/pinkColor"/>
     <item
         android:id="@+id/chat"
         android:enabled="true"
         android:icon="@drawable/ic_chat"
-        android:title="@string/chat"/>
+        android:title="@string/chat"
+        android:iconTint="@color/pinkColor"/>
     <item
         android:id="@+id/places"
         android:enabled="true"
         android:icon="@drawable/ic_places"
-        android:title="@string/places"/>
+        android:title="@string/places"
+        android:iconTint="@color/pinkColor"/>
     <item
         android:id="@+id/profile"
         android:enabled="true"
         android:icon="@drawable/ic_profile"
-        android:title="@string/profile"/>
+        android:title="@string/profile"
+        android:iconTint="@color/pinkColor"/>
 </menu>

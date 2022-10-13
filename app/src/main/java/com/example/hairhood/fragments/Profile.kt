@@ -32,15 +32,35 @@ class Profile : Fragment() {
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.cLayoutProfile, ChangePwd())
             //fragmentTransaction.addToBackStack(null)
+
+            binding.editTextTextNombre.visibility = View.GONE
+            binding.editTextTextCorreo.visibility = View.GONE
+            binding.editTextDireccion.visibility = View.GONE
+            binding.editTextTfno.visibility = View.GONE
+            binding.btnCerrar.visibility = View.GONE
             binding.btnGuardar.visibility = View.GONE
             binding.btnCambiarContra.visibility = View.GONE
-            binding.btnCerrar.visibility = View.GONE
+
             fragmentTransaction.commit()
         }
 
         binding.btnCerrar.setOnClickListener {
             val intent = Intent(this@Profile.requireContext(), LoginActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.button2.setOnClickListener {
+            val fragmentManager = childFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.cLayoutProfile, PerfilPeluquero())
+            binding.btnGuardar.visibility = View.GONE
+            binding.btnCambiarContra.visibility = View.GONE
+            binding.btnCerrar.visibility = View.GONE
+            binding.editTextTfno.visibility = View.GONE
+            binding.editTextDireccion.visibility = View.GONE
+            binding.editTextTextNombre.visibility = View.GONE
+            binding.editTextTextCorreo.visibility = View.GONE
+            fragmentTransaction.commit()
         }
 
         //set variables in Binding
