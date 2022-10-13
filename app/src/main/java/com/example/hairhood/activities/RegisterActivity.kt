@@ -62,23 +62,58 @@ class RegisterActivity : AppCompatActivity() {
             if (PassCliente != ConfirmPassCliente) {
                 Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
             }else {
+                var existe = false
+
+
                 db.collection("clientes")
                     .get()
                     .addOnSuccessListener { list ->
-                        for(usuario in list) {
-                            Toast.makeText(this, "$usuario", Toast.LENGTH_LONG).show()
+                        for (usuario in list) {
+                            if (binding.usuarioCliente == usuario.data["usuario"]) {
+                                existe = true
+                                Toast.makeText(this,"Nombre de Usuario existente",Toast.LENGTH_LONG).show()
 
-                          if (binding.usuarioCliente != usuario.data["usuario"]) {
-                                guardarDatosCliente(db)
-
-                                saveChanges(
-                                    usuario.data["usuario"].toString()
-                                )
-                                val intentLogin = Intent(this, LoginActivity::class.java)
-                                startActivity(intentLogin)
+                                break
+                            }
+                        }
+                    }
 
 
-                            } /*else {
+                db.collection("peluqueros")
+                    .get()
+                    .addOnSuccessListener { list ->
+                        for (usuario in list) {
+                            if (binding.usuarioCliente == usuario.data["usuario"]) {
+                                existe = true
+                                Toast.makeText(this,"Nombre de Usuario existente",Toast.LENGTH_LONG).show()
+                                break
+                            }
+                        }
+                    }
+
+
+                        if (!existe) {
+                            Toast.makeText(this,"$existe",Toast.LENGTH_LONG).show()
+
+                            guardarDatosCliente(db)
+
+                            saveChanges(
+                                binding.usuarioCliente.toString()
+                            )
+                            val intentLogin = Intent(this, LoginActivity::class.java)
+                            startActivity(intentLogin)
+                        }
+
+
+
+
+
+
+
+
+
+
+                             /*else {
                                 //En caso de no ser usuario mira si es peluquero
                                 db.collection("peluqueros")
                                     .get()
@@ -97,8 +132,8 @@ class RegisterActivity : AppCompatActivity() {
                                         }
                                     }
                             }*/
-                        }
-                    }
+
+
 
 
                                     }

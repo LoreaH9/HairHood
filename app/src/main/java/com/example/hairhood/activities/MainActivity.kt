@@ -10,6 +10,8 @@ import com.example.hairhood.fragments.Profile
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityMainBinding
 
+
+//SharedPreferences datos usuario
 var PREFS_KEY :String = "prefs"
 var USER_KEY :String = "user"
 var user :String = ""
