@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.hairhood">
-
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,6 +17,9 @@
             android:name=".activities.AdminWorkerActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.Mapa"
+            android:exported="false" />
+        <activity
             android:name=".activities.AdminUserActivity"
             android:exported="false" />
         <activity
@@ -26,6 +29,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="false" />

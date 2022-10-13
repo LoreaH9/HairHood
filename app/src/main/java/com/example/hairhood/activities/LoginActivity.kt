@@ -1,17 +1,26 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.hairhood.activities
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityLoginBinding
+import com.google.android.gms.tasks.Tasks.call
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.security.MessageDigest
+import java.util.jar.Manifest
 
 class LoginActivity : AppCompatActivity() {
 
@@ -86,7 +95,46 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        binding.btnLlamada.setOnClickListener{requestPermissions()}
+
+        }
+    private fun requestPermission() {
+        //https://www.youtube.com/watch?v=Z1v0EVhDSsk
+val phone="645 52 87 12".toString()
+
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+
+            when{
+                ContextCompat.checkSelfPermission(this,Manifest.permission.CALL_PHONE)==PackageManager.PERMISSION_GRANTED->{
+                    call(phone)
+                }else->requestPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
+
+                }
+            }
+
+
     }
+
+    private fun call() {
+startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))    }
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            isGranted->if(isGranted){
+            call()
+        }else{
+            Toast.makeText(this, "Se necesitan permisos", Toast.LENGTH_SHORT).show()
+
+
+/*No funciona
+binding.btnLlamada.setOnClickListener{
+    val dial="645528712".toString()
+    val intentLlamada =Intent(Intent.ACTION_DIAL,  Uri.parse(dial))
+    startActivity(intentLlamada)
+}*/
+        }
+    }
+
+
 
     //Hash password and rm blank spaces
     private fun hashPassword(psswd: String): String {
