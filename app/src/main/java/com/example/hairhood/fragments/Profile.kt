@@ -36,7 +36,6 @@ class Profile : Fragment() {
             binding.btnCambiarContra.visibility = View.GONE
             binding.btnCerrar.visibility = View.GONE
             fragmentTransaction.commit()
-
         }
 
         binding.btnCerrar.setOnClickListener {
