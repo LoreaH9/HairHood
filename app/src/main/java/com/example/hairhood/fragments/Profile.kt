@@ -5,15 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
-import com.example.hairhood.activities.ChangePassword
 import com.example.hairhood.activities.LoginActivity
-import com.example.hairhood.activities.RegisterActivity
-import com.example.hairhood.databinding.ActivityChangePasswordBinding
 import com.example.hairhood.databinding.FragmentProfileBinding
-import androidx.fragment.app.FragmentActivity
 
 class Profile : Fragment() {
 
@@ -30,22 +25,23 @@ class Profile : Fragment() {
     ): View? {
         val binding: FragmentProfileBinding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        binding.button.setOnClickListener {
-            val editProfileIntent = Intent(getActivity(), ChangePassword()::class.java)
-            getActivity()?.startActivity(editProfileIntent)
-        }
-
-        binding.button2.setOnClickListener {
-            val intent = Intent(this@Profile.requireContext(), LoginActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.button3.setOnClickListener {
+        binding.btnCambiarContra.setOnClickListener {
+            /*val editProfileIntent = Intent(getActivity(), ChangePwd()::class.java)
+            getActivity()?.startActivity(editProfileIntent)*/
             val fragmentManager = childFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.cLayoutProfile, Map())
+            fragmentTransaction.replace(R.id.cLayoutProfile, ChangePwd())
             //fragmentTransaction.addToBackStack(null)
+            binding.btnGuardar.visibility = View.GONE
+            binding.btnCambiarContra.visibility = View.GONE
+            binding.btnCerrar.visibility = View.GONE
             fragmentTransaction.commit()
+
+        }
+
+        binding.btnCerrar.setOnClickListener {
+            val intent = Intent(this@Profile.requireContext(), LoginActivity::class.java)
+            startActivity(intent)
         }
 
         //set variables in Binding
@@ -54,6 +50,13 @@ class Profile : Fragment() {
             startActivity(intent)
         }*/
         return binding.root
+    }
+
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentManager = childFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout,fragment)
+        fragmentTransaction.commit()
     }
 
 }
