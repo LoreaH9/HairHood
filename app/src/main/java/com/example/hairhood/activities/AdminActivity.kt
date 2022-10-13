@@ -57,9 +57,16 @@ class AdminActivity : AppCompatActivity() {
                         //Recycle View tabla todos los usuarios
                         tableRecyclerView = findViewById(R.id.table_recycler_view)
                         UserAdapter = UserAdapter(userList){ user->
-                            val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
-                            intent.putExtra(AdminUserActivity.USER_INFO, user)
-                            startActivity(intent)
+                            if(user.tipo=="P"){
+                                val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
+                                intent.putExtra(AdminUserActivity.USER_INFO, user)
+                                startActivity(intent)
+                            }else{
+                                val intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
+                                intent.putExtra(AdminUserActivity.USER_INFO, user)
+                                startActivity(intent)
+                            }
+
 
                         }
                         tableRecyclerView.layoutManager = LinearLayoutManager(this)

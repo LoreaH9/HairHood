@@ -2,8 +2,12 @@ package com.example.hairhood.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityAdminBinding
 import com.example.hairhood.databinding.ActivityAdminUserBinding
+import com.example.hairhood.fragments.Favorite
+import com.example.hairhood.fragments.Profile
 import com.example.hairhood.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -23,10 +27,17 @@ class AdminUserActivity : AppCompatActivity() {
         val user:User=intent?.getParcelableExtra<User>(USER_INFO)?:throw IllegalStateException()
         setContentView(binding.root)
         binding.info.text=user.usuario
-        searchUserInfo(user)
-        binding.usuarioPeluquero.text
 
+        replaceFragment(Profile())
+        /*searchUserInfo(user)
+        binding.usuarioPeluquero.text*/
+    }
 
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout,fragment)
+        fragmentTransaction.commit()
     }
 
     private fun searchUserInfo(user:User){
