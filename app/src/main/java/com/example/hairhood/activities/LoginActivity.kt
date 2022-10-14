@@ -27,8 +27,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     lateinit var sharedPreferences: SharedPreferences
     var PREFS_KEY = "com.example.hairhood.activities.getUser"
-    var USER_KEY = "user"
-    var PWD_KEY = "pwd"
+    var USER_KEY = ""
+    var PWD_KEY = ""
 
     var user = ""
     var pwd = ""
@@ -83,7 +83,9 @@ class LoginActivity : AppCompatActivity() {
                                                 startActivity(intentCorrecto)
                                             }else if(USER_KEY==""){
                                                 //Los datos no son correctos
-                                                Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show()}}}
+                                                Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show()}
+                                    }
+                                    }
                                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}}}}
                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
@@ -96,12 +98,14 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnLlamada.setOnClickListener{requestPermissions()}
+        binding.btnLlamada.setOnClickListener{
+            //requestPermissions()
+        }
 
         }
-    private fun requestPermission() {
+   /* private fun requestPermission() {
         //https://www.youtube.com/watch?v=Z1v0EVhDSsk
-val phone="645 52 87 12".toString()
+        val phone="645 52 87 12".toString()
 
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
 
@@ -117,9 +121,9 @@ val phone="645 52 87 12".toString()
     }
 
     private fun call() {
-startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))    }
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-            isGranted->if(isGranted){
+        startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))    }
+        private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+        isGranted->if(isGranted){
             call()
         }else{
             Toast.makeText(this, "Se necesitan permisos", Toast.LENGTH_SHORT).show()
@@ -132,7 +136,7 @@ binding.btnLlamada.setOnClickListener{
     startActivity(intentLlamada)
 }*/
         }
-    }
+    }*/
 
 
 

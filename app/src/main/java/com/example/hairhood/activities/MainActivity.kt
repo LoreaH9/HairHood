@@ -12,8 +12,10 @@ import com.example.hairhood.databinding.ActivityMainBinding
 
 
 //SharedPreferences datos usuario
-var PREFS_KEY :String = "prefs"
+var PREFS_KEY :String = "com.example.hairhood.activities.getUser"
 var USER_KEY :String = "user"
+var PWD_KEY :String = "psswd"
+
 var user :String = ""
 
 
