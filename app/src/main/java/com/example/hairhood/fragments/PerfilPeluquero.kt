@@ -1,16 +1,19 @@
 package com.example.hairhood.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.hairhood.R
 import com.example.hairhood.activities.LoginActivity
-import com.example.hairhood.databinding.FragmentChangePwdBinding
+import com.example.hairhood.activities.USER_KEY
 import com.example.hairhood.databinding.FragmentPerfilPeluqueroBinding
 import com.example.hairhood.databinding.FragmentProfileBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,6 +57,11 @@ class PerfilPeluquero : Fragment() {
         }
 
         llamada.btnCerrarSesionPelu.setOnClickListener {
+            val preferences = this.activity!!
+                .getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor = preferences.edit()
+            editor.putString(USER_KEY, "")
+            editor.apply()
             val intent = Intent(this@PerfilPeluquero.requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }

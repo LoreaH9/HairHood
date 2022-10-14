@@ -1,6 +1,8 @@
 package com.example.hairhood.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
 import com.example.hairhood.activities.LoginActivity
+import com.example.hairhood.activities.USER_KEY
 import com.example.hairhood.databinding.FragmentProfileBinding
 
 class Profile : Fragment() {
@@ -45,6 +48,8 @@ class Profile : Fragment() {
         }
 
         binding.btnCerrar.setOnClickListener {
+            val preferences = this.activity!!.getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
+           preferences.edit().remove("USER_KEY")
             val intent = Intent(this@Profile.requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }

@@ -54,28 +54,28 @@ class AdminActivity : AppCompatActivity() {
                         list.forEach { peluquero ->
                             userList.add(User(peluquero.data["dni"].toString(), peluquero.data["usuario"].toString(), "P"))
                         }
-                        //Recycle View tabla todos los usuarios
-                        tableRecyclerView = findViewById(R.id.table_recycler_view)
-                        UserAdapter = UserAdapter(userList){ user->
-                            if(user.tipo=="P"){
-                                val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
-                                intent.putExtra(AdminUserActivity.USER_INFO, user)
-                                startActivity(intent)
-                            }else{
-                                val intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
-                                intent.putExtra(AdminUserActivity.USER_INFO, user)
-                                startActivity(intent)
-                            }
 
-
-                        }
-                        tableRecyclerView.layoutManager = LinearLayoutManager(this)
-                        tableRecyclerView.adapter = UserAdapter
                     }
                     .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
             .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
+        //Recycle View tabla todos los usuarios
+        tableRecyclerView = findViewById(R.id.table_recycler_view)
+        UserAdapter = UserAdapter(userList){ user->
+            if(user.tipo=="P"){
+                val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
+                intent.putExtra(AdminUserActivity.USER_INFO, user)
+                startActivity(intent)
+            }else{
+                val intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
+                intent.putExtra(AdminUserActivity.USER_INFO, user)
+                startActivity(intent)
+            }
 
+
+        }
+        tableRecyclerView.layoutManager = LinearLayoutManager(this)
+        tableRecyclerView.adapter = UserAdapter
     }
 
 }

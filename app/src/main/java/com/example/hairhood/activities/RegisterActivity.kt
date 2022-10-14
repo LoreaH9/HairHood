@@ -8,9 +8,13 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityRegisterBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.security.MessageDigest
 
 class RegisterActivity : AppCompatActivity() {
@@ -62,8 +66,9 @@ class RegisterActivity : AppCompatActivity() {
                 if (passCliente != confirmPassCliente) {
                     Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
                 }else {
-                   verifyUser(binding.usuarioCliente.text.toString(), "c",passCliente)
-
+                    lifecycleScope.launch(Dispatchers.IO){
+                        verifyUser(binding.usuarioCliente.text.toString(), "p",passCliente)
+                    }
                 }
             }
         }
@@ -84,19 +89,32 @@ class RegisterActivity : AppCompatActivity() {
                 if (passPeluquero != confirmPassPeluquero) {
                     Toast.makeText(this,"No coinciden las contraseñas",Toast.LENGTH_SHORT).show()
                 } else {
-                    verifyUser(binding.usuarioPeluquero.text.toString(), "p",passPeluquero)
+                    lifecycleScope.launch(Dispatchers.IO){
+                        verifyUser(binding.usuarioPeluquero.text.toString(), "p",passPeluquero)
+                    }
                 }
             }
         }
     }
 
-    private fun verifyUser(userName: String, s: String, pass: String) {
+    private suspend fun verifyUser(userName: String, s: String, pass: String) {
         var existe = false
-        db.collection("clientes").whereEqualTo("usuario",userName).get().addOnSuccessListener { list ->
+
+        var existeCli = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
+        var existeUsu = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
+
+        if (existeCli.isEmpty && existeUsu.isEmpty) {
+            if(s=="c"){guardarDatosCliente(db)}else{guardarDatosPeluquero(db)}
+            saveChanges(binding.usuarioCliente.toString(),pass)
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+        /*db.collection("clientes").whereEqualTo("usuario",userName).get()
+            .addOnSuccessListener { list ->
             for (usuario in list) {existe = true
                 break
             }
-            db.collection("peluqueros").whereEqualTo("usuario",userName).get().addOnSuccessListener { list ->
+            db.collection("peluqueros").whereEqualTo("usuario",userName).get()
+                .addOnSuccessListener { list ->
                 for (usuario in list) {existe = true
                     break}
                 if (!existe) {
@@ -107,7 +125,7 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this,"Nombre de Usuario existente",Toast.LENGTH_LONG).show()
                 }
             }
-        }
+        }*/
     }
 
 
