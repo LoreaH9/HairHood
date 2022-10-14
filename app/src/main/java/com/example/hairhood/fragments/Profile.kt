@@ -60,6 +60,7 @@ class Profile : Fragment() {
             binding.editTextDireccion.visibility = View.GONE
             binding.editTextTextNombre.visibility = View.GONE
             binding.editTextTextCorreo.visibility = View.GONE
+            binding.button2.visibility = View.GONE
             fragmentTransaction.commit()
         }
 
