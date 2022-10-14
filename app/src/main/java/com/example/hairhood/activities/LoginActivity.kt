@@ -98,46 +98,49 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        //binding.btnLlamada.setOnClickListener{requestPermissions()}
 
-        }/*
-    private fun requestPermission() {
-        //https://www.youtube.com/watch?v=Z1v0EVhDSsk
-val phone="645 52 87 12".toString()
+        binding.btnLlamada.setOnClickListener{ requestPermissions() }
+
+    }
+
+    private fun requestPermissions() {
+        val phone="645 52 87 12".toString()
 
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
 
             when{
-                ContextCompat.checkSelfPermission(this,Manifest.permission.CALL_PHONE)==PackageManager.PERMISSION_GRANTED->{
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)==PackageManager.PERMISSION_GRANTED->{
                     call(phone)
-                }else->requestPermissionLauncher.launch(Manifest.permission.CALL_PHONE)
+                }else->requestPermissionLauncher.launch(android.Manifest.permission.CALL_PHONE)
 
-                }
             }
-
-
-    }
-
-    private fun call() {
-startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))    }
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-            isGranted->if(isGranted){
-            call()
         }else{
-            Toast.makeText(this, "Se necesitan permisos", Toast.LENGTH_SHORT).show()
-
-
-/*No funciona
-binding.btnLlamada.setOnClickListener{
-    val dial="645528712".toString()
-    val intentLlamada =Intent(Intent.ACTION_DIAL,  Uri.parse(dial))
-    startActivity(intentLlamada)
-}*/
+            call(phone)
         }
     }
 
 
-*/
+
+    private fun call(phone:String) {
+
+
+
+
+
+        startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))    }
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            isGranted->
+        val phone="645 52 87 12".toString()
+        if(isGranted){
+            call(phone)
+        }else{
+            Toast.makeText(this, "Se necesitan permisos", Toast.LENGTH_SHORT).show()
+
+
+        }}
+
+
+
     //Hash password and rm blank spaces
     private fun hashPassword(psswd: String): String {
         val digest = MessageDigest.getInstance("SHA-1")
