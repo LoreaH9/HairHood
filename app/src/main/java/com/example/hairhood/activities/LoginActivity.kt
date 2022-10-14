@@ -98,9 +98,9 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnLlamada.setOnClickListener{requestPermissions()}
+        //binding.btnLlamada.setOnClickListener{requestPermissions()}
 
-        }
+        }/*
     private fun requestPermission() {
         //https://www.youtube.com/watch?v=Z1v0EVhDSsk
 val phone="645 52 87 12".toString()
@@ -137,7 +137,7 @@ binding.btnLlamada.setOnClickListener{
     }
 
 
-
+*/
     //Hash password and rm blank spaces
     private fun hashPassword(psswd: String): String {
         val digest = MessageDigest.getInstance("SHA-1")
