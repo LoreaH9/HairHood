@@ -24,6 +24,7 @@ import java.util.jar.Manifest
 
 class LoginActivity : AppCompatActivity() {
 
+    public var pelu : Boolean = false
     private lateinit var binding: ActivityLoginBinding
     lateinit var sharedPreferences: SharedPreferences
     var PREFS_KEY = "com.example.hairhood.activities.getUser"
@@ -81,6 +82,7 @@ class LoginActivity : AppCompatActivity() {
                                                 saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
                                                 val intentCorrecto =Intent(this, MainActivity::class.java)
                                                 startActivity(intentCorrecto)
+                                                pelu = true
                                             }else if(USER_KEY==""){
                                                 //Los datos no son correctos
                                                 Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show()}}}
@@ -96,10 +98,10 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.btnLlamada.setOnClickListener{requestPermissions()}
+        //binding.btnLlamada.setOnClickListener{requestPermissions()}
 
         }
-    private fun requestPermission() {
+    /*private fun requestPermission() {
         //https://www.youtube.com/watch?v=Z1v0EVhDSsk
 val phone="645 52 87 12".toString()
 
@@ -114,9 +116,9 @@ val phone="645 52 87 12".toString()
             }
 
 
-    }
+    }*/
 
-    private fun call() {
+    /*private fun call() {
 startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))    }
     private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             isGranted->if(isGranted){
@@ -125,14 +127,14 @@ startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))    }
             Toast.makeText(this, "Se necesitan permisos", Toast.LENGTH_SHORT).show()
 
 
-/*No funciona
+*//*No funciona
 binding.btnLlamada.setOnClickListener{
     val dial="645528712".toString()
     val intentLlamada =Intent(Intent.ACTION_DIAL,  Uri.parse(dial))
     startActivity(intentLlamada)
-}*/
+}*//*
         }
-    }
+    }*/
 
 
 
