@@ -1,5 +1,7 @@
 package com.example.hairhood.activities
 
+//https://www.youtube.com/watch?v=QUC9BILIbJ8 Video para subir archivos
+
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
