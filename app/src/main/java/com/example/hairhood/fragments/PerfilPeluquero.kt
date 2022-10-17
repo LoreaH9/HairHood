@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
 import com.example.hairhood.activities.LoginActivity
+import com.example.hairhood.activities.PWD_KEY
 import com.example.hairhood.activities.USER_KEY
 import com.example.hairhood.databinding.FragmentPerfilPeluqueroBinding
 import com.example.hairhood.databinding.FragmentProfileBinding
@@ -57,10 +58,11 @@ class PerfilPeluquero : Fragment() {
         }
 
         llamada.btnCerrarSesionPelu.setOnClickListener {
-            val preferences = this.activity!!
+            val preferences = this.requireActivity()
                 .getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor = preferences.edit()
             editor.putString(USER_KEY, "")
+            editor.putString(PWD_KEY, "")
             editor.apply()
             val intent = Intent(this@PerfilPeluquero.requireContext(), LoginActivity::class.java)
             startActivity(intent)
