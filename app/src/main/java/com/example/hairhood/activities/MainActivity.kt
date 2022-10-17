@@ -12,8 +12,8 @@ import com.example.hairhood.fragments.Map
 
 //SharedPreferences datos usuario
 var PREFS_KEY :String = "com.example.hairhood.activities.getUser"
-var USER_KEY :String = "user"
-var PWD_KEY :String = "psswd"
+var USER_KEY :String = "USER_KEY"
+var PWD_KEY :String = "PWD_KEY"
 
 var user :String = ""
 

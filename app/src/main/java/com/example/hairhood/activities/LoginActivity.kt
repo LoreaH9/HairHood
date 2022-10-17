@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -28,8 +29,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     lateinit var sharedPreferences: SharedPreferences
     var PREFS_KEY = "com.example.hairhood.activities.getUser"
-    var USER_KEY = ""
-    var PWD_KEY = ""
+    var USER_KEY = "USER_KEY"
+    var PWD_KEY = "PWD_KEY"
 
     var user = ""
     var pwd = ""
@@ -69,9 +70,6 @@ class LoginActivity : AppCompatActivity() {
                         list.forEach { usuario ->
                             if (userName == usuario.data["usuario"] && hashedPassword == usuario.data["contraseña"]) {
                                 saveChanges(usuario.data["usuario"].toString(), usuario.data["contraseña"].toString())
-                                var i = Intent(this@LoginActivity, MainActivity::class.java)
-                                if(userName=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
-                                startActivity(i)
                             }else{
                                 //En caso de no ser usuario mira si es peluquero
                                 db.collection("peluqueros")
@@ -80,10 +78,8 @@ class LoginActivity : AppCompatActivity() {
                                         list.forEach { peluquero ->
                                             if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
                                                 saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
-                                                val intentCorrecto =Intent(this, MainActivity::class.java)
-                                                startActivity(intentCorrecto)
                                                 pelu = true
-                                            }else if(USER_KEY==""){
+                                            }else if(user!=""){
                                                 //Los datos no son correctos
                                                 Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show()}}}
                                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}}}}
@@ -93,11 +89,9 @@ class LoginActivity : AppCompatActivity() {
 
         //Volver a la página principal
         binding.closeLoginFrm.setOnClickListener {
-            intent = Intent(this@LoginActivity, MainActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
         }
-
 
         binding.btnLlamada.setOnClickListener{ requestPermissions() }
 
@@ -105,41 +99,29 @@ class LoginActivity : AppCompatActivity() {
 
     private fun requestPermissions() {
         val phone="645 52 87 12".toString()
-
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-
             when{
                 ContextCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)==PackageManager.PERMISSION_GRANTED->{
                     call(phone)
                 }else->requestPermissionLauncher.launch(android.Manifest.permission.CALL_PHONE)
-
             }
         }else{
             call(phone)
         }
     }
 
-
-
     private fun call(phone:String) {
+        startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))
+    }
 
-
-
-
-
-        startActivity(Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone")))    }
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
-            isGranted->
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted->
         val phone="645 52 87 12".toString()
         if(isGranted){
             call(phone)
         }else{
             Toast.makeText(this, "Se necesitan permisos", Toast.LENGTH_SHORT).show()
-
-
-        }}
-
-
+        }
+    }
 
     //Hash password and rm blank spaces
     private fun hashPassword(psswd: String): String {
@@ -156,20 +138,19 @@ class LoginActivity : AppCompatActivity() {
         editor.putString(USER_KEY, user)
         editor.putString(PWD_KEY, psswd)
         editor.apply()
+        intentLogin()
+    }
+    private fun intentLogin(){
         var i = Intent(this@LoginActivity, MainActivity::class.java)
         if(user=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
         startActivity(i)
         finish()
     }
-
     override fun onStart() {
         super.onStart()
         //Meterse a la app si ya tenia una sesión iniciada
         if (user != "" && pwd != "") {
-            var i = Intent(this@LoginActivity, MainActivity::class.java)
-            if(user=="admin") {i = Intent(this@LoginActivity, AdminActivity::class.java)}
-            startActivity(i)
-            finish()
+            intentLogin()
         }
     }
 

@@ -25,6 +25,7 @@ class AdminActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         getAllUsers()
+
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -37,16 +38,20 @@ class AdminActivity : AppCompatActivity() {
             startActivity(i)
             finish()
         }
+        Thread(Runnable {
+            // performing some dummy time taking operation
+
+
+        }).start()
     }
 
     private fun getAllUsers() {
-        //Añade todos los usuarios
         db.collection("clientes")
             .get()
             .addOnSuccessListener { list ->
                 list.forEach { usuario ->
                     if(usuario.data["usuario"].toString()!="admin")
-                    userList.add(User(usuario.data["dni"].toString(), usuario.data["usuario"].toString(), "C"))
+                        userList.add(User(usuario.data["dni"].toString(), usuario.data["usuario"].toString(), "C"))
                 }
                 db.collection("peluqueros")
                     .get()
@@ -54,28 +59,25 @@ class AdminActivity : AppCompatActivity() {
                         list.forEach { peluquero ->
                             userList.add(User(peluquero.data["dni"].toString(), peluquero.data["usuario"].toString(), "P"))
                         }
-
+                        tableRecyclerView = findViewById(R.id.table_recycler_view)
+                        UserAdapter = UserAdapter(userList){ user->
+                            if(user.tipo=="P"){
+                                val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
+                                intent.putExtra(AdminUserActivity.USER_INFO, user)
+                                startActivity(intent)
+                            }else{
+                                val intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
+                                intent.putExtra(AdminUserActivity.USER_INFO, user)
+                                startActivity(intent)
+                            }
+                        }
+                        tableRecyclerView.layoutManager = LinearLayoutManager(this)
+                        tableRecyclerView.adapter = UserAdapter
                     }
                     .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
             .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
-        //Recycle View tabla todos los usuarios
-        tableRecyclerView = findViewById(R.id.table_recycler_view)
-        UserAdapter = UserAdapter(userList){ user->
-            if(user.tipo=="P"){
-                val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
-                intent.putExtra(AdminUserActivity.USER_INFO, user)
-                startActivity(intent)
-            }else{
-                val intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
-                intent.putExtra(AdminUserActivity.USER_INFO, user)
-                startActivity(intent)
-            }
 
-
-        }
-        tableRecyclerView.layoutManager = LinearLayoutManager(this)
-        tableRecyclerView.adapter = UserAdapter
     }
 
 }
