@@ -23,7 +23,7 @@
             android:name=".activities.AdminUserActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.Selector_peluquero"
+            android:name=".activities.SelectorPeluquero"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
