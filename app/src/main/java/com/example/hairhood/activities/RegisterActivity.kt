@@ -69,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
                 }else {
                     lifecycleScope.launch(Dispatchers.IO){
-                        verifyUser(binding.usuarioCliente.text.toString(), "p",passCliente)
+                        verifyUser(binding.usuarioCliente.text.toString(), "c",passCliente)
                     }
                 }
             }
@@ -168,8 +168,7 @@ class RegisterActivity : AppCompatActivity() {
             "usuario" to binding.usuarioPeluquero.text.toString(),
             "nombre" to binding.nombrePeluquero.text.toString(),
             "dni" to binding.dniPeluquero.text.toString(),
-            "numTelefono" to binding.numTlfPeluquero.text.toString()
-                .toInt(),
+            "numTelefono" to binding.numTlfPeluquero.text.toString().toInt(),
             "email" to binding.emailPeluquero.text.toString(),
             "contraseña" to pass
         )

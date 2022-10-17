@@ -67,7 +67,7 @@ class AdminActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }else{
                                 val intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
-                                intent.putExtra(AdminUserActivity.USER_INFO, user)
+                                intent.putExtra(AdminWorkerActivity.USER_INFO, user)
                                 startActivity(intent)
                             }
                         }

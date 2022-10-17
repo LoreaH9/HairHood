@@ -28,9 +28,9 @@ class AdminUserActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.info.text=user.usuario
 
-        replaceFragment(Profile())
-        /*searchUserInfo(user)
-        binding.usuarioPeluquero.text*/
+        //replaceFragment(Profile())
+        searchUserInfo(user)
+        //binding.usuarioPeluquero.text
     }
 
     private fun replaceFragment(fragment: Fragment) {

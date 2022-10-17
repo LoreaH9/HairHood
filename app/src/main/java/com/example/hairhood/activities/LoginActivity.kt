@@ -79,9 +79,7 @@ class LoginActivity : AppCompatActivity() {
                                             if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
                                                 saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
                                                 pelu = true
-                                            }else if(user!=""){
-                                                //Los datos no son correctos
-                                                Toast.makeText(this, "Contraseña o usuario incorrecto", Toast.LENGTH_SHORT).show()}}}
+                                            }}}
                                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}}}}
                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
@@ -133,12 +131,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //Guarda el inicio de sesion en SharedPreferences
-    private fun saveChanges(user: String, psswd: String) {
+    private fun saveChanges(usuario: String, psswd: String) {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putString(USER_KEY, user)
+        editor.putString(USER_KEY, usuario)
         editor.putString(PWD_KEY, psswd)
         editor.apply()
+        user = sharedPreferences.getString(USER_KEY, "").toString()
+        pwd = sharedPreferences.getString(PWD_KEY, "").toString()
         intentLogin()
+
     }
     private fun intentLogin(){
         var i = Intent(this@LoginActivity, MainActivity::class.java)
