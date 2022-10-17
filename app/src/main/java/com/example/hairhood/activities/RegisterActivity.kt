@@ -115,8 +115,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private suspend fun verifyUser(userName: String, s: String, pass: String) {
-        var existe = false
-
         var existeCli = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
         var existeUsu = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
 
@@ -125,24 +123,7 @@ class RegisterActivity : AppCompatActivity() {
             saveChanges(binding.usuarioCliente.toString(),pass)
             startActivity(Intent(this, LoginActivity::class.java))
         }
-        /*db.collection("clientes").whereEqualTo("usuario",userName).get()
-            .addOnSuccessListener { list ->
-            for (usuario in list) {existe = true
-                break
-            }
-            db.collection("peluqueros").whereEqualTo("usuario",userName).get()
-                .addOnSuccessListener { list ->
-                for (usuario in list) {existe = true
-                    break}
-                if (!existe) {
-                    if(s=="c"){guardarDatosCliente(db)}else{guardarDatosPeluquero(db)}
-                    saveChanges(binding.usuarioCliente.toString(),pass)
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }else{
-                    Toast.makeText(this,"Nombre de Usuario existente",Toast.LENGTH_LONG).show()
-                }
-            }
-        }*/
+
     }
 
 
