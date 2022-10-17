@@ -61,7 +61,7 @@ class AdminActivity : AppCompatActivity() {
                         }
                         tableRecyclerView = findViewById(R.id.table_recycler_view)
                         UserAdapter = UserAdapter(userList){ user->
-                            if(user.tipo=="P"){
+                            if(user.tipo=="C"){
                                 val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
                                 intent.putExtra(AdminUserActivity.USER_INFO, user)
                                 startActivity(intent)

@@ -24,7 +24,7 @@ class AdminWorkerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val user: User =intent?.getParcelableExtra<User>(AdminWorkerActivity.USER_INFO)?:throw IllegalStateException()
-        binding.info.text=user.usuario
+        binding.info.text=user.toString()
 
     }
 }
