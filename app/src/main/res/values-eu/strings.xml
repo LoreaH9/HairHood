@@ -23,6 +23,7 @@
     <!-- ADMIN ACTIVITY -->
     <string name="adminConfig">Configuración del administrador</string>
     <string name="type">Mota</string>
+    <string name="remove">Ezabatu erabiltzailea</string>
 
     <!-- PROFILE ACTIVITY -->
     <string name="moreInformation">Informazio gehiago</string>

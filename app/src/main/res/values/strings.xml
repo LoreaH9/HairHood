@@ -21,6 +21,7 @@
     <!-- ADMIN ACTIVITY -->
     <string name="adminConfig">Configuración del administrador</string>
     <string name="type">Tipo</string>
+    <string name="remove">Eliminar usuario</string>
 
     <!-- PROFILE ACTIVITY -->
     <string name="moreInformation">Más información</string>
