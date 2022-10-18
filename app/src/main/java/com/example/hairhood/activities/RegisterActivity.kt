@@ -1,12 +1,19 @@
 package com.example.hairhood.activities
 
 //https://www.youtube.com/watch?v=QUC9BILIbJ8 Video para subir archivos
+//https://adorahack.com/upload-gallery-image-to-firebase-from-android-app-kotlin Pagina pra archivos
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -14,20 +21,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityRegisterBinding
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
+import com.google.firebase.storage.UploadTask
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.security.MessageDigest
+import java.util.*
+
 
 @Suppress("DEPRECATION")
 class RegisterActivity : AppCompatActivity() {
+    private var filePath: Uri? = null
+    private var firebaseStore: FirebaseStorage? = null
+    private var storageReference: StorageReference? = null
+    private val PICK_IMAGE_REQUEST = 71
     private lateinit var binding: ActivityRegisterBinding
     lateinit var sharedPreferences: SharedPreferences
     val db=FirebaseFirestore.getInstance()
@@ -112,6 +128,9 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnFotoCliente.setOnClickListener{
             subir_Archivo()
         }
+        binding.btnFotoPeluquero.setOnClickListener{
+            subir_Archivo()
+        }
     }
 
     private suspend fun verifyUser(userName: String, s: String, pass: String) {
@@ -129,24 +148,68 @@ class RegisterActivity : AppCompatActivity() {
 
     fun subir_Archivo(){
         val intent=Intent(Intent.ACTION_GET_CONTENT)
-        intent.type="*/*"
-        startActivityForResult(intent,File)
+        intent.type="image/*"
+        intent.action=Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_REQUEST)
     }
+
+
+    private fun uploadImage(){
+        if(filePath != null){
+            val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
+            val uploadTask = ref?.putFile(filePath!!)
+
+            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                return@Continuation ref.downloadUrl
+            })?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val downloadUri = task.result
+                    addUploadRecordToDb(downloadUri.toString())
+                } else {
+                    // Handle failures
+                }
+            }?.addOnFailureListener{
+
+            }
+        }else{
+            Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun addUploadRecordToDb(uri: String){
+        val db = FirebaseFirestore.getInstance()
+
+        val data = HashMap<String, Any>()
+        data["imageUrl"] = uri
+
+        db.collection("posts")
+            .add(data)
+            .addOnSuccessListener { documentReference ->
+                Toast.makeText(this, "Saved to DB", Toast.LENGTH_LONG).show()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Error saving to DB", Toast.LENGTH_LONG).show()
+            }
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == File){
-            if (resultCode == RESULT_OK){
-                val FileUri = data!!.data
-                val folder:StorageReference=FirebaseStorage.getInstance().getReference().child("Clientes")
-
-                val file_name: StorageReference = folder.child("file"+ FileUri!!.lastPathSegment)
-                file_name.getDownloadUrl().addOnSuccessListener{uri->
-                    val hashMap = HashMap<String,String>()
-                    hashMap["link"] =java.lang.String.valueOf(uri)
-                    myRef.setValue(hashMap)
-                    Log.d("Mensaje", "Se subió correctamente")
-                }
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode== Activity.RESULT_OK){
+            if (data==null|| data.data==null){
+                return
+            }
+                filePath = data.data
+            try{
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                uploadImage().setImageBitmap(bitmap)
+            }catch (e: IOException){
+                e.printStackTrace()
             }
         }
     }
