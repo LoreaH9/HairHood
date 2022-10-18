@@ -40,6 +40,7 @@ class AdminUserActivity : AppCompatActivity() {
         binding.info.text=user.usuario
         binding.info.typeWrite(this, "AAAAAAAAAAAAA" , 333L)
         searchUserInfo(user)
+
         binding.btnRemoveClient.setOnClickListener {
             db.collection("clientes").document(user.usuario)
                 .delete()
@@ -59,6 +60,14 @@ class AdminUserActivity : AppCompatActivity() {
             .addOnSuccessListener { list ->
                 list.forEach {
                     usuario = it.data
+                    binding.nombreCliente.setText(usuario["nombre"].toString())
+                    binding.usuarioCliente.setText(usuario["usuario"].toString())
+                    binding.dniCliente.setText(usuario["dni"].toString())
+                    binding.numTlfCliente.setText(usuario["numTelefono"].toString())
+                    binding.fechaCliente.setText(usuario["fechaNacimiento"].toString())
+                    binding.direccionCliente.setText(usuario["direccion"].toString())
+                    binding.emailCliente.setText(usuario["email"].toString())
+                    binding.passCliente.setText(usuario["contraseña"].toString())
                 }
             }
     }

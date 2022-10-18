@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hairhood.R
@@ -14,6 +16,11 @@ import com.example.hairhood.databinding.ActivityAdminBinding
 import com.example.hairhood.model.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 
 class AdminActivity : AppCompatActivity() {
@@ -24,11 +31,21 @@ class AdminActivity : AppCompatActivity() {
     private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        getAllUsers()
-
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.progressBar.visibility = View.VISIBLE;
+
+        lifecycleScope.launch{
+
+            async(Dispatchers.IO) {
+                getAllUsers()
+            }
+            withContext(Dispatchers.Main) {
+                binding.progressBar.visibility = View.GONE;
+            }
+        }
+
         binding.logout.setOnClickListener {
             val sharedPreferences = getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
@@ -45,7 +62,7 @@ class AdminActivity : AppCompatActivity() {
         }).start()
     }
 
-    private fun getAllUsers() {
+    private suspend fun getAllUsers() {
         db.collection("clientes")
             .get()
             .addOnSuccessListener { list ->
@@ -59,6 +76,7 @@ class AdminActivity : AppCompatActivity() {
                         list.forEach { peluquero ->
                             userList.add(User(peluquero.data["dni"].toString(), peluquero.data["usuario"].toString(), "P"))
                         }
+
                         tableRecyclerView = findViewById(R.id.table_recycler_view)
                         UserAdapter = UserAdapter(userList){ user->
                             if(user.tipo=="C"){
@@ -77,7 +95,7 @@ class AdminActivity : AppCompatActivity() {
                     .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
             .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
-
+            .await()
     }
 
 }
