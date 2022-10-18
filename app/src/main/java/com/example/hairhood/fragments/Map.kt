@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
-import com.example.hairhood.activities.MainActivity
 import com.example.hairhood.activities.SelectorPeluquero
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -49,7 +48,6 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     override fun onMarkerClick(marker: Marker): Boolean {
         Toast.makeText(activity, "Posicion", Toast.LENGTH_SHORT).show()
-
         val intent = Intent(activity, SelectorPeluquero::class.java)
         startActivity(intent)
         
