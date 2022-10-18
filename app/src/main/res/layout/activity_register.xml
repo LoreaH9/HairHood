@@ -270,6 +270,7 @@
                             android:textColor="@color/black"
                             android:textSize="13sp"
                             android:textStyle="normal" />
+
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -350,6 +351,27 @@
                             android:textStyle="normal" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+
+                    <LinearLayout
+                        android:layout_width="312dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/FotoCliente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Foto" />
+
+                        <Button
+                            android:id="@+id/btnFotoCliente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Subir Archivo" />
+
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/singInCliente"
@@ -587,6 +609,27 @@
                             android:textSize="13sp"
                             android:textStyle="normal" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/FotoPeluquero"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Foto" />
+
+                        <Button
+                            android:id="@+id/btnFotoPeluquero"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Subir Archivo" />
+
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/singInPelu"

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,15 +15,25 @@ import androidx.lifecycle.lifecycleScope
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityRegisterBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.security.MessageDigest
 
+@Suppress("DEPRECATION")
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     lateinit var sharedPreferences: SharedPreferences
     val db=FirebaseFirestore.getInstance()
+    private val File=1
+    private val database = Firebase.database
+    val myRef=database.getReference("Clientes")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +80,7 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
                 }else {
                     lifecycleScope.launch(Dispatchers.IO){
-                        verifyUser(binding.usuarioCliente.text.toString(), "p",passCliente)
+                        verifyUser(binding.usuarioCliente.text.toString(), "c",passCliente)
                     }
                 }
             }
@@ -97,11 +108,13 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.btnFotoCliente.setOnClickListener{
+            subir_Archivo()
+        }
     }
 
     private suspend fun verifyUser(userName: String, s: String, pass: String) {
-        var existe = false
-
         var existeCli = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
         var existeUsu = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
 
@@ -110,24 +123,32 @@ class RegisterActivity : AppCompatActivity() {
             saveChanges(binding.usuarioCliente.toString(),pass)
             startActivity(Intent(this, LoginActivity::class.java))
         }
-        /*db.collection("clientes").whereEqualTo("usuario",userName).get()
-            .addOnSuccessListener { list ->
-            for (usuario in list) {existe = true
-                break
-            }
-            db.collection("peluqueros").whereEqualTo("usuario",userName).get()
-                .addOnSuccessListener { list ->
-                for (usuario in list) {existe = true
-                    break}
-                if (!existe) {
-                    if(s=="c"){guardarDatosCliente(db)}else{guardarDatosPeluquero(db)}
-                    saveChanges(binding.usuarioCliente.toString(),pass)
-                    startActivity(Intent(this, LoginActivity::class.java))
-                }else{
-                    Toast.makeText(this,"Nombre de Usuario existente",Toast.LENGTH_LONG).show()
+
+    }
+
+
+    fun subir_Archivo(){
+        val intent=Intent(Intent.ACTION_GET_CONTENT)
+        intent.type="*/*"
+        startActivityForResult(intent,File)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == File){
+            if (resultCode == RESULT_OK){
+                val FileUri = data!!.data
+                val folder:StorageReference=FirebaseStorage.getInstance().getReference().child("Clientes")
+
+                val file_name: StorageReference = folder.child("file"+ FileUri!!.lastPathSegment)
+                file_name.getDownloadUrl().addOnSuccessListener{uri->
+                    val hashMap = HashMap<String,String>()
+                    hashMap["link"] =java.lang.String.valueOf(uri)
+                    myRef.setValue(hashMap)
+                    Log.d("Mensaje", "Se subió correctamente")
                 }
             }
-        }*/
+        }
     }
 
 
@@ -168,8 +189,7 @@ class RegisterActivity : AppCompatActivity() {
             "usuario" to binding.usuarioPeluquero.text.toString(),
             "nombre" to binding.nombrePeluquero.text.toString(),
             "dni" to binding.dniPeluquero.text.toString(),
-            "numTelefono" to binding.numTlfPeluquero.text.toString()
-                .toInt(),
+            "numTelefono" to binding.numTlfPeluquero.text.toString().toInt(),
             "email" to binding.emailPeluquero.text.toString(),
             "contraseña" to pass
         )
