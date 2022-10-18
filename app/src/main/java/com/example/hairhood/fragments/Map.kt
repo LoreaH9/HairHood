@@ -47,7 +47,6 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        Toast.makeText(activity, "Posicion", Toast.LENGTH_SHORT).show()
         val intent = Intent(activity, SelectorPeluquero::class.java)
         startActivity(intent)
         
