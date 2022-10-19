@@ -62,7 +62,6 @@ class Profile : Fragment() {
         binding.button2.setOnClickListener {
             val fragmentManager = childFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
-<<<<<<< Updated upstream
             fragmentTransaction.replace(R.id.cLayoutProfile, PerfilPeluquero())
             binding.btnGuardar.visibility = View.GONE
             binding.btnCambiarContra.visibility = View.GONE
@@ -72,10 +71,6 @@ class Profile : Fragment() {
             binding.editTextTextNombre.visibility = View.GONE
             binding.editTextTextCorreo.visibility = View.GONE
             binding.button2.visibility = View.GONE
-=======
-            fragmentTransaction.replace(R.id.LayoutProfile, Map())
-            //fragmentTransaction.addToBackStack(null)
->>>>>>> Stashed changes
             fragmentTransaction.commit()
         }
 

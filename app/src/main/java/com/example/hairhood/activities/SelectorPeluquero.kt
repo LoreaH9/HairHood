@@ -14,14 +14,8 @@ class SelectorPeluquero : AppCompatActivity() {
         binding = ActivitySelectorPeluqueroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-<<<<<<< Updated upstream:app/src/main/java/com/example/hairhood/activities/SelectorPeluquero.kt
         binding.infor.setOnClickListener() {
             val intent = Intent(this@SelectorPeluquero, ReservarPeluquero::class.java)
-=======
-        binding.infor.setOnClickListener(){
-            //En caso de pulsar el  boton de + infor  nos redirige a reservar
-            val intent= Intent(this, ReservarPeluquero::class.java)
->>>>>>> Stashed changes:app/src/main/java/com/example/hairhood/activities/Selector_peluquero.kt
             startActivity(intent)
         }
 
