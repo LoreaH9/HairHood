@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityLoginBinding
+import com.example.hairhood.fragments.Favorite
 import com.google.android.gms.tasks.Tasks.call
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -25,7 +26,10 @@ import java.util.jar.Manifest
 
 class LoginActivity : AppCompatActivity() {
 
-    public var pelu : Boolean = false
+    companion object {
+        var pelu : Boolean? = false
+    }
+
     private lateinit var binding: ActivityLoginBinding
     lateinit var sharedPreferences: SharedPreferences
     var PREFS_KEY = "com.example.hairhood.activities.getUser"
@@ -77,8 +81,8 @@ class LoginActivity : AppCompatActivity() {
                                     .addOnSuccessListener { list ->
                                         list.forEach { peluquero ->
                                             if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
-                                                saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
                                                 pelu = true
+                                                saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
                                             }}}
                                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}}}}
                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
@@ -86,6 +90,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //Volver a la página principal
+
         binding.closeLoginFrm.setOnClickListener {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
@@ -147,6 +152,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(i)
         finish()
     }
+
     override fun onStart() {
         super.onStart()
         //Meterse a la app si ya tenia una sesión iniciada

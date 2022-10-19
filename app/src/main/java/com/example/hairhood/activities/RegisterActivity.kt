@@ -18,20 +18,20 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+//import androidx.lifecycle.lifecycleScope
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityRegisterBinding
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
-import com.google.firebase.database.ktx.database
+//import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.UploadTask
+//import com.google.firebase.storage.FirebaseStorage
+//import com.google.firebase.storage.StorageReference
+//import com.google.firebase.storage.UploadTask
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
+//import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.security.MessageDigest
@@ -41,15 +41,15 @@ import java.util.*
 @Suppress("DEPRECATION")
 class RegisterActivity : AppCompatActivity() {
     private var filePath: Uri? = null
-    private var firebaseStore: FirebaseStorage? = null
-    private var storageReference: StorageReference? = null
+    //private var firebaseStore: FirebaseStorage? = null
+    //private var storageReference: StorageReference? = null
     private val PICK_IMAGE_REQUEST = 71
     private lateinit var binding: ActivityRegisterBinding
     lateinit var sharedPreferences: SharedPreferences
     val db=FirebaseFirestore.getInstance()
     private val File=1
-    private val database = Firebase.database
-    val myRef=database.getReference("Clientes")
+    //private val database = Firebase.database
+    //val myRef=database.getReference("Clientes")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,9 +95,9 @@ class RegisterActivity : AppCompatActivity() {
                 if (passCliente != confirmPassCliente) {
                     Toast.makeText(this, "No coinciden las contraseñas", Toast.LENGTH_SHORT).show()
                 }else {
-                    lifecycleScope.launch(Dispatchers.IO){
+                    /*lifecycleScope.launch(Dispatchers.IO){
                         verifyUser(binding.usuarioCliente.text.toString(), "c",passCliente)
-                    }
+                    }*/
                 }
             }
         }
@@ -118,9 +118,9 @@ class RegisterActivity : AppCompatActivity() {
                 if (passPeluquero != confirmPassPeluquero) {
                     Toast.makeText(this,"No coinciden las contraseñas",Toast.LENGTH_SHORT).show()
                 } else {
-                    lifecycleScope.launch(Dispatchers.IO){
+                    /*lifecycleScope.launch(Dispatchers.IO){
                         verifyUser(binding.usuarioPeluquero.text.toString(), "p",passPeluquero)
-                    }
+                    }*/
                 }
             }
         }
@@ -134,14 +134,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private suspend fun verifyUser(userName: String, s: String, pass: String) {
-        var existeCli = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
-        var existeUsu = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
+        //var existeCli = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
+        //var existeUsu = db.collection("clientes").whereEqualTo("usuario",userName).get().await()
 
-        if (existeCli.isEmpty && existeUsu.isEmpty) {
+        /*if (existeCli.isEmpty && existeUsu.isEmpty) {
             if(s=="c"){guardarDatosCliente(db)}else{guardarDatosPeluquero(db)}
             saveChanges(binding.usuarioCliente.toString(),pass)
             startActivity(Intent(this, LoginActivity::class.java))
-        }
+        }*/
 
     }
 
@@ -154,32 +154,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    private fun uploadImage(){
-        if(filePath != null){
-            val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
-            val uploadTask = ref?.putFile(filePath!!)
-
-            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
-                    }
-                }
-                return@Continuation ref.downloadUrl
-            })?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val downloadUri = task.result
-                    addUploadRecordToDb(downloadUri.toString())
-                } else {
-                    // Handle failures
-                }
-            }?.addOnFailureListener{
-
-            }
-        }else{
-            Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     private fun addUploadRecordToDb(uri: String){
         val db = FirebaseFirestore.getInstance()
@@ -207,7 +181,7 @@ class RegisterActivity : AppCompatActivity() {
                 filePath = data.data
             try{
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                uploadImage().setImageBitmap(bitmap)
+                //uploadImage().setImageBitmap(bitmap)
             }catch (e: IOException){
                 e.printStackTrace()
             }

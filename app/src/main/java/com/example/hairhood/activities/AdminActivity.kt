@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+//import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hairhood.R
@@ -19,7 +19,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
+//import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 
@@ -36,7 +36,7 @@ class AdminActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.progressBar.visibility = View.VISIBLE;
 
-        lifecycleScope.launch{
+        /*lifecycleScope.launch{
 
             async(Dispatchers.IO) {
                 getAllUsers()
@@ -44,7 +44,7 @@ class AdminActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE;
             }
-        }
+        }*/
 
         binding.logout.setOnClickListener {
             val sharedPreferences = getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
@@ -95,7 +95,7 @@ class AdminActivity : AppCompatActivity() {
                     .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
             .addOnFailureListener { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
-            .await()
+            //.await()
     }
 
 }

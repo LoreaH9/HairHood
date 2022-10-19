@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hairhood.activities.LoginActivity
+import com.example.hairhood.activities.SelectorPeluquero
+//import com.example.hairhood.activities.Selector_peluquero
 import com.example.hairhood.databinding.FragmentFavoriteBinding
 
 class Favorite : Fragment() {
+
     lateinit var binding: FragmentFavoriteBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +28,11 @@ class Favorite : Fragment() {
         //set variables in Binding
 
         binding.btnPrueba.setOnClickListener {
-            val intent = Intent(this@Favorite.requireContext(), LoginActivity::class.java)
+            val intent = Intent(this@Favorite.requireContext(), SelectorPeluquero::class.java)
             startActivity(intent)
         }
         return binding.root
     }
+
 
 }
