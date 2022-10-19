@@ -21,14 +21,10 @@
     <string name="register">Erregistratu</string>
 
     <!-- ADMIN ACTIVITY -->
-<<<<<<< Updated upstream
-    <string name="adminConfig">Configuración del administrador</string>
     <string name="type">Mota</string>
     <string name="remove">Ezabatu erabiltzailea</string>
-=======
     <string name="adminConfig">Administratzailearen konfiguraketa</string>
-    <string name="type">Tipo</string>
->>>>>>> Stashed changes
+
 
     <!-- PROFILE ACTIVITY -->
     <string name="moreInformation">Informazio gehiago</string>
