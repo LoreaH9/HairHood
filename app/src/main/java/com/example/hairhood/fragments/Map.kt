@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
+<<<<<<< Updated upstream
 import com.example.hairhood.activities.SelectorPeluquero
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,27 +20,38 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.hairhood.databinding.FragmentMapBinding
-
 
 
 class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     private lateinit var mMap: GoogleMap
     private lateinit var marker: Marker
+=======
+import com.example.hairhood.databinding.FragmentMapBinding
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+
+
+class Map : Fragment(), OnMapReadyCallback {
+
+    private lateinit var map:GoogleMap
     lateinit var binding: FragmentMapBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentMapBinding.inflate(layoutInflater)
     }
-
+>>>>>>> Stashed changes
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+<<<<<<< Updated upstream
+=======
         // Inflate the layout for this fragment
+>>>>>>> Stashed changes
         return inflater.inflate(R.layout.fragment_map, container, false)
         crearFargment()
     }
@@ -49,6 +61,9 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         mapFragment.getMapAsync(this)
     }
 
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val mapFragment =

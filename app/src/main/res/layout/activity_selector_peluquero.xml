@@ -5,10 +5,14 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_login"
     android:layout_gravity="center"
+<<<<<<< Updated upstream
+    android:orientation="vertical">
+=======
     android:orientation="vertical"
     app:cardCornerRadius="25dp"
     android:padding="32dp"
     tools:context=".activities.SelectorPeluquero">
+>>>>>>> Stashed changes
 
 
     <androidx.cardview.widget.CardView
