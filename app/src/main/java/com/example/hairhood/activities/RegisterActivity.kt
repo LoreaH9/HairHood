@@ -84,7 +84,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.singInCliente.setOnClickListener {
-            //uploadImage()
+            uploadImageCliente()
 
             if (TextUtils.isEmpty(binding.usuarioCliente.text.toString()) ||
                 TextUtils.isEmpty(binding.passCliente.text.toString()) ||
@@ -109,7 +109,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
         binding.singInPelu.setOnClickListener {
-            uploadImage()
+            uploadImagePelu()
 
 
             if (TextUtils.isEmpty(binding.usuarioPeluquero.text.toString()) ||
@@ -164,12 +164,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    private fun uploadImage(){
+    private fun uploadImageCliente(){
         if(filePath != null){
-            val ref = storageReference.child("clientes/Iker.jpg")
+            val ref = storageReference.child("clientes/${binding.usuarioCliente.text}.jpg")
             val uploadTask = ref.putFile(filePath!!)
-            Log.i("uploadImage", ref.toString())
-            Log.i("uploadImage", uploadTask.toString())
             val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                 if (!task.isSuccessful) {
                     task.exception?.let {
@@ -186,9 +184,40 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     // Handle failures
                 }
-                Toast.makeText(this, "Completado", Toast.LENGTH_SHORT).show()
+
             }.addOnFailureListener{
-                Toast.makeText(this, "Fallo", Toast.LENGTH_SHORT).show()
+
+
+            }
+
+        }else{
+            Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun uploadImagePelu(){
+        if(filePath != null){
+            val ref = storageReference.child("peluqueros/${binding.usuarioPeluquero.text}.jpg")
+            val uploadTask = ref.putFile(filePath!!)
+            val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                Toast.makeText(this, "CT", Toast.LENGTH_SHORT).show()
+
+                return@Continuation ref.downloadUrl
+            }).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val downloadUri = task.result
+                    addUploadRecordToDb(downloadUri.toString())
+                } else {
+                    // Handle failures
+                }
+
+            }.addOnFailureListener{
+
 
             }
 
@@ -222,7 +251,7 @@ class RegisterActivity : AppCompatActivity() {
             }
             filePath = data.data
 
-            uploadImage()
+
         }
     }
 
