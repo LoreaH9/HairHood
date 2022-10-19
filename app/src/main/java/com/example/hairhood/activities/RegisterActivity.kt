@@ -154,7 +154,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
 
-    /*private fun uploadImage(){
+    private fun uploadImage(){
         if(filePath != null){
             val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
             val uploadTask = ref?.putFile(filePath!!)
@@ -213,7 +213,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-*/
+
 
     private fun guardarDatosCliente(db: FirebaseFirestore) {
         val pass = hashPassword(binding.passCliente.text.toString())
