@@ -42,10 +42,9 @@ class AdminUserActivity : AppCompatActivity() {
         binding=ActivityAdminUserBinding.inflate(layoutInflater)
         val user:User=intent?.getParcelableExtra<User>(USER_INFO)?:throw IllegalStateException()
         setContentView(binding.root)
-        binding.info.text=user.usuario
-        binding.info.typeWrite(this, "Editar usuario: "+user.usuario , 333L)
-        searchUserInfo(user)
 
+        binding.info.typeWrite(this, "Editar usuario: "+user.usuario , 300L)
+        searchUserInfo(user)
 
         binding.btnRemoveClient.setOnClickListener {
             db.collection("clientes").document(user.usuario)
@@ -91,7 +90,6 @@ class AdminUserActivity : AppCompatActivity() {
                         binding.passCliente.setText(usuario["contraseña"].toString())
                     }
                     hideLoading()
-
                 }
             })
 

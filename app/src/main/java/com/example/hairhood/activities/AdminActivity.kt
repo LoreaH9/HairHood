@@ -30,8 +30,6 @@ class AdminActivity : AppCompatActivity() {
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
         queryFirebase()
-
-
         binding.logout.setOnClickListener {
             val sharedPreferences = getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
@@ -50,6 +48,7 @@ class AdminActivity : AppCompatActivity() {
     private fun hideLoading() {
         binding.progressBar.visibility = View.GONE
     }
+
     private fun queryFirebase() {
         showLoading()
         val userList: MutableList<User?> = ArrayList()
@@ -64,25 +63,24 @@ class AdminActivity : AppCompatActivity() {
         db.collection("peluqueros").get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
             if (task.isSuccessful) {
                 for (document in task.result) {
-                        userList.add(User(document.data["dni"].toString(), document.data["usuario"].toString(), "C"))
+                        userList.add(User(document.data["dni"].toString(), document.data["usuario"].toString(), "P"))
                 }
                 tableRecyclerView = findViewById(R.id.table_recycler_view)
                 UserAdapter = UserAdapter(userList){ user->
+                    var intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
+                    intent.putExtra(AdminWorkerActivity.USER_INFO, user)
                     if(user.tipo=="C"){
-                        val intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
+                        intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
                         intent.putExtra(AdminUserActivity.USER_INFO, user)
-                        startActivity(intent)
-                    }else{
-                        val intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
-                        intent.putExtra(AdminWorkerActivity.USER_INFO, user)
-                        startActivity(intent)
                     }
+                    startActivity(intent)
                 }
                 tableRecyclerView.layoutManager = LinearLayoutManager(this)
                 tableRecyclerView.adapter = UserAdapter
                 hideLoading()
             }
         })
+
     }
 
 }
