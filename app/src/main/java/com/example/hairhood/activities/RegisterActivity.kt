@@ -18,6 +18,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toFile
 import androidx.lifecycle.lifecycleScope
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityRegisterBinding
@@ -29,26 +30,30 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.IOException
 import java.security.MessageDigest
 import java.util.*
+import java.util.logging.Logger
 
 
 @Suppress("DEPRECATION")
 class RegisterActivity : AppCompatActivity() {
     private var filePath: Uri? = null
     private var firebaseStore: FirebaseStorage? = null
-    private var storageReference: StorageReference? = null
     private val PICK_IMAGE_REQUEST = 71
     private lateinit var binding: ActivityRegisterBinding
     lateinit var sharedPreferences: SharedPreferences
     val db=FirebaseFirestore.getInstance()
     private val File=1
     private val database = Firebase.database
+    private val storage = Firebase.storage
+    private var storageReference = storage.reference
     val myRef=database.getReference("Clientes")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,6 +84,8 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.singInCliente.setOnClickListener {
+            //uploadImage()
+
             if (TextUtils.isEmpty(binding.usuarioCliente.text.toString()) ||
                 TextUtils.isEmpty(binding.passCliente.text.toString()) ||
                 TextUtils.isEmpty(binding.emailCliente.text.toString()) ||
@@ -102,6 +109,9 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
         binding.singInPelu.setOnClickListener {
+            uploadImage()
+
+
             if (TextUtils.isEmpty(binding.usuarioPeluquero.text.toString()) ||
                 TextUtils.isEmpty(binding.passPeluquero.text.toString()) ||
                 TextUtils.isEmpty(binding.emailPeluquero.text.toString()) ||
@@ -156,26 +166,32 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun uploadImage(){
         if(filePath != null){
-            val ref = storageReference?.child("uploads/" + UUID.randomUUID().toString())
-            val uploadTask = ref?.putFile(filePath!!)
-
-            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+            val ref = storageReference.child("clientes/Iker.jpg")
+            val uploadTask = ref.putFile(filePath!!)
+            Log.i("uploadImage", ref.toString())
+            Log.i("uploadImage", uploadTask.toString())
+            val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                 if (!task.isSuccessful) {
                     task.exception?.let {
                         throw it
                     }
                 }
+                Toast.makeText(this, "CT", Toast.LENGTH_SHORT).show()
+
                 return@Continuation ref.downloadUrl
-            })?.addOnCompleteListener { task ->
+            }).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val downloadUri = task.result
                     addUploadRecordToDb(downloadUri.toString())
                 } else {
                     // Handle failures
                 }
-            }?.addOnFailureListener{
+                Toast.makeText(this, "Completado", Toast.LENGTH_SHORT).show()
+            }.addOnFailureListener{
+                Toast.makeText(this, "Fallo", Toast.LENGTH_SHORT).show()
 
             }
+
         }else{
             Toast.makeText(this, "Please Upload an Image", Toast.LENGTH_SHORT).show()
         }
@@ -204,13 +220,9 @@ class RegisterActivity : AppCompatActivity() {
             if (data==null|| data.data==null){
                 return
             }
-                filePath = data.data
-            try{
-               /* val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                uploadImage().setImageBitmap(bitmap)*/
-            }catch (e: IOException){
-                e.printStackTrace()
-            }
+            filePath = data.data
+
+            uploadImage()
         }
     }
 
@@ -225,7 +237,8 @@ class RegisterActivity : AppCompatActivity() {
             "fechaNacimiento" to binding.fechaCliente.text.toString(),
             "direccion" to binding.direccionCliente.text.toString(),
             "email" to binding.emailCliente.text.toString(),
-            "contraseña" to pass
+            "contraseña" to pass,
+            "foto" to filePath
         )
         db.collection("clientes")
             .document(binding.usuarioCliente.text.toString())
