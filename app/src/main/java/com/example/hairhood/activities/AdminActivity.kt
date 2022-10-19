@@ -29,9 +29,6 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.progressBar.visibility = View.VISIBLE;
-        binding.progressBar.visibility = View.INVISIBLE;
-
         queryFirebase()
 
 
@@ -55,14 +52,20 @@ class AdminActivity : AppCompatActivity() {
     }
     private fun queryFirebase() {
         showLoading()
+        val userList: MutableList<User?> = ArrayList()
         db.collection("clientes").get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
             if (task.isSuccessful) {
-                val userList: MutableList<User?> = ArrayList()
                 for (document in task.result) {
                     if(document.data["usuario"].toString()!="admin")
                         userList.add(User(document.data["dni"].toString(), document.data["usuario"].toString(), "C"))
                 }
-                hideLoading()
+            }
+        })
+        db.collection("peluqueros").get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+            if (task.isSuccessful) {
+                for (document in task.result) {
+                        userList.add(User(document.data["dni"].toString(), document.data["usuario"].toString(), "C"))
+                }
                 tableRecyclerView = findViewById(R.id.table_recycler_view)
                 UserAdapter = UserAdapter(userList){ user->
                     if(user.tipo=="C"){
@@ -77,6 +80,7 @@ class AdminActivity : AppCompatActivity() {
                 }
                 tableRecyclerView.layoutManager = LinearLayoutManager(this)
                 tableRecyclerView.adapter = UserAdapter
+                hideLoading()
             }
         })
     }

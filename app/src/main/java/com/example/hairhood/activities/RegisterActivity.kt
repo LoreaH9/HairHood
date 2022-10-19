@@ -206,8 +206,8 @@ class RegisterActivity : AppCompatActivity() {
             }
                 filePath = data.data
             try{
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-                uploadImage().setImageBitmap(bitmap)
+               /* val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+                uploadImage().setImageBitmap(bitmap)*/
             }catch (e: IOException){
                 e.printStackTrace()
             }
