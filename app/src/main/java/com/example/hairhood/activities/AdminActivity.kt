@@ -58,28 +58,30 @@ class AdminActivity : AppCompatActivity() {
                     if(document.data["usuario"].toString()!="admin")
                         userList.add(User(document.data["dni"].toString(), document.data["usuario"].toString(), "C"))
                 }
-            }
-        })
-        db.collection("peluqueros").get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
-            if (task.isSuccessful) {
-                for (document in task.result) {
-                        userList.add(User(document.data["dni"].toString(), document.data["usuario"].toString(), "P"))
-                }
-                tableRecyclerView = findViewById(R.id.table_recycler_view)
-                UserAdapter = UserAdapter(userList){ user->
-                    var intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
-                    intent.putExtra(AdminWorkerActivity.USER_INFO, user)
-                    if(user.tipo=="C"){
-                        intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
-                        intent.putExtra(AdminUserActivity.USER_INFO, user)
+                db.collection("peluqueros").get().addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
+                    if (task.isSuccessful) {
+                        for (document in task.result) {
+                            userList.add(User(document.data["dni"].toString(), document.data["usuario"].toString(), "P"))
+                        }
+                        tableRecyclerView = findViewById(R.id.table_recycler_view)
+                        UserAdapter = UserAdapter(userList){ user->
+
+                            var intent= Intent(this@AdminActivity, AdminWorkerActivity::class.java)
+                            intent.putExtra(AdminWorkerActivity.USER_INFO, user)
+                            if(user.tipo=="C"){
+                                intent= Intent(this@AdminActivity, AdminUserActivity::class.java)
+                                intent.putExtra(AdminUserActivity.USER_INFO, user)
+                            }
+                            startActivity(intent)
+                        }
+                        tableRecyclerView.layoutManager = LinearLayoutManager(this)
+                        tableRecyclerView.adapter = UserAdapter
+                        hideLoading()
                     }
-                    startActivity(intent)
-                }
-                tableRecyclerView.layoutManager = LinearLayoutManager(this)
-                tableRecyclerView.adapter = UserAdapter
-                hideLoading()
+                })
             }
         })
+
 
     }
 
