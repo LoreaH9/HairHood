@@ -7,9 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.hairhood.R
-import com.example.hairhood.databinding.ActivityAdminBinding
-import com.example.hairhood.databinding.ActivityAdminUserBinding
 import com.example.hairhood.databinding.ActivityAdminWorkerBinding
 import com.example.hairhood.model.User
 import com.google.android.gms.tasks.OnCompleteListener

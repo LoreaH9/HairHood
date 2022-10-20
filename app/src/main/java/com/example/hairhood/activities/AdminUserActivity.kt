@@ -8,23 +8,15 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hairhood.R
-import com.example.hairhood.UserAdapter
-import com.example.hairhood.databinding.ActivityAdminBinding
 import com.example.hairhood.databinding.ActivityAdminUserBinding
-import com.example.hairhood.fragments.Favorite
-import com.example.hairhood.fragments.Profile
 import com.example.hairhood.model.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
 
 class AdminUserActivity : AppCompatActivity() {
     private lateinit var usuario: MutableMap<String, Any>
