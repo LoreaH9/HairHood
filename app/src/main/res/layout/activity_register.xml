@@ -230,7 +230,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:hint="Fecha de Ncimiento"
+                        android:hint="Fecha de Nacimiento"
                         app:boxStrokeColor="#4E4A4A"
                         app:boxStrokeWidth="1dp"
                         app:hintTextColor="#4E4A4A"
@@ -353,7 +353,7 @@
 
 
                     <LinearLayout
-                        android:layout_width="312dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
@@ -395,7 +395,7 @@
             <ScrollView
                 android:id="@+id/ScrollPeluquero"
                 android:layout_width="match_parent"
-                android:layout_height="607dp">
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:id="@+id/singUpWorkerLayout"
@@ -592,7 +592,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:hint="Confirmar COntraseña"
+                        android:hint="Confirmar Contraseña"
                         app:boxStrokeColor="#4E4A4A"
                         app:boxStrokeWidth="1dp"
                         app:endIconMode="password_toggle"

@@ -16,16 +16,257 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnRemoveWorker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/pinkColor"
-        android:text="@string/remove"
+    <ScrollView
+        android:id="@+id/ScrollPeluquero"
+        android:layout_width="match_parent"
+        android:layout_height="607dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"
-        app:shapeAppearance="@style/Button5" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/singUpWorkerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="25dp"
+            android:visibility="visible">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/UsuarioPeluquero"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="Usuario"
+                app:boxStrokeColor="#4E4A4A"
+                app:boxStrokeWidth="1dp"
+                app:hintTextColor="#4E4A4A"
+                app:shapeAppearanceOverlay="@style/Button4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/usuarioPeluquero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/NombrePeluquero"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="Nombre"
+                app:boxStrokeColor="#4E4A4A"
+                app:boxStrokeWidth="1dp"
+                app:hintTextColor="#4E4A4A"
+                app:shapeAppearanceOverlay="@style/Button4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nombrePeluquero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/DNIPeluquero"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="DNI"
+                app:boxStrokeColor="#4E4A4A"
+                app:boxStrokeWidth="1dp"
+                app:hintTextColor="#4E4A4A"
+                app:shapeAppearanceOverlay="@style/Button4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dniPeluquero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/NumTlfPeluquero"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="Numero de telefono"
+                app:boxStrokeColor="#4E4A4A"
+                app:boxStrokeWidth="1dp"
+                app:hintTextColor="#4E4A4A"
+                app:shapeAppearanceOverlay="@style/Button4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/numTlfPeluquero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/FechaPeluquero"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="Fecha Nacimiento"
+                app:boxStrokeColor="#4E4A4A"
+                app:boxStrokeWidth="1dp"
+                app:hintTextColor="#4E4A4A"
+                app:shapeAppearanceOverlay="@style/Button4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fechaPeluquero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/EmailPeluquero"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="Correo Electronico"
+                app:boxStrokeColor="#4E4A4A"
+                app:boxStrokeWidth="1dp"
+                app:hintTextColor="#4E4A4A"
+                app:shapeAppearanceOverlay="@style/Button4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailPeluquero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/PassPeluquero"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="Contraseña"
+                app:boxStrokeColor="#4E4A4A"
+                app:boxStrokeWidth="1dp"
+                app:endIconMode="password_toggle"
+                app:hintTextColor="#4E4A4A"
+                app:shapeAppearanceOverlay="@style/Button4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passPeluquero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:textStyle="normal" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/FotoPeluquero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingRight="20dp"
+                    android:text="Foto" />
+
+                <Button
+                    android:id="@+id/btnFotoPeluquero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Subir Archivo" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRemoveWorker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/pinkColor"
+                android:text="@string/remove"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.13"
+                app:shapeAppearance="@style/Button5" />
+
+            <Button
+                android:id="@+id/btnSaveChangesWorker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:elevation="15dp"
+                android:gravity="center"
+                android:text="@string/register"
+                android:textAllCaps="false"
+                android:textColor="@color/textColor"
+                android:textSize="17sp"
+                app:backgroundTint="@color/pinkColor"
+                app:shapeAppearanceOverlay="@style/Button5" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

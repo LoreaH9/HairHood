@@ -41,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
     var pwd = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Thread.sleep(1000)
         setTheme(R.style.Theme_HairHood)
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
