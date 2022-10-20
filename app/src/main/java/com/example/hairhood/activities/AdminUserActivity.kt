@@ -56,6 +56,10 @@ class AdminUserActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error deleting document", e) }
         }
+        binding.saveChangesUser.setOnClickListener {
+
+            //startActivity(Intent(this@AdminUserActivity, AdminActivity::class.java))
+        }
     }
     private fun showLoading() {
         binding.progressBarUser.visibility = View.VISIBLE
@@ -71,13 +75,10 @@ class AdminUserActivity : AppCompatActivity() {
 
     private fun searchUserInfo(user:User){
         showLoading()
-        var tipo = "clientes"
-        if (user.tipo == "P") tipo = "peluqueros"
 
-        db.collection(tipo).whereEqualTo("usuario", user.usuario).get()
+        db.collection( "clientes").whereEqualTo("usuario", user.usuario).get()
             .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
                 if (task.isSuccessful) {
-                    val userList: MutableList<User?> = ArrayList()
                     for (document in task.result) {
                         usuario = document.data
                         binding.nombreCliente.setText(usuario["nombre"].toString())

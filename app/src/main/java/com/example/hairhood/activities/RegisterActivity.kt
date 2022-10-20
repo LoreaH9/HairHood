@@ -296,6 +296,7 @@ class RegisterActivity : AppCompatActivity() {
             "dni" to binding.dniPeluquero.text.toString(),
             "numTelefono" to binding.numTlfPeluquero.text.toString().toInt(),
             "email" to binding.emailPeluquero.text.toString(),
+            "verificado" to false,
             "contraseña" to pass
         )
         db.collection("peluqueros")
