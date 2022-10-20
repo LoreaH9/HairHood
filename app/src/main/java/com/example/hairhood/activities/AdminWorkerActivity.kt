@@ -45,6 +45,20 @@ class AdminWorkerActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
         }
+        binding.btnSaveChangesWorker.setOnClickListener {
+            val dato = hashMapOf(
+                "nombre" to binding.nombrePeluquero.text.toString(),
+                "dni" to binding.dniPeluquero.text.toString(),
+                "numTelefono" to binding.numTlfPeluquero.text.toString().toInt(),
+                "email" to binding.emailPeluquero.text.toString(),
+                "contraseña" to binding.passPeluquero.text.toString(),
+                "verificado" to binding.verificado.isChecked
+            )
+
+            db.collection("peluqueros").document(user.usuario).update(dato as Map<String, Any>)
+            Toast.makeText(this,"Usuario actualizado correctamente"+ binding.verificado.isChecked.toString(),Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@AdminWorkerActivity, AdminActivity::class.java))
+        }
     }
     private fun showLoading() {
         binding.progressBarWorker.visibility = View.VISIBLE
@@ -65,14 +79,13 @@ class AdminWorkerActivity : AppCompatActivity() {
                     for (document in task.result) {
                         usuario = document.data
                         binding.nombrePeluquero.setText(usuario["nombre"].toString())
-                        binding.usuarioPeluquero.setText(usuario["usuario"].toString())
                         binding.dniPeluquero.setText(usuario["dni"].toString())
                         binding.numTlfPeluquero.setText(usuario["numTelefono"].toString())
                         binding.tituloPeluquero.setText(usuario["titulo"].toString())
                         binding.emailPeluquero.setText(usuario["email"].toString())
                         binding.passPeluquero.setText(usuario["contraseña"].toString())
                         binding.verificado.isChecked = usuario["verificado"] as Boolean
-                    }
+                }
                     hideLoading()
                 }
             })

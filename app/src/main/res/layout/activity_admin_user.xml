@@ -47,30 +47,6 @@
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/UsuarioCliente"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:hint="Usuario"
-                app:boxStrokeColor="#4E4A4A"
-                app:boxStrokeWidth="1dp"
-                app:hintTextColor="#4E4A4A"
-                app:shapeAppearanceOverlay="@style/Button4">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/usuarioCliente"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NombreCliente"

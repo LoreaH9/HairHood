@@ -23,10 +23,8 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 
 class AdminUserActivity : AppCompatActivity() {
     private lateinit var usuario: MutableMap<String, Any>
@@ -57,9 +55,22 @@ class AdminUserActivity : AppCompatActivity() {
                 .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error deleting document", e) }
         }
         binding.saveChangesUser.setOnClickListener {
-
-            //startActivity(Intent(this@AdminUserActivity, AdminActivity::class.java))
+            val datoC = hashMapOf(
+                "nombre" to binding.nombreCliente.text.toString(),
+                "dni" to binding.dniCliente.text.toString(),
+                "numTelefono" to binding.numTlfCliente.text.toString().toInt(),
+                "fechaNacimiento" to binding.fechaCliente.text.toString(),
+                "direccion" to binding.direccionCliente.text.toString(),
+                "email" to binding.emailCliente.text.toString()
+            )
+            db.collection("clientes").document(user.usuario).update(datoC as Map<String, Any>)
+            Toast.makeText(this,"Usuario actualizado correctamente",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@AdminUserActivity, AdminActivity::class.java))
         }
+    }
+
+    suspend fun updateUser(){
+
     }
     private fun showLoading() {
         binding.progressBarUser.visibility = View.VISIBLE
@@ -82,7 +93,6 @@ class AdminUserActivity : AppCompatActivity() {
                     for (document in task.result) {
                         usuario = document.data
                         binding.nombreCliente.setText(usuario["nombre"].toString())
-                        binding.usuarioCliente.setText(usuario["usuario"].toString())
                         binding.dniCliente.setText(usuario["dni"].toString())
                         binding.numTlfCliente.setText(usuario["numTelefono"].toString())
                         binding.fechaCliente.setText(usuario["fechaNacimiento"].toString())
