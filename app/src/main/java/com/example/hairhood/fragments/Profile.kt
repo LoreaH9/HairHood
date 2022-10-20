@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
 import com.example.hairhood.activities.LoginActivity
+import com.example.hairhood.activities.PWD_KEY
 import com.example.hairhood.activities.USER_KEY
 import com.example.hairhood.databinding.FragmentProfileBinding
+import com.example.hairhood.activities.LoginActivity.Companion.nombre
 
 class Profile : Fragment() {
 
@@ -27,6 +29,11 @@ class Profile : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding: FragmentProfileBinding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        //Coger el nombre de usuario con el que se ha iniciado sesión y ponerlo en el campo de texto
+        binding.editTextTextNombre.setText(nombre)
+
+
 
         binding.btnCambiarContra.setOnClickListener {
             /*val editProfileIntent = Intent(getActivity(), ChangePwd()::class.java)
@@ -48,25 +55,14 @@ class Profile : Fragment() {
         }
 
         binding.btnCerrar.setOnClickListener {
-            val preferences = this.requireActivity().getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
-            preferences.edit().remove("USER_KEY")
+            val preferences = this.requireActivity()
+                .getSharedPreferences("com.example.hairhood.activities.getUser", Context.MODE_PRIVATE)
+            val editor: SharedPreferences.Editor = preferences.edit()
+            editor.putString(USER_KEY, "")
+            editor.putString(PWD_KEY, "")
+            editor.apply()
             val intent = Intent(this@Profile.requireContext(), LoginActivity::class.java)
             startActivity(intent)
-        }
-
-        binding.button2.setOnClickListener {
-            val fragmentManager = childFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.cLayoutProfile, PerfilPeluquero())
-            binding.btnGuardar.visibility = View.GONE
-            binding.btnCambiarContra.visibility = View.GONE
-            binding.btnCerrar.visibility = View.GONE
-            binding.editTextTfno.visibility = View.GONE
-            binding.editTextDireccion.visibility = View.GONE
-            binding.editTextTextNombre.visibility = View.GONE
-            binding.editTextTextCorreo.visibility = View.GONE
-            binding.button2.visibility = View.GONE
-            fragmentTransaction.commit()
         }
 
         //set variables in Binding

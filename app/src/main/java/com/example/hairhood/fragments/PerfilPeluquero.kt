@@ -45,6 +45,8 @@ class PerfilPeluquero : Fragment() {
     ): View? {
         val llamada : FragmentPerfilPeluqueroBinding = FragmentPerfilPeluqueroBinding.inflate(inflater, container, false)
 
+        llamada.editTextNombrePelu.setText(LoginActivity.nombre)
+
         llamada.btnMasInforPelu.setOnClickListener {
             val fragmentManager = childFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()

@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         var pelu : Boolean? = false
+        var nombre : String? = ""
     }
 
     private lateinit var binding: ActivityLoginBinding
@@ -73,6 +74,8 @@ class LoginActivity : AppCompatActivity() {
                     .addOnSuccessListener { list ->
                         list.forEach { usuario ->
                             if (userName == usuario.data["usuario"] && hashedPassword == usuario.data["contraseña"]) {
+                                pelu = false
+                                nombre = binding.user.text.toString()
                                 saveChanges(usuario.data["usuario"].toString(), usuario.data["contraseña"].toString())
                             }else{
                                 //En caso de no ser usuario mira si es peluquero
@@ -82,6 +85,7 @@ class LoginActivity : AppCompatActivity() {
                                         list.forEach { peluquero ->
                                             if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
                                                 pelu = true
+                                                nombre = binding.user.text.toString()
                                                 saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
                                             }}}
                                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}}}}
