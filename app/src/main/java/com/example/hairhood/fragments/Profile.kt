@@ -34,7 +34,7 @@ class Profile : Fragment() {
     var contraseña = ""
     var nan = ""
     var fecha = ""
-    var usu = nombre
+    //var usu = nombre
     var nom = ""
     var img = ""
 
@@ -52,7 +52,7 @@ class Profile : Fragment() {
         //Coger el nombre de usuario con el que se ha iniciado sesión y ponerlo en el campo de texto
         //binding.editTextTextNombre.setText(nombre)
 
-        if (nombre != "") {
+        if (nombre != "" || nombre.equals(null)) {
             nom = nombre.toString()
         } else {
             nom = nomUs.toString()
@@ -109,15 +109,17 @@ class Profile : Fragment() {
             var direccion : String = binding.editTextDireccion.text.toString()
 
             db.collection("clientes").document(nom).set(
-                hashMapOf("nombre" to nomb,
+                hashMapOf(
+                    "nombre" to nomb,
                     "email" to email,
                     "numTelefono" to num,
                     "direccion" to direccion,
                     "contraseña" to contraseña,
                     "dni" to nan,
                     "fechaNacimiento" to fecha,
-                    "usuario" to usu,
-                    "foto" to img)
+                    "usuario" to nom,
+                    "foto" to img
+                )
 
             )
 
