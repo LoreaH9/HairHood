@@ -76,6 +76,7 @@ class Profile : Fragment() {
            // Glide.with(this)
                 //.load(URL)
                // .into(binding.imgPerfil)
+
         }
 
         binding.btnCambiarContra.setOnClickListener {

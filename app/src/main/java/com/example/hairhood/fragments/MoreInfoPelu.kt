@@ -21,6 +21,7 @@ private const val ARG_PARAM2 = "param2"
 
 private lateinit var nom : FragmentMoreInfoPeluBinding
 
+
 class MoreInfoPelu : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
