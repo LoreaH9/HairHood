@@ -31,6 +31,7 @@
                 android:value="" />
         </activity>
 
+
         <activity
             android:name=".activities.ReservarPeluquero"
             android:exported="false">
@@ -53,6 +54,7 @@
             android:name=".activities.LoginActivity"
             android:exported="true"
             android:theme="@style/SplashTheme"> <!-- Para que nuestra pantalla principal utilice el tema del splashScreen -->
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

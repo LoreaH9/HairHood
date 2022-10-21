@@ -46,6 +46,7 @@ import java.util.logging.Logger
 @Suppress("DEPRECATION")
 class RegisterActivity : AppCompatActivity() {
     private var filePath: Uri? = null
+    var imageURL = ""
     private var firebaseStore: FirebaseStorage? = null
     private val PICK_IMAGE_REQUEST = 71
     private lateinit var binding: ActivityRegisterBinding
@@ -175,6 +176,9 @@ class RegisterActivity : AppCompatActivity() {
     private fun uploadImageCliente(){
         if(filePath != null){
             val ref = storageReference.child("clientes/${binding.usuarioCliente.text}.jpg")
+            ref.downloadUrl.addOnSuccessListener { Uri->
+                 imageURL = Uri.toString()
+            }
             val uploadTask = ref.putFile(filePath!!)
             val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                 if (!task.isSuccessful) {
@@ -278,7 +282,7 @@ class RegisterActivity : AppCompatActivity() {
             "direccion" to binding.direccionCliente.text.toString(),
             "email" to binding.emailCliente.text.toString(),
             "contraseña" to pass,
-            "foto" to filePath
+            "foto" to imageURL
         )
         db.collection("clientes")
             .document(binding.usuarioCliente.text.toString())
