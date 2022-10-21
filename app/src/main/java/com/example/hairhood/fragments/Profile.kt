@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.hairhood.R
 import com.example.hairhood.activities.LoginActivity
 import com.example.hairhood.activities.PWD_KEY
@@ -23,6 +24,10 @@ import com.example.hairhood.activities.MainActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.lang.System.load
+import java.net.URL
 
 class Profile : Fragment() {
 
@@ -68,7 +73,9 @@ class Profile : Fragment() {
             fecha = it.get("fechaNacimiento").toString()
             contraseña = it.get("contraseña").toString()
             img = it.get("foto").toString()
-            //binding.imgPerfil.set
+           // Glide.with(this)
+                //.load(URL)
+               // .into(binding.imgPerfil)
         }
 
         binding.btnCambiarContra.setOnClickListener {
@@ -139,5 +146,9 @@ class Profile : Fragment() {
         fragmentTransaction.replace(R.id.frame_layout,fragment)
         fragmentTransaction.commit()
     }
+    var storage: FirebaseStorage = FirebaseStorage.getInstance()
+    var storageRef: StorageReference = storage.getReferenceFromUrl("gs://hairhood-f9a24.appspot.com/")
+        .child("clientes")
+
 
 }
