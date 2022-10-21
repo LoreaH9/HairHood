@@ -47,6 +47,7 @@ class PerfilPeluquero : Fragment() {
 
         llamada.editTextNombrePelu.setText(LoginActivity.nombre)
 
+
         llamada.btnMasInforPelu.setOnClickListener {
             val fragmentManager = childFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()

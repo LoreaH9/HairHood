@@ -118,6 +118,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }else{
             call(phone)
+
         }
     }
 

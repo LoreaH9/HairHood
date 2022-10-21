@@ -118,6 +118,7 @@ class Profile : Fragment() {
                     "fechaNacimiento" to fecha,
                     "usuario" to usu,
                     "foto" to img)
+
             )
 
             val intent = Intent(this@Profile.requireContext(), MainActivity::class.java)
