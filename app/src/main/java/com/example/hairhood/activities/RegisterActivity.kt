@@ -37,6 +37,7 @@ import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
+import java.net.URL
 import java.security.MessageDigest
 import java.util.*
 import java.util.logging.Logger
@@ -214,10 +215,13 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 Toast.makeText(this, "CT", Toast.LENGTH_SHORT).show()
 
+                Toast.makeText(this, "", Toast.LENGTH_LONG).show()
+
                 return@Continuation ref.downloadUrl
             }).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val downloadUri = task.result
+
                     addUploadRecordToDb(downloadUri.toString())
                 } else {
                     // Handle failures
@@ -303,6 +307,7 @@ class RegisterActivity : AppCompatActivity() {
             "dni" to binding.dniPeluquero.text.toString(),
             "numTelefono" to binding.numTlfPeluquero.text.toString().toInt(),
             "email" to binding.emailPeluquero.text.toString(),
+            "verificado" to false,
             "contraseña" to pass
         )
         db.collection("peluqueros")

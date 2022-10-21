@@ -8,6 +8,9 @@ import com.example.hairhood.databinding.ActivitySelectorPeluqueroBinding
 
 class SelectorPeluquero : AppCompatActivity() {
     private lateinit var binding: ActivitySelectorPeluqueroBinding
+    companion object{
+        const val EXTRA_MOVIE="SelectorPeluquero:extraPeluqueros"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

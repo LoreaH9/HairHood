@@ -7,7 +7,7 @@
     tools:context=".activities.AdminWorkerActivity">
 
     <TextView
-        android:id="@+id/info"
+        android:id="@+id/infoPelu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -23,7 +23,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,32 +38,6 @@
             android:orientation="vertical"
             android:padding="25dp"
             android:visibility="visible">
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/UsuarioPeluquero"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:hint="Usuario"
-                app:boxStrokeColor="#4E4A4A"
-                app:boxStrokeWidth="1dp"
-                app:hintTextColor="#4E4A4A"
-                app:shapeAppearanceOverlay="@style/Button4">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/usuarioPeluquero"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/black"
-                    android:textSize="13sp"
-                    android:textStyle="normal" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NombrePeluquero"
@@ -141,21 +115,21 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/FechaPeluquero"
+                android:id="@+id/TituloPeluquero"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:hint="Fecha Nacimiento"
+                android:hint="Título peluquero"
                 app:boxStrokeColor="#4E4A4A"
                 app:boxStrokeWidth="1dp"
                 app:hintTextColor="#4E4A4A"
                 app:shapeAppearanceOverlay="@style/Button4">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fechaPeluquero"
+                    android:id="@+id/tituloPeluquero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
@@ -216,6 +190,13 @@
                     android:textStyle="normal" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Switch
+                android:id="@+id/verificado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Verificado" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -260,13 +241,24 @@
                 android:layout_marginEnd="24dp"
                 android:elevation="15dp"
                 android:gravity="center"
-                android:text="@string/register"
+                android:text="@string/saveAndBack"
                 android:textAllCaps="false"
                 android:textColor="@color/textColor"
                 android:textSize="17sp"
                 app:backgroundTint="@color/pinkColor"
                 app:shapeAppearanceOverlay="@style/Button5" />
+
         </LinearLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBarWorker"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

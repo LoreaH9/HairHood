@@ -8,25 +8,15 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hairhood.R
-import com.example.hairhood.UserAdapter
-import com.example.hairhood.databinding.ActivityAdminBinding
 import com.example.hairhood.databinding.ActivityAdminUserBinding
-import com.example.hairhood.fragments.Favorite
-import com.example.hairhood.fragments.Profile
 import com.example.hairhood.model.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class AdminUserActivity : AppCompatActivity() {
     private lateinit var usuario: MutableMap<String, Any>
@@ -56,6 +46,23 @@ class AdminUserActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener { e -> Log.w(ContentValues.TAG, "Error deleting document", e) }
         }
+        binding.saveChangesUser.setOnClickListener {
+            val datoC = hashMapOf(
+                "nombre" to binding.nombreCliente.text.toString(),
+                "dni" to binding.dniCliente.text.toString(),
+                "numTelefono" to binding.numTlfCliente.text.toString().toInt(),
+                "fechaNacimiento" to binding.fechaCliente.text.toString(),
+                "direccion" to binding.direccionCliente.text.toString(),
+                "email" to binding.emailCliente.text.toString()
+            )
+            db.collection("clientes").document(user.usuario).update(datoC as Map<String, Any>)
+            Toast.makeText(this,"Usuario actualizado correctamente",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@AdminUserActivity, AdminActivity::class.java))
+        }
+    }
+
+    suspend fun updateUser(){
+
     }
     private fun showLoading() {
         binding.progressBarUser.visibility = View.VISIBLE
@@ -71,17 +78,13 @@ class AdminUserActivity : AppCompatActivity() {
 
     private fun searchUserInfo(user:User){
         showLoading()
-        var tipo = "clientes"
-        if (user.tipo == "P") tipo = "peluqueros"
 
-        db.collection(tipo).whereEqualTo("usuario", user.usuario).get()
+        db.collection( "clientes").whereEqualTo("usuario", user.usuario).get()
             .addOnCompleteListener(OnCompleteListener<QuerySnapshot?> { task ->
                 if (task.isSuccessful) {
-                    val userList: MutableList<User?> = ArrayList()
                     for (document in task.result) {
                         usuario = document.data
                         binding.nombreCliente.setText(usuario["nombre"].toString())
-                        binding.usuarioCliente.setText(usuario["usuario"].toString())
                         binding.dniCliente.setText(usuario["dni"].toString())
                         binding.numTlfCliente.setText(usuario["numTelefono"].toString())
                         binding.fechaCliente.setText(usuario["fechaNacimiento"].toString())
