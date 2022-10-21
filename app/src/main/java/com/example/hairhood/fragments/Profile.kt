@@ -26,6 +26,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import java.io.File
 import java.lang.System.load
 import java.net.URL
 
@@ -46,6 +47,15 @@ class Profile : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentProfileBinding.inflate(layoutInflater)
+
+    val imageName = binding.txtUsuario.text.toString()
+    val storageref =FirebaseStorage.getInstance().reference.child("clientes/$imageName.jpg")
+
+    val localfile = File.createTempFile("tempImage", "jpg")
+        storageref.getFile(localfile).addOnSuccessListener {
+            val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+            binding.imgPerfil.setImageBitmap(bitmap)
+        }
     }
 
     override fun onCreateView(
@@ -73,10 +83,16 @@ class Profile : Fragment() {
             fecha = it.get("fechaNacimiento").toString()
             contraseña = it.get("contraseña").toString()
             img = it.get("foto").toString()
+<<<<<<< Updated upstream
            // Glide.with(this)
                 //.load(URL)
                // .into(binding.imgPerfil)
 
+=======
+           Glide.with(this)
+                .load(storageRef.child("Iker.jpg"))
+                .into(binding.imgPerfil)
+>>>>>>> Stashed changes
         }
 
         binding.btnCambiarContra.setOnClickListener {

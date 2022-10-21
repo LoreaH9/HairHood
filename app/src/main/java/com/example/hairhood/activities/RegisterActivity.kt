@@ -177,7 +177,7 @@ class RegisterActivity : AppCompatActivity() {
         if(filePath != null){
             val ref = storageReference.child("clientes/${binding.usuarioCliente.text}.jpg")
             ref.downloadUrl.addOnSuccessListener { Uri->
-                 imageURL = Uri.toString()
+                val imageURL = Uri.toString()
             }
             val uploadTask = ref.putFile(filePath!!)
             val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
