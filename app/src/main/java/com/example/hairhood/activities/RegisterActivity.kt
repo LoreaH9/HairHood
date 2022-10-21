@@ -56,6 +56,10 @@ class RegisterActivity : AppCompatActivity() {
     private var storageReference = storage.reference
     val myRef=database.getReference("Clientes")
 
+    companion object {
+        var nomUs : String? = ""
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -107,6 +111,9 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
             }
+
+            nomUs = binding.usuarioCliente.text.toString()
+
         }
         binding.singInPelu.setOnClickListener {
             uploadImagePelu()
