@@ -21,6 +21,7 @@ import com.google.firebase.ktx.Firebase
 class AdminActivity : AppCompatActivity() {
     lateinit var binding: ActivityAdminBinding
     private var userList = ArrayList<User>()
+
     private lateinit var UserAdapter:UserAdapter
     private lateinit var tableRecyclerView : RecyclerView
     private val db = Firebase.firestore
