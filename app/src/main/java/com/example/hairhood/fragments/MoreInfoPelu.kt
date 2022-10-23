@@ -76,9 +76,7 @@ class MoreInfoPelu : Fragment() {
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.layouMasInfoPelu, PerfilPeluquero())
             fragmentTransaction.commit()
-            nom.btnVolverPelu.visibility = View.GONE
-            nom.btnGuardarPelu.visibility = View.GONE
-            nom.btnCambiarContraPelu.visibility = View.GONE
+            nom.card.visibility = View.GONE
         }
 
         nom.btnCambiarContraPelu.setOnClickListener {
@@ -86,13 +84,7 @@ class MoreInfoPelu : Fragment() {
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.layouMasInfoPelu, ChangePwd())
             fragmentTransaction.commit()
-            nom.btnVolverPelu.visibility = View.GONE
-            nom.btnGuardarPelu.visibility = View.GONE
-            nom.btnCambiarContraPelu.visibility = View.GONE
-            nom.editTextEmailPelu.visibility = View.GONE
-            nom.editTextEspecialidadPelu.visibility = View.GONE
-            nom.editTextTfnoPelu.visibility = View.GONE
-            nom.editTextNombrePelu2.visibility = View.GONE
+            nom.card.visibility = View.GONE
         }
 
         nom.btnGuardarPelu.setOnClickListener {

@@ -1,12 +1,16 @@
 package com.example.hairhood.fragments
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
 import com.example.hairhood.activities.SelectorPeluquero
@@ -24,6 +28,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     private lateinit var mMap: GoogleMap
 
+    private var locationPermissionGranted = false
 
     private var uno = LatLng(43.25471423656013, -2.904199867091976)
     private var dos = LatLng(43.258482935494406, -2.9049796343857333)
@@ -39,9 +44,11 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
         //val locationArrayList: ArrayList<LatLng>? = null
         locationArrayList.add(uno)
         locationArrayList.add(dos)
@@ -51,6 +58,20 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+
+        getLocationPermission()
+
+        if (locationPermissionGranted) {
+            mMap.isMyLocationEnabled = true
+        } else {
+            getLocationPermission()
+        }
+
+        mMap.setOnMyLocationChangeListener { location ->
+            val yourLocation = CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 16f)
+            mMap.animateCamera(yourLocation)
+        }
+
         createMarker()
 
         mMap.setOnMarkerClickListener(this)
@@ -74,16 +95,16 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
             )
         }
 
-        //Marcador tu posicion
-        val coordenadas = LatLng(43.258859663296036, -2.897823693297347)
-        mMap.addMarker(MarkerOptions().position(coordenadas).title("HEMEN ZAUDE"))
-
-        //Animacion de camara, enfoca a tu localizacion
-        mMap.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(coordenadas, 18f),
-            4000,
-            null
-        )
+//        //Marcador tu posicion
+//        val coordenadas = LatLng(43.258859663296036, -2.897823693297347)
+//        mMap.addMarker(MarkerOptions().position(coordenadas).title("HEMEN ZAUDE"))
+//
+//        //Animacion de camara, enfoca a tu localizacion
+//        mMap.animateCamera(
+//            CameraUpdateFactory.newLatLngZoom(coordenadas, 18f),
+//            4000,
+//            null
+//        )
 
     }
 
@@ -102,6 +123,18 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         roundedBitmapDrawable.cornerRadius = roundPx
         return bitmap*/
 
+    }
+
+    private fun getLocationPermission() {
+
+        if (ContextCompat.checkSelfPermission(activity!!.baseContext,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED) {
+            locationPermissionGranted = true
+        } else {
+            ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1)
+        }
     }
 }
 

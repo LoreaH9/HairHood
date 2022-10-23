@@ -1,8 +1,12 @@
 package com.example.hairhood.activities
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityLoginBinding
@@ -29,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     val bundle = intent?.extras
     val dato = nombre
+    var locationPermissionGranted = false;
     /*val usuario : String? = nombre*/
 
     override fun onCreate(savedInstanceState: Bundle?) {

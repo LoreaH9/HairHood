@@ -13,14 +13,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.hairhood.R
-import com.example.hairhood.activities.LoginActivity
-import com.example.hairhood.activities.PWD_KEY
-import com.example.hairhood.activities.USER_KEY
+import com.example.hairhood.activities.*
 import com.example.hairhood.databinding.FragmentProfileBinding
 import com.example.hairhood.activities.LoginActivity.Companion.nombre
 import com.example.hairhood.activities.RegisterActivity.Companion.nomUs
 import com.example.hairhood.activities.LoginActivity.Companion.contra
-import com.example.hairhood.activities.MainActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -37,7 +34,7 @@ class Profile : Fragment() {
 
     lateinit var binding: FragmentProfileBinding
 
-    var contraseña = ""
+    var contraseina = ""
     var nan = ""
     var fecha = ""
     //var usu = nombre
@@ -56,6 +53,8 @@ class Profile : Fragment() {
             val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
             binding.imgPerfil.setImageBitmap(bitmap)
         }
+
+        sharedPreferences = activity!!.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
     }
 
     override fun onCreateView(
@@ -67,32 +66,25 @@ class Profile : Fragment() {
         //Coger el nombre de usuario con el que se ha iniciado sesión y ponerlo en el campo de texto
         //binding.editTextTextNombre.setText(nombre)
 
-        if (nombre != "" || nombre.equals(null)) {
-            nom = nombre.toString()
-        } else {
-            nom = nomUs.toString()
-        }
+        if (sharedPreferences.getString(USER_KEY, "").toString() != "" || sharedPreferences.getString(USER_KEY, "").toString().equals(null)) {
+            nom = sharedPreferences.getString(USER_KEY, "").toString()
 
-        db.collection("clientes").document(nom).get().addOnSuccessListener {
-            binding.editTextTextNombre.setText(it.get("nombre") as String?)
-            binding.editTextTextCorreo.setText(it.get("email") as String?)
-            val num = it.get("numTelefono").toString()
-            binding.editTextTfno.setText(num)
-            binding.editTextDireccion.setText(it.get("direccion") as String?)
-            nan = it.get("dni").toString()
-            fecha = it.get("fechaNacimiento").toString()
-            contraseña = it.get("contraseña").toString()
-            img = it.get("foto").toString()
-<<<<<<< Updated upstream
-           // Glide.with(this)
+            db.collection("clientes").document(nom).get().addOnSuccessListener {
+                binding.editTextTextNombre.setText(it.get("nombre") as String?)
+                binding.editTextTextCorreo.setText(it.get("email") as String?)
+                val num = it.get("numTelefono").toString()
+                binding.editTextTfno.setText(num)
+                binding.editTextDireccion.setText(it.get("direccion") as String?)
+                nan = it.get("dni").toString()
+                fecha = it.get("fechaNacimiento").toString()
+                contraseina = it.get("contraseña").toString()
+                img = it.get("foto").toString()
+                // Glide.with(this)
                 //.load(URL)
-               // .into(binding.imgPerfil)
-
-=======
-           Glide.with(this)
-                .load(storageRef.child("Iker.jpg"))
-                .into(binding.imgPerfil)
->>>>>>> Stashed changes
+                // .into(binding.imgPerfil)
+            }
+        } else {
+            Toast.makeText(activity!!.baseContext, "No has iniciado sesion", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnCambiarContra.setOnClickListener {
@@ -126,11 +118,11 @@ class Profile : Fragment() {
         }
 
         binding.btnGuardar.setOnClickListener {
-            var nomb : String = binding.editTextTextNombre.text.toString()
-            var email : String = binding.editTextTextCorreo.text.toString()
-            var tfno : String = binding.editTextTfno.text.toString()
-            var num : Int = tfno.toInt()
-            var direccion : String = binding.editTextDireccion.text.toString()
+            val nomb : String = binding.editTextTextNombre.text.toString()
+            val email : String = binding.editTextTextCorreo.text.toString()
+            val tfno : String = binding.editTextTfno.text.toString()
+            val num : Int = tfno.toInt()
+            val direccion : String = binding.editTextDireccion.text.toString()
 
             db.collection("clientes").document(nom).set(
                 hashMapOf(
@@ -138,7 +130,7 @@ class Profile : Fragment() {
                     "email" to email,
                     "numTelefono" to num,
                     "direccion" to direccion,
-                    "contraseña" to contraseña,
+                    "contraseña" to contraseina,
                     "dni" to nan,
                     "fechaNacimiento" to fecha,
                     "usuario" to nom,

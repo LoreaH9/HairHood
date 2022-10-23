@@ -53,11 +53,7 @@ class PerfilPeluquero : Fragment() {
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.layoutPelu, MoreInfoPelu())
             fragmentTransaction.commit()
-            llamada.imageButton.visibility = View.GONE
-            llamada.editTextNombrePelu.visibility = View.GONE
-            llamada.btnMasInforPelu.visibility = View.GONE
-            llamada.btnCerrarSesionPelu.visibility = View.GONE
-            llamada.switch1.visibility = View.GONE
+            llamada.card.visibility = View.GONE
         }
 
         llamada.btnCerrarSesionPelu.setOnClickListener {
