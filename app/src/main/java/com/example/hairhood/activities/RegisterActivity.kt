@@ -312,7 +312,8 @@ class RegisterActivity : AppCompatActivity() {
             "numTelefono" to binding.numTlfPeluquero.text.toString().toInt(),
             "email" to binding.emailPeluquero.text.toString(),
             "verificado" to false,
-            "contraseña" to pass
+            "contraseña" to pass,
+            "foto" to imageURL
         )
         db.collection("peluqueros")
             .document(binding.usuarioPeluquero.text.toString())

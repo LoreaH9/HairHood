@@ -14,9 +14,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class SelectorPeluquero : AppCompatActivity() {
     private lateinit var binding: ActivitySelectorPeluqueroBinding
-  /*  var nom = ""
-    var img = ""
-    val db = FirebaseFirestore.getInstance()*/
+    lateinit var sharedPreferences: SharedPreferences
+
+
+      var nomC = ""
+      var nomP = ""
+      var img = ""
+      val db = FirebaseFirestore.getInstance()
 
     companion object {
         const val EXTRA_MOVIE = "SelectorPeluquero:extraPeluqueros"
@@ -26,7 +30,19 @@ class SelectorPeluquero : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectorPeluqueroBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
+        user = sharedPreferences.getString(USER_KEY, "").toString()
 
+
+        if (user != "") {
+            if (sharedPreferences.getString(USER_KEY, "").toString() != "" || sharedPreferences.getString(USER_KEY, "").toString().equals(null)) {
+                nomC = sharedPreferences.getString(USER_KEY, "").toString()
+
+                db.collection("favoritos").document(nomC).get().addOnSuccessListener {
+
+                }
+            }
+        }
 
 
 
@@ -43,6 +59,7 @@ class SelectorPeluquero : AppCompatActivity() {
         binding.nofav.setOnClickListener(){
             binding.fav.visibility=View.VISIBLE
             binding.nofav.visibility=View.GONE
+            guardarFav(db)
         }
         binding.fav.setOnClickListener(){
             binding.fav.visibility=View.GONE
@@ -53,6 +70,17 @@ class SelectorPeluquero : AppCompatActivity() {
             val intent = Intent(this@SelectorPeluquero, ReservarPeluquero::class.java)
             startActivity(intent)
         }
+
+    }
+    fun guardarFav(db: FirebaseFirestore) {
+        val fav = hashMapOf(
+            "usuarioCliente" to nomC,
+            "usuarioPelu" to nomP
+
+        )
+        db.collection("favoritos")
+            .document("$nomC fav $nomP")
+            .set(fav)
 
     }
 }
