@@ -70,7 +70,7 @@ class Profile : Fragment() {
             nom = sharedPreferences.getString(USER_KEY, "").toString()
 
             db.collection("clientes").document(nom).get().addOnSuccessListener {
-                binding.txtUsuario.setText(it.get("usuario")as String)
+                binding.txtUsuario.text = nom
                 binding.editTextTextNombre.setText(it.get("nombre") as String?)
                 binding.editTextTextCorreo.setText(it.get("email") as String?)
                 val num = it.get("numTelefono").toString()
