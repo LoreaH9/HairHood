@@ -24,12 +24,24 @@
             tools:context=".activities.SelectorPeluquero">
 
             <ImageButton
+                android:id="@+id/nofav"
+                android:layout_width="52dp"
+                android:layout_height="60dp"
+                android:layout_gravity="right"
+                android:backgroundTint="@color/transparentColor"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_favorite"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageButton
                 android:id="@+id/fav"
                 android:layout_width="52dp"
                 android:layout_height="60dp"
                 android:layout_gravity="right"
                 android:backgroundTint="@color/transparentColor"
                 android:scaleType="fitCenter"
+                android:tint="#FF0000"
+                android:visibility="gone"
                 app:srcCompat="@drawable/ic_favorite"
                 tools:ignore="SpeakableTextPresentCheck" />
 
