@@ -69,30 +69,44 @@ class LoginActivity : AppCompatActivity() {
 
                 val hashedPassword = hashPassword(binding.password.text.toString().replace(" ", ""))
                 val userName = binding.user.text.toString().replace(" ", "")
-
+                var correct=false;
                 //Mira si es un usuario
                 db.collection("clientes")
                     .get()
                     .addOnSuccessListener { list ->
                         list.forEach { usuario ->
                             if (userName == usuario.data["usuario"] && hashedPassword == usuario.data["contraseña"]) {
+                                correct=true
                                 pelu = false
                                 nombre = binding.user.text.toString()
                                 contra = binding.password.text.toString()
                                 saveChanges(usuario.data["usuario"].toString(), usuario.data["contraseña"].toString())
-                            }else{
-                                //En caso de no ser usuario mira si es peluquero
-                                db.collection("peluqueros")
-                                    .get()
-                                    .addOnSuccessListener { list ->
-                                        list.forEach { peluquero ->
-                                            if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
-                                                pelu = true
-                                                nombre = binding.user.text.toString()
-                                                contra = binding.password.text.toString()
-                                                saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
-                                            }}}
-                                    .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}}}}
+                            }
+                        }
+                        if(!correct){
+                            //En caso de no ser usuario mira si es peluquero
+                            db.collection("peluqueros")
+                                .get()
+                                .addOnSuccessListener { list ->
+                                    list.forEach { peluquero ->
+                                        if (userName == peluquero.data["usuario"] && hashedPassword == peluquero.data["contraseña"]) {
+                                            pelu = true
+                                            correct=true
+
+                                            nombre = binding.user.text.toString()
+                                            contra = binding.password.text.toString()
+                                            saveChanges(peluquero.data["usuario"].toString(), peluquero.data["contraseña"].toString())
+                                        }
+                                    }
+                                    if(!correct){
+                                        Toast.makeText(this, "Usuario o contraseña incorrectas", Toast.LENGTH_SHORT).show()
+                                    }
+
+                                }
+                                .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                     .addOnFailureListener {Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()}
             }
         }
