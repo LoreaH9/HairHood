@@ -70,6 +70,7 @@ class Profile : Fragment() {
             nom = sharedPreferences.getString(USER_KEY, "").toString()
 
             db.collection("clientes").document(nom).get().addOnSuccessListener {
+                binding.txtUsuario.setText(it.get("usuario")as String)
                 binding.editTextTextNombre.setText(it.get("nombre") as String?)
                 binding.editTextTextCorreo.setText(it.get("email") as String?)
                 val num = it.get("numTelefono").toString()
@@ -79,9 +80,9 @@ class Profile : Fragment() {
                 fecha = it.get("fechaNacimiento").toString()
                 contraseina = it.get("contraseña").toString()
                 img = it.get("foto").toString()
-                // Glide.with(this)
-                //.load(URL)
-                // .into(binding.imgPerfil)
+                Glide.with(this)
+                .load(img)
+                .into(binding.imgPerfil)
             }
         } else {
             Toast.makeText(activity!!.baseContext, "No has iniciado sesion", Toast.LENGTH_SHORT).show()
