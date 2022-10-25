@@ -104,6 +104,12 @@ class Profile : Fragment() {
             binding.btnCerrar.visibility = View.GONE
             binding.btnGuardar.visibility = View.GONE
             binding.btnCambiarContra.visibility = View.GONE
+            binding.imgPerfil.visibility = View.GONE
+            binding.txtNombre.visibility = View.GONE
+            binding.txtDireccion.visibility = View.GONE
+            binding.txtCorreo.visibility = View.GONE
+            binding.txtTfno.visibility = View.GONE
+            binding.cardViewProfile.visibility = View.GONE
 
             fragmentTransaction.commit()
         }

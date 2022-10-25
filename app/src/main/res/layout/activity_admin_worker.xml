@@ -39,6 +39,11 @@
             android:padding="25dp"
             android:visibility="visible">
 
+            <TextView
+                android:id="@+id/infoWorker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/NombrePeluquero"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
