@@ -40,6 +40,9 @@
     <string name="newPasswordRepeat">Pasahitz berria errepikatu</string>
     <string name="titulation">Titulazioa</string>
     <string name="specialty">Espezialitateak</string>
+    <string name="emailError">Helbide elektroniko zuzen bat jarri</string>
+    <string name="tfnoError">Telefonoak 9 zenbaki izan behar ditu</string>
+    <string name="fields">Testu-guneak zuzen bete</string>
 
     <!-- PAY ACTIVITY -->
     <string name="titulo">ORDAINTZEKO MODUA</string>
@@ -51,4 +54,5 @@
 
     <!-- PAY ACTIVITY -->
     <string name="vacio">Mesedez, bete eremu guztiak</string>
+
 </resources>

@@ -30,6 +30,9 @@ var user :String = ""
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        var prfPelu : Boolean = false
+    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var llamada: ActivityLoginBinding
@@ -47,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(Favorite())
 
 
-        sharedPreferences = this.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+        sharedPreferences = this.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
@@ -57,11 +60,13 @@ class MainActivity : AppCompatActivity() {
                         /*val input = dato
                         val bundle = Bundle()
                         bundle.putString("nameUser", input)*/
+                        prfPelu = false
                         replaceFragment(Profile())
                     } else {
                         val input = dato
                         val bundle = Bundle()
                         bundle.putString("nameUser", input)
+                        prfPelu = true
                         replaceFragment(PerfilPeluquero())
                     }
                     /*replaceFragment(Profile())*/
