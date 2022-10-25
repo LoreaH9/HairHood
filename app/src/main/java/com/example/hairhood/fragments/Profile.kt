@@ -54,7 +54,7 @@ class Profile : Fragment() {
             binding.imgPerfil.setImageBitmap(bitmap)
         }
 
-        sharedPreferences = activity!!.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
     }
 
     override fun onCreateView(
@@ -66,11 +66,12 @@ class Profile : Fragment() {
         //Coger el nombre de usuario con el que se ha iniciado sesión y ponerlo en el campo de texto
         //binding.editTextTextNombre.setText(nombre)
 
-        if (sharedPreferences.getString(USER_KEY, "").toString() != "" || sharedPreferences.getString(USER_KEY, "").toString().equals(null)) {
+        if (sharedPreferences.getString(USER_KEY, "").toString() != "") {
+
             nom = sharedPreferences.getString(USER_KEY, "").toString()
 
             db.collection("clientes").document(nom).get().addOnSuccessListener {
-                binding.txtUsuario.setText(it.get("usuario")as String)
+                binding.txtUsuario.text = nom
                 binding.editTextTextNombre.setText(it.get("nombre") as String?)
                 binding.editTextTextCorreo.setText(it.get("email") as String?)
                 val num = it.get("numTelefono").toString()
@@ -85,7 +86,7 @@ class Profile : Fragment() {
                 .into(binding.imgPerfil)
             }
         } else {
-            Toast.makeText(activity!!.baseContext, "No has iniciado sesion", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity().baseContext, "No has iniciado sesion", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnCambiarContra.setOnClickListener {

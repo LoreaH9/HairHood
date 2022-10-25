@@ -37,18 +37,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/nameSurname"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/editTextNombrePelu2"
+                app:layout_constraintStart_toStartOf="@+id/editTextNombrePelu2"
                 app:layout_constraintTop_toBottomOf="@+id/imgPelu" />
 
             <EditText
                 android:id="@+id/editTextNombrePelu2"
                 android:layout_width="313dp"
                 android:layout_height="51dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="@+id/textView5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -58,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/email"
-                app:layout_constraintStart_toStartOf="@+id/editTextNombrePelu2"
+                app:layout_constraintEnd_toEndOf="@+id/editTextEmailPelu"
+                app:layout_constraintStart_toStartOf="@+id/editTextEmailPelu"
                 app:layout_constraintTop_toBottomOf="@+id/editTextNombrePelu2" />
 
             <EditText
@@ -67,7 +70,8 @@
                 android:layout_height="51dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="@+id/textView9"
+                app:layout_constraintEnd_toEndOf="@+id/editTextNombrePelu2"
+                app:layout_constraintStart_toStartOf="@+id/editTextNombrePelu2"
                 app:layout_constraintTop_toBottomOf="@+id/textView9"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -77,7 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/phoneNumber"
-                app:layout_constraintStart_toStartOf="@+id/editTextEmailPelu"
+                app:layout_constraintEnd_toEndOf="@+id/editTextTfnoPelu"
+                app:layout_constraintStart_toStartOf="@+id/editTextTfnoPelu"
                 app:layout_constraintTop_toBottomOf="@+id/editTextEmailPelu" />
 
             <EditText
@@ -86,7 +91,8 @@
                 android:layout_height="51dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintEnd_toEndOf="@+id/editTextEmailPelu"
+                app:layout_constraintStart_toStartOf="@+id/editTextEmailPelu"
                 app:layout_constraintTop_toBottomOf="@+id/textView10"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -96,7 +102,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/titulation"
-                app:layout_constraintStart_toStartOf="@+id/editTextTfnoPelu"
+                app:layout_constraintEnd_toEndOf="@+id/editTextTituloPelu"
+                app:layout_constraintStart_toStartOf="@+id/editTextTituloPelu"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTfnoPelu" />
 
             <EditText
@@ -105,7 +112,9 @@
                 android:layout_height="51dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="@+id/textView11"
+                app:layout_constraintEnd_toEndOf="@+id/editTextTfnoPelu"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/editTextTfnoPelu"
                 app:layout_constraintTop_toBottomOf="@+id/textView11"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -115,7 +124,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/specialty"
-                app:layout_constraintStart_toStartOf="@+id/editTextTituloPelu"
+                app:layout_constraintEnd_toEndOf="@+id/editTextEspecialidadPelu"
+                app:layout_constraintStart_toStartOf="@+id/editTextEspecialidadPelu"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTituloPelu" />
 
             <EditText
@@ -125,7 +135,8 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
-                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintEnd_toEndOf="@+id/editTextTituloPelu"
+                app:layout_constraintStart_toStartOf="@+id/editTextTituloPelu"
                 app:layout_constraintTop_toBottomOf="@+id/textView12"
                 tools:ignore="SpeakableTextPresentCheck" />
 

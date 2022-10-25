@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
 import com.example.hairhood.activities.LoginActivity
+import com.example.hairhood.activities.PREFS_KEY
 import com.example.hairhood.activities.PWD_KEY
 import com.example.hairhood.activities.USER_KEY
 import com.example.hairhood.databinding.FragmentPerfilPeluqueroBinding
@@ -21,6 +22,11 @@ import com.example.hairhood.databinding.FragmentProfileBinding
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+var PREFS_KEY :String = "com.example.hairhood.activities.getUser"
+var USER_KEY :String = "USER_KEY"
+var PWD_KEY :String = "PWD_KEY"
+var ROL_KEY :String = "ROL_KEY"
+
 private lateinit var llamada : FragmentPerfilPeluqueroBinding
 private lateinit var otraP : FragmentProfileBinding
 
@@ -28,6 +34,8 @@ class PerfilPeluquero : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +43,9 @@ class PerfilPeluquero : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        sharedPreferences = activity!!.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+
         llamada = FragmentPerfilPeluqueroBinding.inflate(layoutInflater)
         otraP = FragmentProfileBinding.inflate(layoutInflater)
     }
@@ -45,7 +56,7 @@ class PerfilPeluquero : Fragment() {
     ): View? {
         val llamada : FragmentPerfilPeluqueroBinding = FragmentPerfilPeluqueroBinding.inflate(inflater, container, false)
 
-        llamada.editTextNombrePelu.setText(LoginActivity.nombre)
+        llamada.editTextNombrePelu.setText(sharedPreferences.getString(USER_KEY, ""))
 
 
         llamada.btnMasInforPelu.setOnClickListener {
@@ -62,6 +73,7 @@ class PerfilPeluquero : Fragment() {
             val editor: SharedPreferences.Editor = preferences.edit()
             editor.putString(USER_KEY, "")
             editor.putString(PWD_KEY, "")
+            editor.putBoolean(ROL_KEY, false)
             editor.apply()
             val intent = Intent(this@PerfilPeluquero.requireContext(), LoginActivity::class.java)
             startActivity(intent)

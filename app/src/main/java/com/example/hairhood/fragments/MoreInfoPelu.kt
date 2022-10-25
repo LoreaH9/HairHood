@@ -1,18 +1,19 @@
 package com.example.hairhood.fragments
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.hairhood.R
-import com.example.hairhood.activities.LoginActivity
 import com.example.hairhood.databinding.FragmentMoreInfoPeluBinding
-import com.example.hairhood.activities.LoginActivity.Companion.nombre
 import com.example.hairhood.activities.MainActivity
-import com.example.hairhood.activities.RegisterActivity
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,8 +28,15 @@ class MoreInfoPelu : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    var PREFS_KEY :String = "com.example.hairhood.activities.getUser"
+    var USER_KEY :String = "USER_KEY"
+    var PWD_KEY :String = "PWD_KEY"
+    var ROL_KEY :String = "ROL_KEY"
+
+    lateinit var sharedPreferences: SharedPreferences
+
     var us = ""
-    val db = FirebaseFirestore.getInstance()
+    val db = Firebase.firestore
     var dni = ""
     var usuario = ""
     var verificado = false
@@ -41,6 +49,9 @@ class MoreInfoPelu : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
         nom = FragmentMoreInfoPeluBinding.inflate(layoutInflater)
+
+        sharedPreferences = activity!!.getSharedPreferences(com.example.hairhood.activities.PREFS_KEY, Context.MODE_PRIVATE);
+
     }
 
     override fun onCreateView(
@@ -50,25 +61,34 @@ class MoreInfoPelu : Fragment() {
         // Inflate the layout for this fragment
         val nom : FragmentMoreInfoPeluBinding = FragmentMoreInfoPeluBinding.inflate(inflater, container, false)
 
-        if (nombre != "" || nombre.equals(null)) {
-            us = nombre.toString()
-        } else {
-            us = RegisterActivity.nomUs.toString()
-        }
+        us = sharedPreferences.getString(USER_KEY, "")!!
 
-        db.collection("peluqueros").document(us).get().addOnSuccessListener {
-            //binding.editTextTextNombre.setText(it.get("nombre") as String?)
-            nom.editTextNombrePelu2.setText(it.get("nombre") as String?)
-            nom.editTextEmailPelu.setText(it.get("email") as String?)
-            val num = it.get("numTelefono").toString()
-            nom.editTextTfnoPelu.setText(num)
-            dni = it.get("dni").toString()
-            usuario = it.get("usuario").toString()
-            var verificadoP = it.get("verificado").toString()
-            if (verificadoP.equals("true")){
-                verificado = true
-            }
-            contraseña = it.get("contraseña").toString()
+        if (us != "") {
+
+            db.collection("peluqueros")
+                .document(us)
+                .get()
+                .addOnSuccessListener { user ->
+                    if (user != null) {
+                        Toast.makeText(requireContext(), user.data.toString(), Toast.LENGTH_SHORT).show()
+                        //binding.editTextTextNombre.setText(it.get("nombre") as String?)
+                        nom.editTextNombrePelu2.setText(user.data?.get("usuario").toString())
+                        nom.editTextEmailPelu.setText(user.data?.get("email").toString())
+                        nom.editTextTfnoPelu.setText(user.data?.get("numTelefono").toString())
+                        dni = user.data?.get("dni").toString()
+                        usuario = user.data?.get("usuario").toString()
+                        var verificadoP = user.data?.get("verificado").toString()
+
+                        if (verificadoP.equals("true")){
+                            verificado = true
+                        }
+                        contraseña = user.data?.get("contraseña").toString()
+                    } else {
+                        Toast.makeText(requireContext(), "problema", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        } else {
+            Toast.makeText(requireContext(), "No has iniciado sesion", Toast.LENGTH_SHORT).show()
         }
 
         nom.btnVolverPelu.setOnClickListener {

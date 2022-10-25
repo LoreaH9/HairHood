@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
     var PREFS_KEY = "com.example.hairhood.activities.getUser"
     var USER_KEY = "USER_KEY"
     var PWD_KEY = "PWD_KEY"
+    var ROL_KEY = "ROL_KEY"
 
     var user = ""
     var pwd = ""
@@ -163,6 +164,7 @@ class LoginActivity : AppCompatActivity() {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putString(USER_KEY, usuario)
         editor.putString(PWD_KEY, psswd)
+        editor.putBoolean(ROL_KEY, pelu!!)
         editor.apply()
         user = sharedPreferences.getString(USER_KEY, "").toString()
         pwd = sharedPreferences.getString(PWD_KEY, "").toString()

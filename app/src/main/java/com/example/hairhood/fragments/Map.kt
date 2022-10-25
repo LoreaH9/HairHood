@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.hairhood.R
 import com.example.hairhood.activities.SelectorPeluquero
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,15 +24,22 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
+
+
     private lateinit var mMap: GoogleMap
 
     private var locationPermissionGranted = false
-
-    private var uno = LatLng(43.25471423656013, -2.904199867091976)
+    var nom = ""
+    var img = ""
+    val db = FirebaseFirestore.getInstance()
+   /* private var unoF = BitmapFactory.decodeFile(img)
+    private var unoF2 =BitmapDescriptorFactory.fromBitmap(unoF)*/
+    private var unoL = LatLng(43.25471423656013, -2.904199867091976)
     private var dos = LatLng(43.258482935494406, -2.9049796343857333)
     private var tres = LatLng(43.25781971657556, -2.9024068947132546)
     private var cuatro = LatLng(43.25953948584263, -2.899894325785889)
@@ -50,7 +59,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         mapFragment.getMapAsync(this)
 
         //val locationArrayList: ArrayList<LatLng>? = null
-        locationArrayList.add(uno)
+        locationArrayList.add(unoL)
         locationArrayList.add(dos)
         locationArrayList.add(tres)
         locationArrayList.add(cuatro)
@@ -78,15 +87,23 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
+
+
+
         val intent = Intent(activity, SelectorPeluquero::class.java)
         startActivity(intent)
-        
+
+
         return false
     }
 
 
     private fun createMarker(){
+        db.collection("peluqueros").document(nom).get().addOnSuccessListener {
+            nom = it.get("usuario").toString()
+            img = it.get("foto").toString()
 
+        }
         for (i in 0 until locationArrayList.size) {
             //Marcador de los peluqueros
             val marker = MarkerOptions().position(locationArrayList[i])
@@ -113,7 +130,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         val width = 200
         //IMAGEN REDONDA
         //val bitmap = BitmapFactory.decodeResource(context!!.resources, R.mipmap.ic_prueba)
-        val bitmap = BitmapFactory.decodeResource(context!!.resources, R.drawable.prueba)
+        val bitmap = BitmapFactory.decodeFile(img)
         return Bitmap.createScaledBitmap(bitmap, width, height, false)
 
         /*val bitmap = BitmapFactory.decodeResource(context!!.resources, R.drawable.prueba)

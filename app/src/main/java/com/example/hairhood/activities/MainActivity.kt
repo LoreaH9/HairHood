@@ -1,6 +1,8 @@
 package com.example.hairhood.activities
 
 import android.Manifest
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -21,6 +23,7 @@ import com.example.hairhood.activities.LoginActivity.Companion.nombre
 var PREFS_KEY :String = "com.example.hairhood.activities.getUser"
 var USER_KEY :String = "USER_KEY"
 var PWD_KEY :String = "PWD_KEY"
+var ROL_KEY :String = "ROL_KEY"
 
 var user :String = ""
 
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var llamada: ActivityLoginBinding
+    lateinit var sharedPreferences: SharedPreferences
 
     val bundle = intent?.extras
     val dato = nombre
@@ -43,11 +47,13 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(Favorite())
 
 
+        sharedPreferences = this.getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.chat -> replaceFragment(Chat())
                 R.id.profile ->
-                    if (pelu == false) {
+                    if (!sharedPreferences.getBoolean(ROL_KEY, false)) {
                         /*val input = dato
                         val bundle = Bundle()
                         bundle.putString("nameUser", input)*/
