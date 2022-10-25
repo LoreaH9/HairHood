@@ -41,12 +41,13 @@ class AdminUserActivity : AppCompatActivity() {
         searchUserInfo(user)
 
         binding.btnRemoveClient.setOnClickListener {
-            db.collection("clientes").document(user.usuario).delete().addOnSuccessListener {Toast.makeText(this, "Usuario eliminado correctamente", Toast.LENGTH_SHORT).show() }
             val ref = storageReference.child("clientes/$usuario.jpg")
-            ref
+            ref.delete().addOnSuccessListener {Toast.makeText(this, "Foto eliminado correctamente", Toast.LENGTH_SHORT).show()}
+            db.collection("clientes").document(user.usuario)
                 .delete()
+
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Foto eliminada correctamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Usuario eliminada correctamente", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@AdminUserActivity, AdminActivity::class.java))
                     finish()
                 }
