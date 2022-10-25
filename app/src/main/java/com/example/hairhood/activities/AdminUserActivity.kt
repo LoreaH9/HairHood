@@ -27,6 +27,7 @@ class AdminUserActivity : AppCompatActivity() {
     companion object{
         const val USER_INFO = "AdminUserActivity:userInfo"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityAdminUserBinding.inflate(layoutInflater)
@@ -61,19 +62,14 @@ class AdminUserActivity : AppCompatActivity() {
         }
     }
 
-    suspend fun updateUser(){
-
-    }
     private fun showLoading() {
         binding.progressBarUser.visibility = View.VISIBLE
         binding.ScrollUsuario.visibility= View.GONE;
-
     }
 
     private fun hideLoading() {
         binding.progressBarUser.visibility = View.GONE
         binding.ScrollUsuario.visibility= View.VISIBLE;
-
     }
 
     private fun searchUserInfo(user:User){

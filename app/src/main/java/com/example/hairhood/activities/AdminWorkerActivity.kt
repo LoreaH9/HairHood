@@ -6,18 +6,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import com.example.hairhood.databinding.ActivityAdminWorkerBinding
 import com.example.hairhood.model.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class AdminWorkerActivity : AppCompatActivity() {
     private lateinit var usuario: MutableMap<String, Any>
     private lateinit var binding: ActivityAdminWorkerBinding
     private val db = Firebase.firestore
+    private lateinit var routine: CoroutineScope
 
     companion object{
         const val USER_INFO ="AdminWorkerActivity:info"
@@ -29,8 +37,8 @@ class AdminWorkerActivity : AppCompatActivity() {
         setContentView(binding.root)
         showLoading()
         val user: User =intent?.getParcelableExtra<User>(AdminWorkerActivity.USER_INFO)?:throw IllegalStateException()
-        binding.infoPelu.text="aaa"
         searchUserInfo(user)
+        binding.infoWorker.typeWrite(this, "Editar usuario: "+user.usuario , 300L)
 
         binding.btnRemoveWorker.setOnClickListener {
             db.collection("peluqueros").document(user.usuario)
@@ -55,6 +63,18 @@ class AdminWorkerActivity : AppCompatActivity() {
             db.collection("peluqueros").document(user.usuario).update(dato as Map<String, Any>)
             Toast.makeText(this,"Usuario actualizado correctamente"+ binding.verificado.isChecked.toString(),Toast.LENGTH_SHORT).show()
             startActivity(Intent(this@AdminWorkerActivity, AdminActivity::class.java))
+        }
+    }
+    fun TextView.typeWrite(lifecycleOwner: LifecycleOwner, text: String, intervalMs: Long) {
+        this@typeWrite.text = ""
+        if(::routine.isInitialized) routine.cancel()
+
+        lifecycleOwner.lifecycleScope.launch {
+            routine = this
+            repeat(text.length) {
+                delay(intervalMs)
+                this@typeWrite.text = text.take(it + 1)
+            }
         }
     }
     private fun showLoading() {
