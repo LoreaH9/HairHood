@@ -51,7 +51,7 @@ class RegisterActivity : AppCompatActivity() {
     private val PICK_IMAGE_REQUEST = 71
     private lateinit var binding: ActivityRegisterBinding
     lateinit var sharedPreferences: SharedPreferences
-    val db=FirebaseFirestore.getInstance()
+    var db=FirebaseFirestore.getInstance()
     private val File=1
     private val database = Firebase.database
     private val storage = Firebase.storage
@@ -69,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         user = sharedPreferences.getString(USER_KEY, "").toString()
 
-        val db=FirebaseFirestore.getInstance()
+         db=FirebaseFirestore.getInstance()
 
         binding.singUpUser.setOnClickListener {
             binding.singUpUser.background = resources.getDrawable(R.drawable.switch_trcks,null)

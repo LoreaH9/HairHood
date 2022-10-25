@@ -142,7 +142,7 @@ class Profile : Fragment() {
                     "dni" to nan,
                     "fechaNacimiento" to fecha,
                     "usuario" to nom,
-                    "foto" to img
+                   // "foto" to img
                 )
 
             )
