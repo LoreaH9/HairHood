@@ -146,7 +146,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.btnFotoCliente.setOnClickListener{
             subir_Archivo()
         }
-        binding.btnFotoPeluquero.setOnClickListener{
+        binding.btnTituloPeluquero.setOnClickListener{
             subir_Archivo()
         }
     }

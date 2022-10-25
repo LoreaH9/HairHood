@@ -18,7 +18,7 @@
         android:theme="@style/Theme.HairHood"
         tools:targetApi="31">
         <activity
-            android:name=".activities.pay"
+            android:name=".activities.Pay"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
