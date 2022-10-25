@@ -39,6 +39,8 @@ class AdminUserActivity : AppCompatActivity() {
 
         binding.btnRemoveClient.setOnClickListener {
             db.collection("clientes").document(user.usuario)
+            /*val ref = storageReference.child("clientes/${binding.$user}.jpg")
+            ref*/
                 .delete()
                 .addOnSuccessListener {
                     Toast.makeText(this, "Usuario eliminado correctamente", Toast.LENGTH_SHORT).show()
