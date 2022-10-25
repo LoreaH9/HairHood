@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.*
 
 class AdminUserActivity : AppCompatActivity() {
@@ -23,6 +24,8 @@ class AdminUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAdminUserBinding
     private val db = Firebase.firestore
     private lateinit var routine: CoroutineScope
+    private val storage = Firebase.storage
+    private var storageReference = storage.reference
 
     companion object{
         const val USER_INFO = "AdminUserActivity:userInfo"
@@ -38,12 +41,12 @@ class AdminUserActivity : AppCompatActivity() {
         searchUserInfo(user)
 
         binding.btnRemoveClient.setOnClickListener {
-            db.collection("clientes").document(user.usuario)
-            /*val ref = storageReference.child("clientes/${binding.$user}.jpg")
-            ref*/
+            db.collection("clientes").document(user.usuario).delete().addOnSuccessListener {Toast.makeText(this, "Usuario eliminado correctamente", Toast.LENGTH_SHORT).show() }
+            val ref = storageReference.child("clientes/$usuario.jpg")
+            ref
                 .delete()
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Usuario eliminado correctamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Foto eliminada correctamente", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@AdminUserActivity, AdminActivity::class.java))
                     finish()
                 }
