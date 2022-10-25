@@ -31,11 +31,34 @@ private lateinit var llamada : FragmentPerfilPeluqueroBinding
 private lateinit var otraP : FragmentProfileBinding
 
 class PerfilPeluquero : Fragment() {
+
+    companion object {
+
+        var usuPelu = ""
+
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment PerfilPeluquero.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            PerfilPeluquero().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     lateinit var sharedPreferences: SharedPreferences
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +86,7 @@ class PerfilPeluquero : Fragment() {
             val fragmentManager = childFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.layoutPelu, MoreInfoPelu())
+            usuPelu = llamada.editTextNombrePelu.text.toString()
             fragmentTransaction.commit()
             llamada.card.visibility = View.GONE
         }
@@ -80,25 +104,5 @@ class PerfilPeluquero : Fragment() {
         }
 
         return llamada.root
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PerfilPeluquero.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PerfilPeluquero().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

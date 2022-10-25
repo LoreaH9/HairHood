@@ -1,6 +1,7 @@
 package com.example.hairhood.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,7 +17,13 @@ import com.example.hairhood.databinding.FragmentProfileBinding
 import com.example.hairhood.activities.LoginActivity.Companion.contra
 import com.google.firebase.firestore.FirebaseFirestore
 import com.example.hairhood.activities.LoginActivity.Companion.nombre
+import com.example.hairhood.activities.MainActivity
 import com.example.hairhood.activities.MainActivity.Companion.prfPelu
+import com.example.hairhood.fragments.Profile.Companion.desdeCliente
+import com.example.hairhood.fragments.MoreInfoPelu.Companion.desdePelu
+import com.example.hairhood.fragments.Profile.Companion.usuario
+import com.example.hairhood.fragments.PerfilPeluquero.Companion.usuPelu
+import java.security.MessageDigest
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,17 +61,47 @@ class ChangePwd : Fragment() {
         val binding : FragmentChangePwdBinding = FragmentChangePwdBinding.inflate(inflater, container, false)
         // FragmentProfileBinding.inflate(inflater, container, false)
 
-        /*if (sharedPreferences.getString(USER_KEY, "").toString() != "") {
+        var pasahitza = ""
+        var nombre = ""
+        var direccion = ""
+        var dni = ""
+        var email = ""
+        var fecha = ""
+        var foto = ""
+        var tfno = 0
+        var verificado = false
 
-            nom = sharedPreferences.getString(USER_KEY, "").toString()
+        if (desdeCliente) {
 
-            db.collection("clientes").document(nom).get().addOnSuccessListener {
-
+            db.collection("clientes").document(usuario).get().addOnSuccessListener {
+                pasahitza = it.get("contraseña").toString()
+                nombre = it.get("nombre").toString()
+                direccion = it.get("direccion").toString()
+                dni = it.get("dni").toString()
+                email = it.get("email").toString()
+                fecha = it.get("fechaNacimiento").toString()
+                foto = it.get("foto").toString()
+                val numTelf = it.get("numTelefono").toString()
+                tfno = numTelf.toInt()
             }
 
         } else {
-            Toast.makeText(requireActivity().baseContext, "No has iniciado sesion", Toast.LENGTH_SHORT).show()
-        }*/
+            if (desdePelu){
+
+                db.collection("peluqueros").document(usuPelu).get().addOnSuccessListener {
+                    pasahitza = it.get("contraseña").toString()
+                    nombre = it.get("nombre").toString()
+                    dni = it.get("dni").toString()
+                    email = it.get("email").toString()
+                    foto = it.get("foto").toString()
+                    val numTelf = it.get("numTelefono").toString()
+                    tfno = numTelf.toInt()
+                    val verified = it.get("verificado").toString()
+                    verificado = verified.toBoolean()
+                }
+
+            }
+        }
 
         binding.btnVolverContra.setOnClickListener {
 
@@ -97,6 +134,72 @@ class ChangePwd : Fragment() {
 
         }
 
+        binding.btnGuardarContra.setOnClickListener {
+
+            var contraActual = hashPassword(binding.editTextContraActual.text.toString())
+            var nuevaContra = binding.editTextContraNueva.text.toString()
+            var repiteNuevaContra = binding.editTextRepiteContra.text.toString()
+
+            if (desdeCliente) {
+                if (contraActual.equals(pasahitza)) {
+                    if (nuevaContra.equals(repiteNuevaContra)) {
+                        var nuevaContraseña = hashPassword(nuevaContra)
+                        db.collection("clientes").document(usuario).set(
+                            hashMapOf(
+                                "contraseña" to nuevaContraseña,
+                                "direccion" to direccion,
+                                "dni" to dni,
+                                "email" to email,
+                                "fechaNacimiento" to fecha,
+                                "foto" to foto,
+                                "nombre" to nombre,
+                                "numTelefono" to tfno,
+                                "usuario" to usuario
+                            )
+                        )
+                        binding.cardViewContra.visibility = View.GONE
+                        val intent = Intent(this@ChangePwd.requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+
+                    } else {
+                        binding.editTextContraNueva.error = getString(R.string.passwordsMustCoincide)
+                        binding.editTextRepiteContra.error = getString(R.string.passwordsMustCoincide)
+                    }
+                } else {
+                    binding.editTextContraActual.error = getString(R.string.wrongPassword)
+                }
+            } else {
+                if (desdePelu) {
+                    if (contraActual.equals(pasahitza)) {
+                        if (nuevaContra.equals(repiteNuevaContra)) {
+                            var nuevaContraseña = hashPassword(nuevaContra)
+                            db.collection("peluqueros").document(usuPelu).set(
+                                hashMapOf(
+                                    "contraseña" to nuevaContraseña,
+                                    "dni" to dni,
+                                    "email" to email,
+                                    "foto" to foto,
+                                    "nombre" to nombre,
+                                    "numTelefono" to tfno,
+                                    "verificado" to verificado,
+                                    "usuario" to usuPelu
+                                )
+                            )
+                            binding.cardViewContra.visibility = View.GONE
+                            val intent = Intent(this@ChangePwd.requireContext(), MainActivity::class.java)
+                            startActivity(intent)
+
+                        } else {
+                            binding.editTextContraNueva.error = getString(R.string.passwordsMustCoincide)
+                            binding.editTextRepiteContra.error = getString(R.string.passwordsMustCoincide)
+                        }
+                    } else {
+                        binding.editTextContraActual.error = getString(R.string.wrongPassword)
+                    }
+                }
+            }
+        }
+
         return binding.root
         //return inflater.inflate(R.layout.fragment_change_pwd, container, false)
     }
@@ -120,4 +223,15 @@ class ChangePwd : Fragment() {
                 }
             }
     }*/
+
+    private fun hashPassword(psswd: String): String {
+        val digest = MessageDigest.getInstance("SHA-1")
+        val result = digest.digest(psswd.toByteArray(Charsets.UTF_8))
+        val sb = StringBuilder()
+        for (b in result) {sb.append(String.format("%02X", b))}
+        return sb.toString()
+    }
+
+
+
 }

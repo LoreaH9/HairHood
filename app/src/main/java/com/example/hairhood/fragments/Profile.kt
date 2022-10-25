@@ -30,6 +30,11 @@ import java.net.URL
 
 class Profile : Fragment() {
 
+    companion object {
+        var desdeCliente : Boolean = false
+        var usuario : String = ""
+    }
+
     lateinit var sharedPreferences: SharedPreferences
     val db = FirebaseFirestore.getInstance()
 
@@ -111,6 +116,9 @@ class Profile : Fragment() {
             binding.txtCorreo.visibility = View.GONE
             binding.txtTfno.visibility = View.GONE
             binding.cardViewProfile.visibility = View.GONE
+
+            desdeCliente = true
+            usuario = binding.txtUsuario.text.toString()
 
             fragmentTransaction.commit()
         }

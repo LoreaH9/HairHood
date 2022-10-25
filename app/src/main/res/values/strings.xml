@@ -41,6 +41,8 @@
     <string name="emailError">Agrega un correo electrónico correcto</string>
     <string name="tfnoError">El teléfono debe tener 9 números</string>
     <string name="fields">Rellena los campos correctamente</string>
+    <string name="passwordsMustCoincide">Las contraseñas deben coincidir</string>
+    <string name="wrongPassword">Contraseña incorrecta</string>
 
     <!-- PAY ACTIVITY -->
     <string name="titulo">METODO DE PAGO</string>
