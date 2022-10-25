@@ -24,19 +24,35 @@
             android:layout_width="match_parent"
             android:layout_height="603dp">
 
-            <EditText
+            <TextView
+                android:id="@+id/txtRepiteContra"
+                android:layout_width="276dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="@string/newPasswordRepeat"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextContraNueva"
+                app:layout_constraintVertical_bias="0.1"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
                 android:id="@+id/txtContraActual"
                 android:layout_width="276dp"
-                android:layout_height="47dp"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="@string/oldPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.213"
+                app:layout_constraintHorizontal_bias="0.44"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.027"
+                app:layout_constraintVertical_bias="0.1"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
@@ -47,25 +63,26 @@
                 android:inputType="textPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.41"
+                app:layout_constraintHorizontal_bias="0.458"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtContraActual"
                 app:layout_constraintVertical_bias="0.0"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-            <EditText
+            <TextView
                 android:id="@+id/txtContraNueva"
                 android:layout_width="276dp"
-                android:layout_height="47dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="@string/newPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.213"
+                app:layout_constraintHorizontal_bias="0.44"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextContraActual"
-                app:layout_constraintVertical_bias="0.042"
+                app:layout_constraintVertical_bias="0.046"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
@@ -76,37 +93,22 @@
                 android:inputType="textPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.41"
+                app:layout_constraintHorizontal_bias="0.458"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtContraNueva"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_bias="0.002"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-            <EditText
-                android:id="@+id/txtRepiteContra"
-                android:layout_width="276dp"
-                android:layout_height="47dp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/newPasswordRepeat"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.213"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextContraNueva"
-                app:layout_constraintVertical_bias="0.053"
-                tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
                 android:id="@+id/editTextRepiteContra"
                 android:layout_width="279dp"
                 android:layout_height="46dp"
-                android:layout_marginBottom="272dp"
+                android:layout_marginBottom="196dp"
                 android:ems="10"
                 android:inputType="textPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.41"
+                app:layout_constraintHorizontal_bias="0.416"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -120,7 +122,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextRepiteContra"
-                app:layout_constraintVertical_bias="0.666"
+                app:layout_constraintVertical_bias="0.455"
                 app:shapeAppearanceOverlay="@style/Button5" />
 
             <Button
