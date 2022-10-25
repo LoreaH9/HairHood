@@ -9,6 +9,7 @@
     tools:context=".fragments.ChangePwd">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewContra"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="30dp"

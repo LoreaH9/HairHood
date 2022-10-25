@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -125,30 +126,89 @@ class Profile : Fragment() {
             startActivity(intent)
         }
 
-        binding.btnGuardar.setOnClickListener {
-            val nomb : String = binding.editTextTextNombre.text.toString()
-            val email : String = binding.editTextTextCorreo.text.toString()
-            val tfno : String = binding.editTextTfno.text.toString()
-            val num : Int = tfno.toInt()
-            val direccion : String = binding.editTextDireccion.text.toString()
+        var errores = false
 
-            db.collection("clientes").document(nom).set(
-                hashMapOf(
-                    "nombre" to nomb,
-                    "email" to email,
-                    "numTelefono" to num,
-                    "direccion" to direccion,
-                    "contraseña" to contraseina,
-                    "dni" to nan,
-                    "fechaNacimiento" to fecha,
-                    "usuario" to nom,
-                   // "foto" to img
+        binding.editTextTextNombre.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                val nombreText = binding.editTextTextNombre.text.toString()
+                errores = true
+            } else {
+                errores = false
+            }
+        }
+
+        binding.editTextTextCorreo.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                val emailText = binding.editTextTextCorreo.text.toString()
+                if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+                    //binding.errorCorreo.visibility = View.VISIBLE
+                    binding.editTextTextCorreo.error = getString(R.string.emailError)
+                    errores = true
+                } else {
+                    errores = false
+                }
+            }
+        }
+
+        binding.editTextTfno.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                val tfnoText = binding.editTextTfno.text.toString()
+                if (tfnoText.length != 9) {
+                    binding.editTextTfno.error = getString(R.string.tfnoError)
+                    errores = true
+                } else {
+                    errores = false
+                }
+            }
+        }
+
+        binding.btnGuardar.setOnClickListener {
+
+            val emailText = binding.editTextTextCorreo.text.toString()
+            if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+                //binding.errorCorreo.visibility = View.VISIBLE
+                binding.editTextTextCorreo.error = getString(R.string.emailError)
+                errores = true
+            } else {
+                errores = false
+            }
+
+            val tfnoText = binding.editTextTfno.text.toString()
+            if (tfnoText.length != 9) {
+                binding.editTextTfno.error = getString(R.string.tfnoError)
+                errores = true
+            } else {
+                errores = false
+            }
+
+            if (!errores) {
+                val nomb : String = binding.editTextTextNombre.text.toString()
+                val email : String = binding.editTextTextCorreo.text.toString()
+                val tfno : String = binding.editTextTfno.text.toString()
+                val num : Int = tfno.toInt()
+                val direccion : String = binding.editTextDireccion.text.toString()
+
+                db.collection("clientes").document(nom).set(
+                    hashMapOf(
+                        "nombre" to nomb,
+                        "email" to email,
+                        "numTelefono" to num,
+                        "direccion" to direccion,
+                        "contraseña" to contraseina,
+                        "dni" to nan,
+                        "fechaNacimiento" to fecha,
+                        "usuario" to nom,
+                        "foto" to img
+                    )
+
                 )
 
-            )
+                val intent = Intent(this@Profile.requireContext(), MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(requireActivity().baseContext, getString(R.string.fields), Toast.LENGTH_SHORT).show()
+            }
 
-            val intent = Intent(this@Profile.requireContext(), MainActivity::class.java)
-            startActivity(intent)
         }
 
         //set variables in Binding

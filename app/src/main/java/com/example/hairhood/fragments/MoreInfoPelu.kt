@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -50,7 +51,7 @@ class MoreInfoPelu : Fragment() {
         }
         nom = FragmentMoreInfoPeluBinding.inflate(layoutInflater)
 
-        sharedPreferences = activity!!.getSharedPreferences(com.example.hairhood.activities.PREFS_KEY, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(com.example.hairhood.activities.PREFS_KEY, Context.MODE_PRIVATE);
 
     }
 
@@ -70,9 +71,9 @@ class MoreInfoPelu : Fragment() {
                 .get()
                 .addOnSuccessListener { user ->
                     if (user != null) {
-                        Toast.makeText(requireContext(), user.data.toString(), Toast.LENGTH_SHORT).show()
+                        //Toast.makeText(requireContext(), user.data.toString(), Toast.LENGTH_SHORT).show()
                         //binding.editTextTextNombre.setText(it.get("nombre") as String?)
-                        nom.editTextNombrePelu2.setText(user.data?.get("usuario").toString())
+                        nom.editTextNombrePelu2.setText(user.data?.get("nombre").toString())
                         nom.editTextEmailPelu.setText(user.data?.get("email").toString())
                         nom.editTextTfnoPelu.setText(user.data?.get("numTelefono").toString())
                         dni = user.data?.get("dni").toString()
@@ -107,25 +108,75 @@ class MoreInfoPelu : Fragment() {
             nom.card.visibility = View.GONE
         }
 
+        var errores = false
+
+        nom.editTextEmailPelu.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                val emailText = nom.editTextEmailPelu.text.toString()
+                if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+                    //binding.errorCorreo.visibility = View.VISIBLE
+                    nom.editTextEmailPelu.error = getString(R.string.emailError)
+                    errores = true
+                } else {
+                    errores = false
+                }
+            }
+        }
+
+        nom.editTextTfnoPelu.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                val tfnoText = nom.editTextTfnoPelu.text.toString()
+                if (tfnoText.length != 9) {
+                    nom.editTextTfnoPelu.error = getString(R.string.tfnoError)
+                    errores = true
+                } else {
+                    errores = false
+                }
+            }
+        }
+
         nom.btnGuardarPelu.setOnClickListener {
-            var nombrePelu = nom.editTextNombrePelu2.text.toString()
-            var emailPelu = nom.editTextEmailPelu.text.toString()
-            var tfnoPelu = nom.editTextTfnoPelu.text.toString()
 
-            db.collection("peluqueros").document(us).set(
-                hashMapOf(
-                    "contraseña" to contraseña,
-                    "dni" to dni,
-                    "email" to emailPelu,
-                    "nombre" to nombrePelu,
-                    "numTelefono" to tfnoPelu.toInt(),
-                    "usuario" to us,
-                    "verificado" to verificado
+            val emailText = nom.editTextEmailPelu.text.toString()
+            if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+                //binding.errorCorreo.visibility = View.VISIBLE
+                nom.editTextEmailPelu.error = getString(R.string.emailError)
+                errores = true
+            } else {
+                errores = false
+            }
+
+            val tfnoText = nom.editTextTfnoPelu.text.toString()
+            if (tfnoText.length != 9) {
+                nom.editTextTfnoPelu.error = getString(R.string.tfnoError)
+                errores = true
+            } else {
+                errores = false
+            }
+
+            if (!errores) {
+                var nombrePelu = nom.editTextNombrePelu2.text.toString()
+                var emailPelu = nom.editTextEmailPelu.text.toString()
+                var tfnoPelu = nom.editTextTfnoPelu.text.toString()
+
+                db.collection("peluqueros").document(us).set(
+                    hashMapOf(
+                        "contraseña" to contraseña,
+                        "dni" to dni,
+                        "email" to emailPelu,
+                        "nombre" to nombrePelu,
+                        "numTelefono" to tfnoPelu.toInt(),
+                        "usuario" to us,
+                        "verificado" to verificado
+                    )
                 )
-            )
 
-            val intent = Intent(this@MoreInfoPelu.requireContext(), MainActivity::class.java)
-            startActivity(intent)
+                val intent = Intent(this@MoreInfoPelu.requireContext(), MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(requireActivity().baseContext, getString(R.string.fields), Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         return nom.root

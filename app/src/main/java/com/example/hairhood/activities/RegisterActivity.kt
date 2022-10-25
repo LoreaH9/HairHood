@@ -120,7 +120,6 @@ class RegisterActivity : AppCompatActivity() {
         binding.singInPelu.setOnClickListener {
             uploadImagePelu()
 
-
             if (TextUtils.isEmpty(binding.usuarioPeluquero.text.toString()) ||
                 TextUtils.isEmpty(binding.passPeluquero.text.toString()) ||
                 TextUtils.isEmpty(binding.emailPeluquero.text.toString()) ||
@@ -288,7 +287,7 @@ class RegisterActivity : AppCompatActivity() {
             .document(binding.usuarioCliente.text.toString())
             .set(datoC)
             .addOnSuccessListener {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
             }
             .addOnFailureListener {
                 Toast.makeText(this,"Error al crear el usuario",Toast.LENGTH_SHORT).show()
@@ -319,7 +318,7 @@ class RegisterActivity : AppCompatActivity() {
             .document(binding.usuarioPeluquero.text.toString())
             .set(datoP)
             .addOnSuccessListener { resultado ->
-                val intentLogin = Intent(this, MainActivity::class.java)
+                val intentLogin = Intent(this, LoginActivity::class.java)
                 startActivity(intentLogin)
             }
             .addOnFailureListener { Exception ->
