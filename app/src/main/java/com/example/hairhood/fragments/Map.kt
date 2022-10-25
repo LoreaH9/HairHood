@@ -4,8 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import com.example.hairhood.R
 import com.example.hairhood.activities.SelectorPeluquero
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,22 +22,13 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
-
-
     private lateinit var mMap: GoogleMap
-
     private var locationPermissionGranted = false
-    var nom = ""
-    var img = ""
-    val db = FirebaseFirestore.getInstance()
-   /* private var unoF = BitmapFactory.decodeFile(img)
-    private var unoF2 =BitmapDescriptorFactory.fromBitmap(unoF)*/
-    private var unoL = LatLng(43.25471423656013, -2.904199867091976)
+    private var uno = LatLng(43.25471423656013, -2.904199867091976)
     private var dos = LatLng(43.258482935494406, -2.9049796343857333)
     private var tres = LatLng(43.25781971657556, -2.9024068947132546)
     private var cuatro = LatLng(43.25953948584263, -2.899894325785889)
@@ -59,7 +48,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         mapFragment.getMapAsync(this)
 
         //val locationArrayList: ArrayList<LatLng>? = null
-        locationArrayList.add(unoL)
+        locationArrayList.add(uno)
         locationArrayList.add(dos)
         locationArrayList.add(tres)
         locationArrayList.add(cuatro)
@@ -87,60 +76,70 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-
-
-
         val intent = Intent(activity, SelectorPeluquero::class.java)
         startActivity(intent)
-
 
         return false
     }
 
 
     private fun createMarker(){
-        db.collection("peluqueros").document(nom).get().addOnSuccessListener {
-            nom = it.get("usuario").toString()
-            img = it.get("foto").toString()
+        var height = 200
+        val width = 200
 
-        }
+        val pel1 = resources.getDrawable(R.drawable.corte1) as BitmapDrawable
+        val p1 = pel1.bitmap
+        val marker1 = Bitmap.createScaledBitmap(p1, width, height, false)
+
+        val pel2 = resources.getDrawable(R.drawable.corte2) as BitmapDrawable
+        val p2 = pel2.bitmap
+        val marker2 = Bitmap.createScaledBitmap(p2, width, height, false)
+
+        val pel3 = resources.getDrawable(R.drawable.corte3) as BitmapDrawable
+        val p3 = pel3.bitmap
+        val marker3 = Bitmap.createScaledBitmap(p3, width, height, false)
+
+        val pel4= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val p4 = pel4.bitmap
+        val marker4 = Bitmap.createScaledBitmap(p4, width, height, false)
+
+
+        var MUno = MarkerOptions()
+            .position(uno)
+            .icon(BitmapDescriptorFactory
+                .fromBitmap(marker1)
+            )
+
+        var MDos = MarkerOptions()
+            .position(dos)
+            .icon(BitmapDescriptorFactory
+                .fromBitmap(marker2)
+
+            )
+
+        var MTres = MarkerOptions()
+            .position(tres)
+            .icon(BitmapDescriptorFactory
+                .fromBitmap(marker3)
+            )
+
+        var MCuatro = MarkerOptions()
+            .position(cuatro)
+            .icon(BitmapDescriptorFactory
+                .fromBitmap(marker4)
+            )
+
         for (i in 0 until locationArrayList.size) {
             //Marcador de los peluqueros
-            val marker = MarkerOptions().position(locationArrayList[i])
-            mMap.addMarker(marker
-                .icon(BitmapDescriptorFactory.fromBitmap(icono()))
-            )
+            //val marker = MarkerOptions().position(locationArrayList[i])
+            mMap.addMarker(MUno)
+            mMap.addMarker(MDos)
+            mMap.addMarker(MTres)
+            mMap.addMarker(MCuatro)
+
         }
-
-//        //Marcador tu posicion
-//        val coordenadas = LatLng(43.258859663296036, -2.897823693297347)
-//        mMap.addMarker(MarkerOptions().position(coordenadas).title("HEMEN ZAUDE"))
-//
-//        //Animacion de camara, enfoca a tu localizacion
-//        mMap.animateCamera(
-//            CameraUpdateFactory.newLatLngZoom(coordenadas, 18f),
-//            4000,
-//            null
-//        )
-
     }
 
-    private fun icono(): Bitmap {
-        val height = 200
-        val width = 200
-        //IMAGEN REDONDA
-        //val bitmap = BitmapFactory.decodeResource(context!!.resources, R.mipmap.ic_prueba)
-        val bitmap = BitmapFactory.decodeFile(img)
-        return Bitmap.createScaledBitmap(bitmap, width, height, false)
-
-        /*val bitmap = BitmapFactory.decodeResource(context!!.resources, R.drawable.prueba)
-        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(
-            resources, bitmap)
-        val roundPx = bitmap.width.toFloat() * 0.06f
-        roundedBitmapDrawable.cornerRadius = roundPx
-        return bitmap*/
-
-    }
 
     private fun getLocationPermission() {
 
@@ -154,6 +153,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         }
     }
 }
+
 
 
 
