@@ -39,5 +39,16 @@
     <string name="titulation">Titulación</string>
     <string name="specialty">Especialidades</string>
 
+    <!-- PAY ACTIVITY -->
+    <string name="titulo">METODO DE PAGO</string>
+    <string name="numero">Nº Tarjeta</string>
+    <string name="caducidad">Caducidad</string>
+    <string name="mes">mm</string>
+    <string name="ano">aa</string>
+    <string name="pagar">PAGAR</string>
+
+
+    <!-- PAY ACTIVITY -->
+    <string name="vacio">Por favor rellene todos los campos</string>
 </resources>
 

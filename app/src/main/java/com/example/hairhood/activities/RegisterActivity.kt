@@ -129,7 +129,7 @@ class RegisterActivity : AppCompatActivity() {
                 TextUtils.isEmpty(binding.numTlfPeluquero.text.toString()) ||
                 TextUtils.isEmpty(binding.fechaPeluquero.text.toString())
             ) {
-                Toast.makeText(this,"Por favor rellene todos los campos",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"@String/vacio",Toast.LENGTH_SHORT).show();
             } else {
                 val passPeluquero: String =binding.passPeluquero.getText().toString()
                 val confirmPassPeluquero: String =binding.passConfirmPeluquero.getText().toString()

@@ -40,4 +40,15 @@
     <string name="newPasswordRepeat">Pasahitz berria errepikatu</string>
     <string name="titulation">Titulazioa</string>
     <string name="specialty">Espezialitateak</string>
+
+    <!-- PAY ACTIVITY -->
+    <string name="titulo">ORDAINTZEKO MODUA</string>
+    <string name="numero">Txartela Znb</string>
+    <string name="caducidad">Iraungipen</string>
+    <string name="mes">hh</string>
+    <string name="ano">uu</string>
+    <string name="pagar">ORDAINDU</string>
+
+    <!-- PAY ACTIVITY -->
+    <string name="vacio">Mesedez, bete eremu guztiak</string>
 </resources>

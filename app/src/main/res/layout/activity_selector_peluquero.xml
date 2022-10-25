@@ -40,10 +40,10 @@
                 android:layout_gravity="right"
                 android:backgroundTint="@color/transparentColor"
                 android:scaleType="fitCenter"
-                android:tint="#FF0000"
                 android:visibility="gone"
                 app:srcCompat="@drawable/ic_favorite"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                app:tint="#FF0000" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
