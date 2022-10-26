@@ -81,8 +81,8 @@ class Profile : Fragment() {
                 contraseina = it.get("contraseña").toString()
                 img = it.get("foto").toString()
                 Glide.with(this)
-                .load(img)
-                .into(binding.imgPerfil)
+                    .load(img)
+                    .into(binding.imgPerfil)
             }
         } else {
             Toast.makeText(requireActivity().baseContext, "No has iniciado sesion", Toast.LENGTH_SHORT).show()
@@ -129,14 +129,14 @@ class Profile : Fragment() {
 
         var errores = false
 
-        binding.editTextTextNombre.setOnFocusChangeListener { _, focused ->
+        /*binding.editTextTextNombre.setOnFocusChangeListener { _, focused ->
             if (!focused) {
                 val nombreText = binding.editTextTextNombre.text.toString()
                 errores = true
             } else {
                 errores = false
             }
-        }
+        }*/
 
         binding.editTextTextCorreo.setOnFocusChangeListener { _, focused ->
             if (!focused) {

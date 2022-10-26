@@ -7,18 +7,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toFile
 import androidx.lifecycle.lifecycleScope
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityRegisterBinding
@@ -28,19 +23,12 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.IOException
-import java.net.URL
 import java.security.MessageDigest
-import java.util.*
-import java.util.logging.Logger
 
 
 @Suppress("DEPRECATION")
@@ -48,7 +36,8 @@ class RegisterActivity : AppCompatActivity() {
     private var filePath: Uri? = null
     var imageURL = ""
     private var firebaseStore: FirebaseStorage? = null
-    private val PICK_IMAGE_REQUEST = 71
+    private val PICK_IMAGE_CLIENTE = 71
+    private val PICK_IMAGE_PELUQUERO = 72
     private lateinit var binding: ActivityRegisterBinding
     lateinit var sharedPreferences: SharedPreferences
     var db=FirebaseFirestore.getInstance()
@@ -61,6 +50,7 @@ class RegisterActivity : AppCompatActivity() {
     companion object {
         var nomUs : String? = ""
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +80,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     binding.singInCliente.setOnClickListener {
-        uploadImageCliente()
 
         if (TextUtils.isEmpty(binding.usuarioCliente.text.toString()) ||
             TextUtils.isEmpty(binding.passCliente.text.toString()) ||
@@ -99,7 +88,8 @@ class RegisterActivity : AppCompatActivity() {
             TextUtils.isEmpty(binding.dniCliente.text.toString()) ||
             TextUtils.isEmpty(binding.numTlfCliente.text.toString()) ||
             TextUtils.isEmpty(binding.direccionCliente.text.toString())||
-            TextUtils.isEmpty(binding.fechaCliente.text.toString())
+            TextUtils.isEmpty(binding.fechaCliente.text.toString()) ||
+                    imageURL == ""
         ) {
             Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT).show();
         }else{
@@ -118,7 +108,6 @@ class RegisterActivity : AppCompatActivity() {
 
     }
     binding.singInPelu.setOnClickListener {
-        uploadImagePelu()
 
 
         if (TextUtils.isEmpty(binding.usuarioPeluquero.text.toString()) ||
@@ -127,7 +116,9 @@ class RegisterActivity : AppCompatActivity() {
             TextUtils.isEmpty(binding.nombrePeluquero.text.toString()) ||
             TextUtils.isEmpty(binding.dniPeluquero.text.toString()) ||
             TextUtils.isEmpty(binding.numTlfPeluquero.text.toString()) ||
-            TextUtils.isEmpty(binding.fechaPeluquero.text.toString())
+            TextUtils.isEmpty(binding.fechaPeluquero.text.toString()) ||
+            imageURL == ""
+
         ) {
             Toast.makeText(this,R.string.vacio,Toast.LENGTH_SHORT).show();
         } else {
@@ -143,16 +134,14 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnFotoPeluquero.setOnClickListener{
-            subir_Archivo()
-        }
+
     }
 
     binding.btnFotoCliente.setOnClickListener{
-        subir_Archivo()
+        subir_Archivo_Cliente()
     }
     binding.btnFotoPeluquero.setOnClickListener{
-        subir_Archivo()
+        subir_Archivo_Peluquero()
     }
 }
 
@@ -162,19 +151,30 @@ private suspend fun verifyUser(userName: String, s: String, pass: String) {
 
     if (existeCli.isEmpty && existeUsu.isEmpty) {
         if(s=="c"){guardarDatosCliente(db)}else{guardarDatosPeluquero(db)}
-        saveChanges(binding.usuarioCliente.toString(),pass)
-        startActivity(Intent(this, LoginActivity::class.java))
+       // saveChanges(binding.usuarioCliente.toString(),pass)
+        // startActivity(Intent(this, LoginActivity::class.java))
     }
 
 }
 
 
-fun subir_Archivo(){
-    val intent=Intent(Intent.ACTION_GET_CONTENT)
-    intent.type="image/*"
-    intent.action=Intent.ACTION_GET_CONTENT
-    startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_REQUEST)
-}
+    fun subir_Archivo_Cliente(){
+        var intent=Intent(Intent.ACTION_GET_CONTENT)
+        intent.type="image/*"
+        intent.action=Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_CLIENTE)
+
+
+    }
+
+    fun subir_Archivo_Peluquero(){
+        var intent=Intent(Intent.ACTION_GET_CONTENT)
+        intent.type="image/*"
+        intent.action=Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent,"Select Picture"),PICK_IMAGE_PELUQUERO)
+
+
+    }
 
 
 private fun uploadImageCliente(){
@@ -182,6 +182,7 @@ private fun uploadImageCliente(){
         val ref = storageReference.child("clientes/${binding.usuarioCliente.text}.jpg")
         ref.downloadUrl.addOnSuccessListener { Uri->
             imageURL = Uri.toString()
+            Log.i("Firebase", "URL: $imageURL")
         }
         val uploadTask = ref.putFile(filePath!!)
         val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
@@ -190,13 +191,17 @@ private fun uploadImageCliente(){
                     throw it
                 }
             }
-            Toast.makeText(this, "Foto subida", Toast.LENGTH_SHORT).show()
+
+            Log.i("Firebase", "PATH: $filePath")
+
 
             return@Continuation ref.downloadUrl
         }).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val downloadUri = task.result
                 addUploadRecordToDb(downloadUri.toString())
+                Log.i("Firebase", "EZDAKIT: " +downloadUri.toString())
+                imageURL = downloadUri.toString()
             }
         }
 
@@ -208,6 +213,9 @@ private fun uploadImageCliente(){
 private fun uploadImagePelu(){
     if(filePath != null){
         val ref = storageReference.child("peluqueros/${binding.usuarioPeluquero.text}.jpg")
+        ref.downloadUrl.addOnSuccessListener { Uri->
+            imageURL = Uri.toString()
+        }
         val uploadTask = ref.putFile(filePath!!)
         val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
             if (!task.isSuccessful) {
@@ -250,14 +258,26 @@ private fun addUploadRecordToDb(uri: String){
 
 override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     super.onActivityResult(requestCode, resultCode, data)
-    if(requestCode == PICK_IMAGE_REQUEST && resultCode== Activity.RESULT_OK){
+    if(requestCode == PICK_IMAGE_CLIENTE && resultCode== Activity.RESULT_OK){
         if (data==null|| data.data==null){
             return
         }
         filePath = data.data
 
+        uploadImageCliente()
 
     }
+    if(requestCode == PICK_IMAGE_PELUQUERO && resultCode== Activity.RESULT_OK){
+        if (data==null|| data.data==null){
+            return
+        }
+        filePath = data.data
+        uploadImagePelu()
+
+    }
+    Log.i("SUBIRARCHIVO", "FOTOSEL: " + filePath.toString())
+
+
 }
 
 
@@ -278,7 +298,9 @@ private fun guardarDatosCliente(db: FirebaseFirestore) {
         .document(binding.usuarioCliente.text.toString())
         .set(datoC)
         .addOnSuccessListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            //startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
+
         }
         .addOnFailureListener {
             Toast.makeText(this,"Error al crear el usuario",Toast.LENGTH_SHORT).show()
@@ -308,9 +330,9 @@ private fun guardarDatosPeluquero(db: FirebaseFirestore) {
     db.collection("peluqueros")
         .document(binding.usuarioPeluquero.text.toString())
         .set(datoP)
-        .addOnSuccessListener { resultado ->
-            val intentLogin = Intent(this, MainActivity::class.java)
-            startActivity(intentLogin)
+        .addOnSuccessListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+
         }
         .addOnFailureListener { Exception ->
             Toast.makeText(
@@ -321,12 +343,12 @@ private fun guardarDatosPeluquero(db: FirebaseFirestore) {
         }
 }
 
-private fun saveChanges(user: String, PassCliente: String) {
+/*private fun saveChanges(user: String, PassCliente: String) {
     val psswd = hashPassword(PassCliente)
     val editor: SharedPreferences.Editor = sharedPreferences.edit()
     editor.putString(USER_KEY, user)
     editor.putString(PWD_KEY, psswd)
     editor.apply()
 
-}
+}*/
 }
