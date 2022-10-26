@@ -5,16 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityPayBinding
-import com.example.hairhood.databinding.ActivityReservarPeluqueroBinding
-import com.example.hairhood.fragments.Chat
-import com.example.hairhood.fragments.Favorite
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class pay : AppCompatActivity() {
+class Pay : AppCompatActivity() {
     private lateinit var binding: ActivityPayBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

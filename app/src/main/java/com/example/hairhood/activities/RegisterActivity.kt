@@ -142,6 +142,10 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.btnFotoPeluquero.setOnClickListener{
+            subir_Archivo()
+        }
     }
 
     binding.btnFotoCliente.setOnClickListener{

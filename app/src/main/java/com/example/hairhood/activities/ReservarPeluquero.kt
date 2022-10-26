@@ -14,7 +14,7 @@ class ReservarPeluquero : AppCompatActivity() {
 
         binding.erreserba.setOnClickListener(){
             //En caso de pulsar el  boton de + infor  nos redirige a reservar
-            val intent= Intent(this, pay::class.java)
+            val intent= Intent(this, Pay::class.java)
             startActivity(intent)
             finish()
         }
