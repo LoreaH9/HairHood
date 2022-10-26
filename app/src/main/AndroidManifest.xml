@@ -30,6 +30,7 @@
         <activity
             android:name=".activities.Mapa"
             android:exported="false" />
+
         <activity
             android:name=".activities.AdminUserActivity"
             android:exported="false" />

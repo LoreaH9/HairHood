@@ -55,7 +55,12 @@
     <string name="ano">uu</string>
     <string name="pagar">ORDAINDU</string>
 
+
     <!-- PAY ACTIVITY -->
     <string name="vacio">Mesedez, bete eremu guztiak</string>
+    <string name="txartelaError">Txartela 16 zenbaki izan behar ditu</string>
+    <string name="mesError">Hilabetea 2 zenbaki izan behar ditu</string>
+    <string name="anoError">Urtea 2 zenbaki izan behar ditu</string>
+    <string name="cvvError">CVV 3 zembaki izan behar ditu</string>
 
 </resources>
