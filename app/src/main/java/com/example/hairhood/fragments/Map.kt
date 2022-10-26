@@ -115,17 +115,17 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     private fun createMarker(){
         var height = 200
         val width = 200
-        db.collection("peluqueros"). {
-            var unoF = it.get("foto") as String
-            var dosF = it.get("foto") as String
-            var tresF = it.get("foto") as String
-            var cuatroF = it.get("foto") as String
-            var cincoF =it.get("foto") as String
-            var seisF = it.get("foto") as String
-            var sieteF = it.get("foto") as String
-            var ochoF = it.get("foto") as String
-            val locationArrayList = ArrayList<Fotos>()
-        }
+//        db.collection("peluqueros"). {
+//            var unoF = it.get("foto") as String
+//            var dosF = it.get("foto") as String
+//            var tresF = it.get("foto") as String
+//            var cuatroF = it.get("foto") as String
+//            var cincoF =it.get("foto") as String
+//            var seisF = it.get("foto") as String
+//            var sieteF = it.get("foto") as String
+//            var ochoF = it.get("foto") as String
+//            val locationArrayList = ArrayList<Fotos>()
+//        }
 
         val pel1 = resources.getDrawable(R.drawable.corte1) as BitmapDrawable
         val p1 = pel1.bitmap
