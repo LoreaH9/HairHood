@@ -10,6 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.hairhood.databinding.ActivitySelectorPeluqueroBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.example.hairhood.fragments.Map.Companion.desdeUno
+import com.example.hairhood.fragments.Map.Companion.desdeDos
+import com.example.hairhood.fragments.Map.Companion.desdeTres
+import com.example.hairhood.fragments.Map.Companion.desdeCuatro
+import com.example.hairhood.fragments.Map.Companion.desdeCinco
+import com.example.hairhood.fragments.Map.Companion.desdeSeis
+import com.example.hairhood.fragments.Map.Companion.desdeSiete
+import com.example.hairhood.fragments.Map.Companion.desdeOcho
 
 
 class SelectorPeluquero : AppCompatActivity() {
@@ -33,6 +41,25 @@ class SelectorPeluquero : AppCompatActivity() {
         sharedPreferences = getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
         user = sharedPreferences.getString(USER_KEY, "").toString()
 
+        //Aqui recoge desde que peluquero hemos accedido a esta pantalla
+        if (desdeUno) {
+            binding.nombre.setText("1")
+        } else if (desdeDos) {
+            binding.nombre.setText("2")
+        } else if (desdeTres) {
+            binding.nombre.setText("3")
+        } else if (desdeCuatro) {
+            binding.nombre.setText("4")
+        } else if (desdeCinco) {
+            binding.nombre.setText("5")
+        } else if (desdeSeis) {
+            binding.nombre.setText("6")
+        } else if (desdeSiete) {
+            binding.nombre.setText("7")
+        } else if (desdeOcho) {
+            binding.nombre.setText("8")
+        }
+
 
         if (user != "") {
             if (sharedPreferences.getString(USER_KEY, "").toString() != "" || sharedPreferences.getString(USER_KEY, "").toString().equals(null)) {
@@ -43,8 +70,6 @@ class SelectorPeluquero : AppCompatActivity() {
                 }
             }
         }
-
-
 
        /* db.collection("peluqueros").document(nom).get().addOnSuccessListener {
             binding.nombre.setText(it.get("usuario") as String)

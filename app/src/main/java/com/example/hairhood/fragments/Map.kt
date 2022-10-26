@@ -26,12 +26,27 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
+    companion object {
+        var desdeUno = false
+        var desdeDos = false
+        var desdeTres = false
+        var desdeCuatro = false
+        var desdeCinco = false
+        var desdeSeis = false
+        var desdeSiete = false
+        var desdeOcho = false
+    }
+
     private lateinit var mMap: GoogleMap
     private var locationPermissionGranted = false
     private var uno = LatLng(43.25471423656013, -2.904199867091976)
     private var dos = LatLng(43.258482935494406, -2.9049796343857333)
     private var tres = LatLng(43.25781971657556, -2.9024068947132546)
     private var cuatro = LatLng(43.25953948584263, -2.899894325785889)
+    private var cinco = LatLng(43.275170, -2.951951)
+    private var seis = LatLng(43.237164, -2.888951)
+    private var siete = LatLng(43.252665, -2.885288)
+    private var ocho = LatLng(43.310618, -3.008234)
     private val locationArrayList = ArrayList<LatLng>()
 
     override fun onCreateView(
@@ -52,6 +67,10 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         locationArrayList.add(dos)
         locationArrayList.add(tres)
         locationArrayList.add(cuatro)
+        locationArrayList.add(cinco)
+        locationArrayList.add(seis)
+        locationArrayList.add(siete)
+        locationArrayList.add(ocho)
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -75,13 +94,23 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         mMap.setOnMarkerClickListener(this)
     }
 
+    var MUno = MarkerOptions()
+    var MDos = MarkerOptions()
+    var MTres = MarkerOptions()
+    var MCuatro = MarkerOptions()
+    var MCinco = MarkerOptions()
+    var MSeis = MarkerOptions()
+    var MSiete = MarkerOptions()
+    var MOcho = MarkerOptions()
+
+
     override fun onMarkerClick(marker: Marker): Boolean {
+
         val intent = Intent(activity, SelectorPeluquero::class.java)
         startActivity(intent)
 
         return false
     }
-
 
     private fun createMarker(){
         var height = 200
@@ -103,30 +132,69 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         val p4 = pel4.bitmap
         val marker4 = Bitmap.createScaledBitmap(p4, width, height, false)
 
+        val pel5= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val p5 = pel5.bitmap
+        val marker5 = Bitmap.createScaledBitmap(p4, width, height, false)
 
-        var MUno = MarkerOptions()
+        val pel6= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val p6 = pel6.bitmap
+        val marker6 = Bitmap.createScaledBitmap(p4, width, height, false)
+
+        val pel7= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val p7 = pel7.bitmap
+        val marker7 = Bitmap.createScaledBitmap(p4, width, height, false)
+
+        val pel8= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val p8 = pel8.bitmap
+        val marker8 = Bitmap.createScaledBitmap(p4, width, height, false)
+
+        MUno = MarkerOptions()
             .position(uno)
             .icon(BitmapDescriptorFactory
                 .fromBitmap(marker1)
             )
 
-        var MDos = MarkerOptions()
+        MDos = MarkerOptions()
             .position(dos)
             .icon(BitmapDescriptorFactory
                 .fromBitmap(marker2)
 
             )
 
-        var MTres = MarkerOptions()
+        MTres = MarkerOptions()
             .position(tres)
             .icon(BitmapDescriptorFactory
                 .fromBitmap(marker3)
             )
 
-        var MCuatro = MarkerOptions()
+        MCuatro = MarkerOptions()
             .position(cuatro)
             .icon(BitmapDescriptorFactory
                 .fromBitmap(marker4)
+            )
+
+        MCinco = MarkerOptions()
+            .position(cinco)
+            .icon(BitmapDescriptorFactory
+                .fromBitmap(marker5)
+            )
+
+        MSeis = MarkerOptions()
+            .position(seis)
+            .icon(BitmapDescriptorFactory
+                .fromBitmap(marker6)
+            )
+
+        MSiete = MarkerOptions()
+            .position(siete)
+            .icon(BitmapDescriptorFactory
+                .fromBitmap(marker7)
+            )
+
+        MOcho = MarkerOptions()
+            .position(ocho)
+            .icon(BitmapDescriptorFactory
+                .fromBitmap(marker8)
             )
 
         for (i in 0 until locationArrayList.size) {
@@ -136,6 +204,10 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
             mMap.addMarker(MDos)
             mMap.addMarker(MTres)
             mMap.addMarker(MCuatro)
+            mMap.addMarker(MCinco)
+            mMap.addMarker(MSeis)
+            mMap.addMarker(MSiete)
+            mMap.addMarker(MOcho)
 
         }
     }
