@@ -136,14 +136,14 @@ class Profile : Fragment() {
 
         var errores = false
 
-        binding.editTextTextNombre.setOnFocusChangeListener { _, focused ->
+        /*binding.editTextTextNombre.setOnFocusChangeListener { _, focused ->
             if (!focused) {
                 val nombreText = binding.editTextTextNombre.text.toString()
                 errores = true
             } else {
                 errores = false
             }
-        }
+        }*/
 
         binding.editTextTextCorreo.setOnFocusChangeListener { _, focused ->
             if (!focused) {

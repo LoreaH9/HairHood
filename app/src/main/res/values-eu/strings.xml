@@ -19,6 +19,7 @@
 
     <!-- REGISTER ACTIVITY -->
     <string name="register">Erregistratu</string>
+    <string name="dniError">NAN egoki bat sartu</string>
 
     <!-- ADMIN ACTIVITY -->
     <string name="adminConfig">Configuración del administrador</string>
@@ -40,7 +41,7 @@
     <string name="newPasswordRepeat">Pasahitz berria errepikatu</string>
     <string name="titulation">Titulazioa</string>
     <string name="specialty">Espezialitateak</string>
-    <string name="emailError">Helbide elektroniko zuzen bat jarri</string>
+    <string name="emailError">Helbide elektroniko egoki bat jarri</string>
     <string name="tfnoError">Telefonoak 9 zenbaki izan behar ditu</string>
     <string name="fields">Testu-guneak zuzen bete</string>
     <string name="passwordsMustCoincide">Pasahitzak berdinak izan behar dira</string>
