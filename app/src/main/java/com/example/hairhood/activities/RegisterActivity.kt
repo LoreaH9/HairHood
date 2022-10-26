@@ -190,7 +190,7 @@ private fun uploadImageCliente(){
                     throw it
                 }
             }
-            Toast.makeText(this, "CT", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Foto subida", Toast.LENGTH_SHORT).show()
 
             return@Continuation ref.downloadUrl
         }).addOnCompleteListener { task ->
@@ -221,9 +221,7 @@ private fun uploadImagePelu(){
                     throw it
                 }
             }
-            Toast.makeText(this, "CT", Toast.LENGTH_SHORT).show()
-
-            Toast.makeText(this, "", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Foto subida", Toast.LENGTH_SHORT).show()
 
             return@Continuation ref.downloadUrl
         }).addOnCompleteListener { task ->
