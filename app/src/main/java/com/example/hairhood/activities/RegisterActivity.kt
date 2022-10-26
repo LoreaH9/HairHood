@@ -330,9 +330,7 @@ private fun guardarDatosPeluquero(db: FirebaseFirestore) {
     db.collection("peluqueros")
         .document(binding.usuarioPeluquero.text.toString())
         .set(datoP)
-        .addOnSuccessListener { resultado ->
-           // val intentLogin = Intent(this, MainActivity::class.java)
-            //startActivity(intentLogin)
+        .addOnSuccessListener {
             startActivity(Intent(this, LoginActivity::class.java))
 
         }

@@ -3,11 +3,13 @@ package com.example.hairhood.fragments
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.hairhood.R
 import com.example.hairhood.activities.LoginActivity
 import com.example.hairhood.activities.PREFS_KEY
@@ -15,6 +17,9 @@ import com.example.hairhood.activities.PWD_KEY
 import com.example.hairhood.activities.USER_KEY
 import com.example.hairhood.databinding.FragmentPerfilPeluqueroBinding
 import com.example.hairhood.databinding.FragmentProfileBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.io.File
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,11 +34,13 @@ var ROL_KEY :String = "ROL_KEY"
 
 private lateinit var llamada : FragmentPerfilPeluqueroBinding
 private lateinit var otraP : FragmentProfileBinding
-
+lateinit var sharedPreferences: SharedPreferences
+val db = FirebaseFirestore.getInstance()
 class PerfilPeluquero : Fragment() {
 
     companion object {
-
+        var nom = ""
+        var img = ""
         var usuPelu = ""
 
         /**
@@ -78,8 +85,26 @@ class PerfilPeluquero : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val llamada : FragmentPerfilPeluqueroBinding = FragmentPerfilPeluqueroBinding.inflate(inflater, container, false)
+        val imageName = llamada.usuario.text.toString()
+        val storageref = FirebaseStorage.getInstance().reference.child("clientes/$imageName.jpg")
 
-        llamada.editTextNombrePelu.setText(sharedPreferences.getString(USER_KEY, ""))
+        val localfile = File.createTempFile("tempImage", "jpg")
+        storageref.getFile(localfile).addOnSuccessListener {
+            val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+            llamada.imageButton.setImageBitmap(bitmap)
+        }
+
+
+        nom = sharedPreferences.getString(USER_KEY, "").toString()
+
+        db.collection("clientes").document(nom).get().addOnSuccessListener {
+            llamada.usuario.text = nom
+            llamada.editTextNombrePelu.setText(it.get("nombre") as String?)
+            img = it.get("foto").toString()
+            Glide.with(this)
+                .load(img)
+                .into(llamada.imageButton)
+        }
 
 
         llamada.btnMasInforPelu.setOnClickListener {

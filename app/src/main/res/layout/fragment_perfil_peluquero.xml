@@ -42,10 +42,11 @@
                 android:id="@+id/editTextNombrePelu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="36dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtNombre2"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -95,6 +96,17 @@
                 app:layout_constraintStart_toStartOf="@+id/btnMasInforPelu"
                 app:layout_constraintTop_toBottomOf="@+id/btnMasInforPelu"
                 app:shapeAppearanceOverlay="@style/Button5" />
+
+            <TextView
+                android:id="@+id/usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="11dp"
+                app:layout_constraintBottom_toTopOf="@+id/txtNombre2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

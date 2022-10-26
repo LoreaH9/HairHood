@@ -88,8 +88,8 @@ class Profile : Fragment() {
                 contraseina = it.get("contraseña").toString()
                 img = it.get("foto").toString()
                 Glide.with(this)
-                .load(img)
-                .into(binding.imgPerfil)
+                    .load(img)
+                    .into(binding.imgPerfil)
             }
         } else {
             Toast.makeText(requireActivity().baseContext, "No has iniciado sesion", Toast.LENGTH_SHORT).show()
