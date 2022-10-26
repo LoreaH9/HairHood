@@ -197,13 +197,7 @@ private fun uploadImageCliente(){
             if (task.isSuccessful) {
                 val downloadUri = task.result
                 addUploadRecordToDb(downloadUri.toString())
-            } else {
-                // Handle failures
             }
-
-        }.addOnFailureListener{
-
-
         }
 
     }else{
@@ -229,13 +223,7 @@ private fun uploadImagePelu(){
                 val downloadUri = task.result
 
                 addUploadRecordToDb(downloadUri.toString())
-            } else {
-                // Handle failures
             }
-
-        }.addOnFailureListener{
-
-
         }
 
     }else{
