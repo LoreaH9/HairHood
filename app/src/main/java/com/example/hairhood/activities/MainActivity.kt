@@ -1,21 +1,15 @@
 package com.example.hairhood.activities
 
-import android.Manifest
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityLoginBinding
 import com.example.hairhood.databinding.ActivityMainBinding
 import com.example.hairhood.fragments.*
 import com.example.hairhood.fragments.Map
-import com.example.hairhood.activities.LoginActivity.Companion.pelu
 import com.example.hairhood.activities.LoginActivity.Companion.nombre
 
 
