@@ -10,19 +10,15 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivityLoginBinding
-import com.example.hairhood.fragments.Favorite
-import com.google.android.gms.tasks.Tasks.call
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.security.MessageDigest
-import java.util.jar.Manifest
 
 class LoginActivity : AppCompatActivity() {
 

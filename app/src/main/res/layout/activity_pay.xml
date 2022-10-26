@@ -94,7 +94,7 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:hint="XXXX XXXX XXXX XXXX"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <LinearLayout
@@ -126,12 +126,12 @@
 
                 <EditText
                     android:id="@+id/editTextMes"
-                    android:layout_width="176dp"
+                    android:layout_width="148dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:ems="10"
                     android:hint="@string/mes"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <EditText
@@ -142,7 +142,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="@string/ano"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
             <LinearLayout
@@ -165,6 +165,7 @@
                     android:text="CVV:"
                     android:textSize="18sp" />
             </LinearLayout>
+
             <EditText
                 android:id="@+id/editextZenbakiaCvv"
                 android:layout_width="match_parent"
@@ -172,7 +173,7 @@
                 android:layout_marginTop="10dp"
                 android:ems="10"
                 android:hint="XXX"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <Button

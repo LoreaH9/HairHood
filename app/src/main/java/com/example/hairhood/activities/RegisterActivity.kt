@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,7 @@ class RegisterActivity : AppCompatActivity() {
     private val storage = Firebase.storage
     private var storageReference = storage.reference
     val myRef=database.getReference("Clientes")
+    var errores=false
 
     companion object {
         var nomUs : String? = ""
@@ -93,6 +95,25 @@ class RegisterActivity : AppCompatActivity() {
         ) {
             Toast.makeText(this, "Por favor rellene todos los campos", Toast.LENGTH_SHORT).show();
         }else{
+            var i=0
+            var mayus=false
+            var numero=false
+            if(binding.dniCliente.text.toString().length==9){
+                while(i<binding.dniCliente.text.toString().length || (!mayus && !numero)){
+                    val g = binding.dniCliente.text.toString()
+                    val c = g.get(index = i)
+                    if(c in 'A'..'Z') {
+                        mayus=true
+                    }
+                    if( c in '0'..'9'){
+                        numero=true
+                    }
+
+                    i++
+                }
+            } else{
+                Toast.makeText(this, "Por favor compruebe el dni", Toast.LENGTH_SHORT).show();
+            }
             val passCliente: String = binding.passCliente.getText().toString()
             val confirmPassCliente: String = binding.passConfirmCliente.getText().toString()
             if (passCliente != confirmPassCliente) {
@@ -107,6 +128,31 @@ class RegisterActivity : AppCompatActivity() {
         nomUs = binding.usuarioCliente.text.toString()
 
     }
+
+        binding.numTlfCliente.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                var tfnoText = binding.numTlfCliente.text.toString()
+                if (tfnoText.length != 9) {
+                    binding.numTlfCliente.error = getString(R.string.tfnoError)
+                    errores = true
+                } else {
+                    errores = false
+                }
+            }
+        }
+
+        binding.emailCliente.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                var emailText = binding.emailCliente.text.toString()
+                if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+                    binding.emailCliente.error = getString(R.string.emailError)
+                    errores = true
+                } else {
+                    errores = false
+                }
+            }
+        }
+
     binding.singInPelu.setOnClickListener {
 
 
@@ -136,6 +182,30 @@ class RegisterActivity : AppCompatActivity() {
 
 
     }
+
+        binding.numTlfPeluquero.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                var tfnoText = binding.numTlfPeluquero.text.toString()
+                if (tfnoText.length != 9) {
+                    binding.numTlfPeluquero.error = getString(R.string.tfnoError)
+                    errores = true
+                } else {
+                    errores = false
+                }
+            }
+        }
+
+        binding.emailPeluquero.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                var emailText = binding.emailPeluquero.text.toString()
+                if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
+                    binding.emailPeluquero.error = getString(R.string.emailError)
+                    errores = true
+                } else {
+                    errores = false
+                }
+            }
+        }
 
     binding.btnFotoCliente.setOnClickListener{
         subir_Archivo_Cliente()

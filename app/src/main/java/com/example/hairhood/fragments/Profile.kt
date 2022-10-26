@@ -3,7 +3,6 @@ package com.example.hairhood.fragments
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Patterns
@@ -16,17 +15,11 @@ import com.bumptech.glide.Glide
 import com.example.hairhood.R
 import com.example.hairhood.activities.*
 import com.example.hairhood.databinding.FragmentProfileBinding
-import com.example.hairhood.activities.LoginActivity.Companion.nombre
-import com.example.hairhood.activities.RegisterActivity.Companion.nomUs
-import com.example.hairhood.activities.LoginActivity.Companion.contra
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.io.File
-import java.lang.System.load
-import java.net.URL
+
 
 class Profile : Fragment() {
 
@@ -51,16 +44,16 @@ class Profile : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentProfileBinding.inflate(layoutInflater)
 
-    val imageName = binding.txtUsuario.text.toString()
-    val storageref =FirebaseStorage.getInstance().reference.child("clientes/$imageName.jpg")
+        val imageName = binding.txtUsuario.text.toString()
+        val storageref =FirebaseStorage.getInstance().reference.child("clientes/$imageName.jpg")
 
-    val localfile = File.createTempFile("tempImage", "jpg")
-        storageref.getFile(localfile).addOnSuccessListener {
-            val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
-            binding.imgPerfil.setImageBitmap(bitmap)
-        }
+        val localfile = File.createTempFile("tempImage", "jpg")
+            storageref.getFile(localfile).addOnSuccessListener {
+                val bitmap = BitmapFactory.decodeFile(localfile.absolutePath)
+                binding.imgPerfil.setImageBitmap(bitmap)
+            }
 
-        sharedPreferences = requireActivity().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE);
+        sharedPreferences = requireActivity().getSharedPreferences(PREFS_KEY, Context.MODE_PRIVATE)
     }
 
     override fun onCreateView(
