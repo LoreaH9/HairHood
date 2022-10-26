@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.chat -> replaceFragment(Chat())
+                //R.id.chat -> replaceFragment(Chat())
                 R.id.profile ->
                     if (!sharedPreferences.getBoolean(ROL_KEY, false)) {
                         /*val input = dato

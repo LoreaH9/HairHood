@@ -5,12 +5,12 @@
         android:icon="@drawable/ic_favorite"
         android:title="@string/favorites"
         android:iconTint="@color/pinkColor"/>
-    <item
+    <!--<item
         android:id="@+id/chat"
         android:enabled="true"
         android:icon="@drawable/ic_chat"
         android:title="@string/chat"
-        android:iconTint="@color/pinkColor"/>
+        android:iconTint="@color/pinkColor"/>-->
     <item
         android:id="@+id/places"
         android:enabled="true"
