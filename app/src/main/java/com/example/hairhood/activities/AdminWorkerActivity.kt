@@ -61,7 +61,7 @@ class AdminWorkerActivity : AppCompatActivity() {
             )
 
             db.collection("peluqueros").document(user.usuario).update(dato as Map<String, Any>)
-            Toast.makeText(this,"Usuario actualizado correctamente"+ binding.verificado.isChecked.toString(),Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Usuario actualizado correctamente",Toast.LENGTH_SHORT).show()
             startActivity(Intent(this@AdminWorkerActivity, AdminActivity::class.java))
         }
     }
