@@ -29,9 +29,9 @@ class RvAdapter(val PeluList:List<Peluqueros>, private val listener:(Peluqueros)
     }
 
     //numero de elementos (la lista en este caso)
-   /* override fun getItemCount(): Int {
-        return PeluList.size
-    }*/
+    /* override fun getItemCount(): Int {
+         return PeluList.size
+     }*/
     override fun getItemCount(): Int = PeluList.size
     //override fun getItemCount(): Int = AsigList.size
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
@@ -41,3 +41,4 @@ class RvAdapter(val PeluList:List<Peluqueros>, private val listener:(Peluqueros)
         }
     }
 }
+
