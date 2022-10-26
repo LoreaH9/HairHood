@@ -17,6 +17,7 @@
 
     <!-- REGISTER ACTIVITY -->
     <string name="register">Registrarse</string>
+    <string name="dniError">Agrega un DNI correcto</string>
 
     <!-- ADMIN ACTIVITY -->
     <string name="adminConfig">Configuración del administrador</string>
