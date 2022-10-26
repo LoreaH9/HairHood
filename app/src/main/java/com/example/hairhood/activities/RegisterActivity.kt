@@ -143,7 +143,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnTituloPeluquero.setOnClickListener{
+        binding.btnFotoPeluquero.setOnClickListener{
             subir_Archivo()
         }
     }

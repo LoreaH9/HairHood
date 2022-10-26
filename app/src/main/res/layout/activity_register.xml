@@ -629,7 +629,7 @@
                             android:text="Titulo" />
 
                         <Button
-                            android:id="@+id/btnTituloPeluquero"
+                            android:id="@+id/btnFotoPeluquero"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
