@@ -106,6 +106,7 @@ class PerfilPeluquero : Fragment() {
         }
 
 
+
         llamada.btnMasInforPelu.setOnClickListener {
             val fragmentManager = childFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
