@@ -10,6 +10,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivitySelectorPeluqueroBinding
+import com.example.hairhood.fragments.Favorite
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
@@ -85,26 +86,19 @@ class SelectorPeluquero : AppCompatActivity() {
             }
 
 
-       /* db.collection("peluqueros").document(nom).get().addOnSuccessListener {
-            binding.nombre.setText(it.get("usuario") as String)
 
-            img = it.get("foto").toString()
-            Glide.with(this)
-                .load(img)
-                .into(binding.fotoPeluquero)
-        }*/
-
-
-        binding.nofav.setOnClickListener(){
-            binding.fav.visibility=View.VISIBLE
-            binding.nofav.visibility=View.GONE
-            nomP = binding.nombre.text.toString()
-            guardarFav(db)
-        }
-        binding.fav.setOnClickListener(){
+            binding.fav.setOnClickListener(){
             binding.fav.visibility=View.GONE
             binding.nofav.visibility=View.VISIBLE
+            quitarFav(db)
         }
+            binding.nofav.setOnClickListener() {
+                binding.fav.visibility = View.VISIBLE
+                binding.nofav.visibility = View.GONE
+                nomP = binding.nombre.text.toString()
+                guardarFav(db)
+            }
+
 
         binding.infor.setOnClickListener() {
             val intent = Intent(this@SelectorPeluquero, ReservarPeluquero::class.java)
@@ -121,6 +115,17 @@ class SelectorPeluquero : AppCompatActivity() {
         db.collection("favoritos")
             .document("$nomC fav $nomP")
             .set(fav)
+
+    }
+    fun quitarFav(db: FirebaseFirestore) {
+        val fav = hashMapOf(
+            "usuarioCliente" to nomC,
+            "usuarioPelu" to nomP
+
+        )
+        db.collection("favoritos")
+            .document("$nomC fav $nomP")
+            .delete()
 
     }
 }
