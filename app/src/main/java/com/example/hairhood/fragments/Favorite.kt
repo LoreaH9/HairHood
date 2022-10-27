@@ -52,20 +52,23 @@ class Favorite : Fragment() {
             .get()
             .addOnSuccessListener { list ->
                 list.forEach { peluquero ->
-                   // Toast.makeText(requireContext(), peluquero.data["usuarioPelu"].toString(), Toast.LENGTH_SHORT).show()
-                    db.collection("peluqueros")
-                        .document(peluquero.data["usuarioPelu"].toString())
-                        .get()
-                        .addOnSuccessListener {
-                            PeluList.add(Peluqueros(peluquero.data["usuario"].toString(), peluquero.data["foto"].toString()))
-                        }
-                }
-                binding.rv.adapter = RvAdapter(PeluList) { pel ->
+                    if (peluquero.data["usuarioPelu"].toString().isNotEmpty()) {
+                        // Toast.makeText(requireContext(), peluquero.data["usuarioPelu"].toString(), Toast.LENGTH_SHORT).show()
+                        db.collection("peluqueros")
+                            .document(peluquero.data["usuarioPelu"].toString())
+                            .get()
+                            .addOnSuccessListener {
+                                PeluList.add(Peluqueros(it.data!!["usuario"].toString(), it.data!!["foto"].toString()))
 
-                    val intent= Intent(activity, SelectorPeluquero::class.java)
-                    intent.putExtra("usuario", pel.nombre)
-                    startActivity(intent)
-                }
+                                binding.rv.adapter = RvAdapter(PeluList) { pel ->
+
+                                    val intent= Intent(activity, SelectorPeluquero::class.java)
+                                    intent.putExtra("usuario", pel.nombre)
+                                    startActivity(intent)
+                                }
+                            }
+                        }
+                    }
             }
 
         return binding.root

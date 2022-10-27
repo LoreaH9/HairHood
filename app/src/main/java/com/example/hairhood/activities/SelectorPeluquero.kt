@@ -98,6 +98,7 @@ class SelectorPeluquero : AppCompatActivity() {
         binding.nofav.setOnClickListener(){
             binding.fav.visibility=View.VISIBLE
             binding.nofav.visibility=View.GONE
+            nomP = binding.nombre.text.toString()
             guardarFav(db)
         }
         binding.fav.setOnClickListener(){
