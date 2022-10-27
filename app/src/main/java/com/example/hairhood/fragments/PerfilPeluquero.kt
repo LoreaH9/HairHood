@@ -94,12 +94,11 @@ class PerfilPeluquero : Fragment() {
             llamada.imageButton.setImageBitmap(bitmap)
         }
 
-
         nom = sharedPreferences.getString(USER_KEY, "").toString()
 
-        db.collection("clientes").document(nom).get().addOnSuccessListener {
-            llamada.usuario.text = nom
-            llamada.editTextNombrePelu.setText(it.get("nombre") as String?)
+        db.collection("peluqueros").document(nom).get().addOnSuccessListener {
+            //llamada.usuario.text = nom
+            llamada.editTextNombrePelu.setText(it.get("usuario") as String?)
             img = it.get("foto").toString()
             Glide.with(this)
                 .load(img)
@@ -127,6 +126,8 @@ class PerfilPeluquero : Fragment() {
             val intent = Intent(this@PerfilPeluquero.requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+
+        usuPelu = llamada.usuario.text.toString()
 
         return llamada.root
     }
