@@ -85,8 +85,8 @@ class PerfilPeluquero : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val llamada : FragmentPerfilPeluqueroBinding = FragmentPerfilPeluqueroBinding.inflate(inflater, container, false)
-        val imageName = llamada.usuario.text.toString()
-        val storageref = FirebaseStorage.getInstance().reference.child("clientes/$imageName.jpg")
+        val imageName = llamada.editTextNombrePelu.text.toString()
+        val storageref =FirebaseStorage.getInstance().reference.child("peluqueros/$imageName.jpg")
 
         val localfile = File.createTempFile("tempImage", "jpg")
         storageref.getFile(localfile).addOnSuccessListener {
@@ -97,8 +97,8 @@ class PerfilPeluquero : Fragment() {
 
         nom = sharedPreferences.getString(USER_KEY, "").toString()
 
-        db.collection("clientes").document(nom).get().addOnSuccessListener {
-            llamada.usuario.text = nom
+        db.collection("peluqueros").document(nom).get().addOnSuccessListener {
+            //llamada.usuario.text = nom
             llamada.editTextNombrePelu.setText(it.get("nombre") as String?)
             img = it.get("foto").toString()
             Glide.with(this)
