@@ -1,11 +1,13 @@
 package com.example.hairhood.fragments
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +24,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 
 class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
@@ -50,13 +55,27 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
     private val locationArrayList = ArrayList<LatLng>()
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_map, container, false)
     }
+    var db= FirebaseFirestore.getInstance()
+    private val database = Firebase.database
+    val myRef=database.getReference("peluqueros")
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+       /* db.collection("peluqueros")
+            .get()
+            .addOnSuccessListener{result->for( document in result){
+                Log.d(TAG, "${document.id} => ${document.data["foto"]}")
+
+            }}*/
+
 
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -112,22 +131,22 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         return false
     }
 
-    private fun createMarker(){
+    private fun createMarker() {
+        db.collection("peluqueros")
+            .get()
+            .addOnSuccessListener{result->for( document in result){
+                Log.d(TAG, "${document.id} => ${document.data["foto"]}")
+             val Fotos: List<String> = listOf("${document.data["foto"]}")
+
+
         var height = 200
         val width = 200
-//        db.collection("peluqueros"). {
-//            var unoF = it.get("foto") as String
-//            var dosF = it.get("foto") as String
-//            var tresF = it.get("foto") as String
-//            var cuatroF = it.get("foto") as String
-//            var cincoF =it.get("foto") as String
-//            var seisF = it.get("foto") as String
-//            var sieteF = it.get("foto") as String
-//            var ochoF = it.get("foto") as String
-//            val locationArrayList = ArrayList<Fotos>()
-//        }
+        //https://www.youtube.com/watch?v=0pF9r0CsT_4 Video
 
-        val pel1 = resources.getDrawable(R.drawable.corte1) as BitmapDrawable
+
+
+
+        val pel1 =resources.getDrawable(R.drawable.corte1) as BitmapDrawable
         val p1 = pel1.bitmap
         val marker1 = Bitmap.createScaledBitmap(p1, width, height, false)
 
@@ -223,7 +242,7 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
         }
     }
 
-
+}}
     private fun getLocationPermission() {
 
         if (ContextCompat.checkSelfPermission(activity!!.baseContext,
