@@ -1,11 +1,13 @@
 package com.example.hairhood.activities
 
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hairhood.R
@@ -74,8 +76,10 @@ class SelectorPeluquero : AppCompatActivity() {
             .document(intent.extras!!.get("usuario").toString())
             .get()
             .addOnSuccessListener {
+
                 val image = FirebaseStorage.getInstance().getReferenceFromUrl(it.data!!["foto"].toString())
                 binding.nombre.text = it.data!!["usuario"].toString()
+                nomP= it.data!!["usuario"].toString()
                 image.getBytes(10 * 200 * 200).addOnSuccessListener {
                     val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
                     val resized = Bitmap.createScaledBitmap(bitmap, 200, 200, false)
@@ -85,9 +89,18 @@ class SelectorPeluquero : AppCompatActivity() {
                 }
             }
 
+        Log.d(ContentValues.TAG, "(db.document(\"$nomC fav $nomP\").exists()")
+   /* if (db.document("$nomC fav $nomP").exists()){
+        binding.fav.visibility= View.VISIBLE
+        binding.nofav.visibility = View.GONE
+    }else{
+        binding.fav.visibility= View.GONE
+        binding.nofav.visibility = View.VISIBLE
+    }*/
 
 
-            binding.fav.setOnClickListener(){
+
+        binding.fav.setOnClickListener(){
             binding.fav.visibility=View.GONE
             binding.nofav.visibility=View.VISIBLE
             quitarFav(db)
@@ -97,6 +110,7 @@ class SelectorPeluquero : AppCompatActivity() {
                 binding.nofav.visibility = View.GONE
                 nomP = binding.nombre.text.toString()
                 guardarFav(db)
+
             }
 
 
@@ -115,14 +129,9 @@ class SelectorPeluquero : AppCompatActivity() {
         db.collection("favoritos")
             .document("$nomC fav $nomP")
             .set(fav)
-
+        Log.d("GuardaFav.TAG", "(db.document(\"$nomC fav $nomP\").exists()")
     }
     fun quitarFav(db: FirebaseFirestore) {
-        val fav = hashMapOf(
-            "usuarioCliente" to nomC,
-            "usuarioPelu" to nomP
-
-        )
         db.collection("favoritos")
             .document("$nomC fav $nomP")
             .delete()
