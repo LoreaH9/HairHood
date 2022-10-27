@@ -1,12 +1,10 @@
 package com.example.hairhood.activities
 
-import android.R.string
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hairhood.databinding.ActivityReservarPeluqueroBinding
-import com.google.type.DateTime
 
 
 class ReservarPeluquero : AppCompatActivity() {
@@ -19,10 +17,7 @@ class ReservarPeluquero : AppCompatActivity() {
 
         binding.erreserba.setOnClickListener(){
             val hour=binding.timePicker1.hour.toString()+" : "+binding.timePicker1.minute.toString()
-            Toast.makeText(this, hour, Toast.LENGTH_SHORT).show()
-
-
-            //val hora = binding.timePicker1.getCurrentHour() + ":" + binding.timePicker1.getCurrentMinute()
+            //Toast.makeText(this, hour, Toast.LENGTH_SHORT).show()
             //En caso de pulsar el  boton de + infor  nos redirige a reservar
             val intent= Intent(this, Pay::class.java)
             startActivity(intent)

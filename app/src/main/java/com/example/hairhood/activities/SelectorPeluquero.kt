@@ -3,19 +3,19 @@ package com.example.hairhood.activities
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivitySelectorPeluqueroBinding
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.firestore.FirebaseFirestore
-import com.example.hairhood.fragments.Map.Companion.desdeUno
-import com.example.hairhood.fragments.Map.Companion.desdeDos
-import com.example.hairhood.fragments.Map.Companion.desdeTres
-import com.example.hairhood.fragments.Map.Companion.desdeCuatro
-import com.example.hairhood.fragments.Map.Companion.desdeCinco
-import com.example.hairhood.fragments.Map.Companion.desdeSeis
-import com.example.hairhood.fragments.Map.Companion.desdeSiete
-import com.example.hairhood.fragments.Map.Companion.desdeOcho
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 
 class SelectorPeluquero : AppCompatActivity() {
@@ -26,10 +26,10 @@ class SelectorPeluquero : AppCompatActivity() {
       var nomC = ""
       var nomP = ""
       var img = ""
-      val db = FirebaseFirestore.getInstance()
+      val db = Firebase.firestore
 
     companion object {
-        const val EXTRA_MOVIE = "SelectorPeluquero:extraPeluqueros"
+        const val EXTRA_PELUQUERO = "SelectorPeluquero:extraPeluqueros"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,23 +40,23 @@ class SelectorPeluquero : AppCompatActivity() {
         user = sharedPreferences.getString(USER_KEY, "").toString()
 
         //Aqui recoge desde que peluquero hemos accedido a esta pantalla
-        if (desdeUno) {
-            binding.nombre.setText("1")
-        } else if (desdeDos) {
-            binding.nombre.setText("2")
-        } else if (desdeTres) {
-            binding.nombre.setText("3")
-        } else if (desdeCuatro) {
-            binding.nombre.setText("4")
-        } else if (desdeCinco) {
-            binding.nombre.setText("5")
-        } else if (desdeSeis) {
-            binding.nombre.setText("6")
-        } else if (desdeSiete) {
-            binding.nombre.setText("7")
-        } else if (desdeOcho) {
-            binding.nombre.setText("8")
-        }
+//        if (desdeUno) {
+//            binding.nombre.setText("1")
+//        } else if (desdeDos) {
+//            binding.nombre.setText("2")
+//        } else if (desdeTres) {
+//            binding.nombre.setText("3")
+//        } else if (desdeCuatro) {
+//            binding.nombre.setText("4")
+//        } else if (desdeCinco) {
+//            binding.nombre.setText("5")
+//        } else if (desdeSeis) {
+//            binding.nombre.setText("6")
+//        } else if (desdeSiete) {
+//            binding.nombre.setText("7")
+//        } else if (desdeOcho) {
+//            binding.nombre.setText("8")
+//        }
 
 
         if (user != "") {
@@ -68,6 +68,22 @@ class SelectorPeluquero : AppCompatActivity() {
                 }
             }
         }
+
+        db.collection("peluqueros")
+            .document(intent.extras!!.get("usuario").toString())
+            .get()
+            .addOnSuccessListener {
+                val image = FirebaseStorage.getInstance().getReferenceFromUrl(it.data!!["foto"].toString())
+                binding.nombre.text = it.data!!["usuario"].toString()
+                image.getBytes(10 * 200 * 200).addOnSuccessListener {
+                    val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+                    val resized = Bitmap.createScaledBitmap(bitmap, 200, 200, false)
+                    binding.fotoPeluquero.setImageBitmap(resized)
+                }.addOnFailureListener {
+                    binding.fotoPeluquero.setImageDrawable(resources.getDrawable(R.drawable.peluquero1))
+                }
+            }
+
 
        /* db.collection("peluqueros").document(nom).get().addOnSuccessListener {
             binding.nombre.setText(it.get("usuario") as String)

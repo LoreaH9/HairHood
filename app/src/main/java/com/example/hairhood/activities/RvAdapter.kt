@@ -1,11 +1,15 @@
 package com.example.hairhood.activities
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hairhood.R
 import com.example.hairhood.databinding.ActivitySingleItemBinding
+import com.google.firebase.storage.FirebaseStorage
 
 class RvAdapter(val PeluList:List<Peluqueros>, private val listener:(Peluqueros)->Unit):RecyclerView.Adapter<RvAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,6 +41,12 @@ class RvAdapter(val PeluList:List<Peluqueros>, private val listener:(Peluqueros)
     class ViewHolder(view: View):RecyclerView.ViewHolder(view) {
         val binding=ActivitySingleItemBinding.bind(view)
         fun bind(pelu:Peluqueros){
+            val image = FirebaseStorage.getInstance().getReferenceFromUrl(pelu.foto)
+            image.getBytes(10 * 200 * 200).addOnSuccessListener {
+                val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+                val resized = Bitmap.createScaledBitmap(bitmap, 200, 200, false)
+                binding.img.setImageBitmap(resized)
+            }
             binding.tv1.text=pelu.nombre
         }
     }

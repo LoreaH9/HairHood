@@ -53,11 +53,17 @@ class Favorite : Fragment() {
             .addOnSuccessListener { list ->
                 list.forEach { peluquero ->
                    // Toast.makeText(requireContext(), peluquero.data["usuarioPelu"].toString(), Toast.LENGTH_SHORT).show()
-                    PeluList.add(Peluqueros(peluquero.data["usuarioPelu"].toString()))
+                    db.collection("peluqueros")
+                        .document(peluquero.data["usuarioPelu"].toString())
+                        .get()
+                        .addOnSuccessListener {
+                            PeluList.add(Peluqueros(peluquero.data["usuario"].toString(), peluquero.data["foto"].toString()))
+                        }
                 }
                 binding.rv.adapter = RvAdapter(PeluList) { pel ->
+
                     val intent= Intent(activity, SelectorPeluquero::class.java)
-                    intent.putExtra(SelectorPeluquero.EXTRA_MOVIE, pel)
+                    intent.putExtra("usuario", pel.nombre)
                     startActivity(intent)
                 }
             }
