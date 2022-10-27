@@ -146,37 +146,37 @@ class Map : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener{
 
 
 
-        val pel1 =resources.getDrawable(R.drawable.corte1) as BitmapDrawable
+        val pel1 =resources.getDrawable(R.drawable.peluquero1) as BitmapDrawable
         val p1 = pel1.bitmap
         val marker1 = Bitmap.createScaledBitmap(p1, width, height, false)
 
-        val pel2 = resources.getDrawable(R.drawable.corte2) as BitmapDrawable
+        val pel2 = resources.getDrawable(R.drawable.peluquero2) as BitmapDrawable
         val p2 = pel2.bitmap
         val marker2 = Bitmap.createScaledBitmap(p2, width, height, false)
 
-        val pel3 = resources.getDrawable(R.drawable.corte3) as BitmapDrawable
+        val pel3 = resources.getDrawable(R.drawable.peluquero3) as BitmapDrawable
         val p3 = pel3.bitmap
         val marker3 = Bitmap.createScaledBitmap(p3, width, height, false)
 
-        val pel4= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val pel4= resources.getDrawable(R.drawable.peluquero4) as BitmapDrawable
         val p4 = pel4.bitmap
         val marker4 = Bitmap.createScaledBitmap(p4, width, height, false)
 
-        val pel5= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val pel5= resources.getDrawable(R.drawable.peluquero5) as BitmapDrawable
         val p5 = pel5.bitmap
-        val marker5 = Bitmap.createScaledBitmap(p4, width, height, false)
+        val marker5 = Bitmap.createScaledBitmap(p5, width, height, false)
 
-        val pel6= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val pel6= resources.getDrawable(R.drawable.peluquero6) as BitmapDrawable
         val p6 = pel6.bitmap
-        val marker6 = Bitmap.createScaledBitmap(p4, width, height, false)
+        val marker6 = Bitmap.createScaledBitmap(p6, width, height, false)
 
-        val pel7= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val pel7= resources.getDrawable(R.drawable.peluquero7) as BitmapDrawable
         val p7 = pel7.bitmap
-        val marker7 = Bitmap.createScaledBitmap(p4, width, height, false)
+        val marker7 = Bitmap.createScaledBitmap(p7, width, height, false)
 
-        val pel8= resources.getDrawable(R.drawable.corte4) as BitmapDrawable
+        val pel8= resources.getDrawable(R.drawable.peluquero8) as BitmapDrawable
         val p8 = pel8.bitmap
-        val marker8 = Bitmap.createScaledBitmap(p4, width, height, false)
+        val marker8 = Bitmap.createScaledBitmap(p8, width, height, false)
 
         MUno = MarkerOptions()
             .position(uno)

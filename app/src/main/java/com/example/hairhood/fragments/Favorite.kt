@@ -52,7 +52,7 @@ class Favorite : Fragment() {
             .get()
             .addOnSuccessListener { list ->
                 list.forEach { peluquero ->
-                    Toast.makeText(requireContext(), peluquero.data["usuarioPelu"].toString(), Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(requireContext(), peluquero.data["usuarioPelu"].toString(), Toast.LENGTH_SHORT).show()
                     PeluList.add(Peluqueros(peluquero.data["usuarioPelu"].toString()))
                 }
                 binding.rv.adapter = RvAdapter(PeluList) { pel ->
