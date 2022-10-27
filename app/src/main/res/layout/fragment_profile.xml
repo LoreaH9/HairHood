@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="30dp"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="25dp"
         app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,14 +35,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/txtUsuario"
                 android:layout_width="98dp"
                 android:layout_height="33dp"
                 app:layout_constraintBottom_toTopOf="@+id/editTextTextNombre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgPerfil" />
+                app:layout_constraintTop_toBottomOf="@+id/imgPerfil" />-->
 
             <TextView
                 android:id="@+id/txtNombre"
@@ -51,7 +51,7 @@
                 android:layout_marginTop="32dp"
                 android:text="@string/nameSurname"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.334"
+                app:layout_constraintHorizontal_bias="0.263"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgPerfil" />
 

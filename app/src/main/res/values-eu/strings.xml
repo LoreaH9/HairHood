@@ -32,7 +32,7 @@
     <string name="changePassword">Pasahitza aldatu</string>
     <string name="saveAndBack">Gorde eta atzera joan</string>
     <string name="back">Atzera</string>
-    <string name="nameSurname">Izen-abizenak</string>
+    <string name="nameSurname">Izena</string>
     <string name="email">Helbide elektronikoa</string>
     <string name="phoneNumber">Telefono zenbakia</string>
     <string name="address">Helbidea</string>

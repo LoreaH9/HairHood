@@ -44,7 +44,7 @@ class Profile : Fragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentProfileBinding.inflate(layoutInflater)
 
-        val imageName = binding.txtUsuario.text.toString()
+        val imageName = binding.editTextTextNombre.text.toString()
         val storageref =FirebaseStorage.getInstance().reference.child("clientes/$imageName.jpg")
 
         val localfile = File.createTempFile("tempImage", "jpg")
@@ -70,7 +70,7 @@ class Profile : Fragment() {
             nom = sharedPreferences.getString(USER_KEY, "").toString()
 
             db.collection("clientes").document(nom).get().addOnSuccessListener {
-                binding.txtUsuario.text = nom
+                //binding.txtUsuario.text = nom
                 binding.editTextTextNombre.setText(it.get("nombre") as String?)
                 binding.editTextTextCorreo.setText(it.get("email") as String?)
                 val num = it.get("numTelefono").toString()
@@ -111,7 +111,7 @@ class Profile : Fragment() {
             binding.cardViewProfile.visibility = View.GONE
 
             desdeCliente = true
-            usuario = binding.txtUsuario.text.toString()
+            usuario = binding.editTextTextNombre.text.toString()
 
             fragmentTransaction.commit()
         }
