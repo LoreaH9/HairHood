@@ -89,7 +89,6 @@ class SelectorPeluquero : AppCompatActivity() {
                 }
             }
 
-        Log.d(ContentValues.TAG, "(db.document(\"$nomC fav $nomP\").exists()")
    /* if (db.document("$nomC fav $nomP").exists()){
         binding.fav.visibility= View.VISIBLE
         binding.nofav.visibility = View.GONE
@@ -97,6 +96,16 @@ class SelectorPeluquero : AppCompatActivity() {
         binding.fav.visibility= View.GONE
         binding.nofav.visibility = View.VISIBLE
     }*/
+if (db.collection("favoritos").document("$nomC fav $nomP")!=null){
+    Log.d(ContentValues.TAG, "(db.document(\"$nomC fav $nomP\")al entrar")
+
+    binding.fav.visibility= View.VISIBLE
+    binding.nofav.visibility = View.GONE
+}else{
+    binding.fav.visibility= View.GONE
+    binding.nofav.visibility = View.VISIBLE
+
+}
 
 
 
