@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:text="Erreserbatu"
+                android:text="@string/reservar"
                 android:textColor="@color/pinkColor"
                 android:textSize="24dp"
                 android:textStyle="bold"

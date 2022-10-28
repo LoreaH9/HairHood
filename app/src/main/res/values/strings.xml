@@ -62,6 +62,14 @@
     <string name="anoError">El año debe tener 2 números</string>
     <string name="cvvError">El CVV debe tener 3 números</string>
 
+    <string name="reservar">Reservar</string>
+    <string name="elegir">Elige lo que quieras hacerte:</string>
+    <string name="hora">Reservar hora:</string>
+    <string name="cejas">Hacer las cejas   5€</string>
+    <string name="pelo">Cortar el pelo   11€</string>
+    <string name="barba">Cortar barba   5€</string>
+    <string name="peloBarba">Cortar pelo + barba   14€</string>
+    <string name="reservar2">RESERVAR</string>
 
 </resources>
 

@@ -63,4 +63,15 @@
     <string name="anoError">Urtea 2 zenbaki izan behar ditu</string>
     <string name="cvvError">CVV 3 zembaki izan behar ditu</string>
 
+
+    <string name="reservar">Erreserbatu</string>
+    <string name="elegir">Erabaki egin nahi duzuna:</string>
+    <string name="hora">Ordua erreserbatu:</string>
+    <string name="cejas">Bekainak egin   5€</string>
+    <string name="pelo">Ilea moztu   11€</string>
+    <string name="barba">Bizarra moztu   5€</string>
+    <string name="peloBarba">Ilea + Bizarra moztu   14€</string>
+    <string name="reservar2">ERRESERBA EGIN</string>
+
+
 </resources>
